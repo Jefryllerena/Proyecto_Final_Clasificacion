@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Por: Angélica Sepúlveda, Andrés Pedraza y Jefry Llerena &#8212; jbook_Proyecto_Final_Clasificacion</title>
+    <title>&lt;no title&gt; &#8212; jbook_Proyecto_Final_Clasificacion</title>
   
   
   
@@ -35,6 +35,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=566e7079" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -60,7 +61,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'descripcion_del_proyecto';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. Aprendizaje supervisado" href="aprendizaje_supervisado.html" />
+    <link rel="next" title="1. Carga de Datos y Librerías" href="eda.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -176,12 +177,35 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    Por: Angélica Sepúlveda, Andrés Pedraza y Jefry Llerena
+                    <no title>
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="aprendizaje_supervisado.html">1. Aprendizaje Supervisado</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">ANÁLISIS EXPLORATORIO DE DATOS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="eda.html"><strong>1. Carga de Datos y Librerías</strong></a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MODELOS BENCHMARK Y RESULTADOS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="clasificacion_bayesiana.html">1.Instalación de Librerías</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="knn.html">KD TREE</a></li>
 
 
@@ -194,17 +218,46 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="ridge_lasso.html">3. Regresión Ridge y Lasso</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bayes.html">4. Clasificador Bayesiano</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rf_xgboost.html">5. Random Forest y XGBoost</a></li>
-<li class="toctree-l1"><a class="reference internal" href="svm.html">8. Máquinas de Vectores de Soporte</a></li>
-<li class="toctree-l1"><a class="reference internal" href="redes_neuronales.html">10. Redes Neuronales y Deep Learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pca.html">11. Análisis de Componentes Principales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="evaluacion_modelos.html">12. Evaluación de Modelos</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pipelines.html">13. Cadenas de Algoritmos y Pipelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="apendice.html">14. Apéndice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="soluciones.html">15. Soluciones a Ejercicios</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliografia.html">16. Bibliografía</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regresion_logistica_l1_l2.html">1.Imports y configuración</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="arbol_de_decision.html">1. Importación de librerías</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="xgboost.html">6. XGBoost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="svm.html">7. Máquina de Soporte Vectorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mlp.html">8. MLP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rnn.html">9. RNN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lstm.html">10. LSTM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cnn.html">11. CNN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoencoders.html">12. Autoencoders</a></li>
 </ul>
 
     </div>
@@ -377,7 +430,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -388,11 +443,19 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Por: Angélica Sepúlveda, Andrés Pedraza y Jefry Llerena</h1>
+    <h1><no title></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -406,13 +469,12 @@ document.write(`
   background: linear-gradient(to right,rgb(0, 0, 108),rgb(159, 207, 255));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 40px;
+  font-size: 25px;
   font-weight: bold;
 ">
   PROYECTO FINAL: MODELOS DE CLASIFICACIÓN APLICADOS A LA PREDICCIÓN DEL RIESGO CREDITICIO
 </h1>
-<section id="por-angelica-sepulveda-andres-pedraza-y-jefry-llerena">
-<h1><strong>Por:</strong> Angélica Sepúlveda, Andrés Pedraza y Jefry Llerena<a class="headerlink" href="#por-angelica-sepulveda-andres-pedraza-y-jefry-llerena" title="Link to this heading">#</a></h1>
+<p><strong>Por:</strong> Angélica Sepúlveda, Andrés Pedraza y Jefry Llerena</p>
 <p><img alt="Portada" src="_images/logo-uninorte.png" /></p>
 <div style="border-left: 6px solid #3498db; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-top: 1rem;">
   <div style="background-color: #d0ebff; padding: 8px 12px;">
@@ -444,7 +506,8 @@ document.write(`
 </div>
 <div class="toctree-wrapper compound">
 </div>
-</section>
+<div class="toctree-wrapper compound">
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -477,11 +540,11 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="right-next"
-       href="aprendizaje_supervisado.html"
+       href="eda.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">1. Aprendizaje supervisado</p>
+        <p class="prev-next-title"><strong>1. Carga de Datos y Librerías</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -491,6 +554,21 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
