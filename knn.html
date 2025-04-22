@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>KD TREE &#8212; jbook_Proyecto_Final_Clasificacion</title>
+    <title>23. k-Vecinos Más Cercanos &#8212; jbook_Proyecto_Final_Clasificacion</title>
   
   
   
@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'knn';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1.Imports y configuración" href="regresion_logistica_l1_l2.html" />
-    <link rel="prev" title="1.Instalación de Librerías" href="clasificacion_bayesiana.html" />
+    <link rel="next" title="33. Regresión Logística Ridge (L2) y Lasso (L1)" href="regresion_logistica_l1_l2.html" />
+    <link rel="prev" title="6. Clasificación Bayesiana" href="clasificacion_bayesiana.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -180,54 +180,12 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="eda.html"><strong>1. Carga de Datos y Librerías</strong></a></li>
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="clasificacion_bayesiana.html">1.Instalación de Librerías</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eda.html">1. <strong>Análisis Exploratorio (EDA)</strong></a></li>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">KD TREE</a></li>
-
-
-
-
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="regresion_logistica_l1_l2.html">1.Imports y configuración</a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="arbol_de_decision.html">1. Importación de librerías</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clasificacion_bayesiana.html">6. <strong>Clasificación Bayesiana</strong></a></li>
 
 
 
@@ -244,8 +202,59 @@
 
 
 
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">23. <strong>k-Vecinos Más Cercanos</strong></a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="xgboost.html">6. XGBoost</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="regresion_logistica_l1_l2.html">33. <strong>Regresión Logística Ridge (L2) y Lasso (L1)</strong></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="arbol_de_decision.html">49. <strong>Árbol de Decisión</strong></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="bosques_aleatorios.html">68. Bosques Aleatorios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xgboost.html">69. XGBoost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="svm.html">70. Máquina de Soporte Vectorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mlp.html">71. Redes Neuronales Perceptrón Multicapa</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rnn.html">72. Redes Neuronales Recurrente</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lstm.html">73. Redes Neuronales Memoria Larga a Corto Plazo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cnn.html">74. Redes Neuronales Convolucionales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoencoders.html">75. Redes Neuronales Autoencoders</a></li>
 </ul>
 
     </div>
@@ -431,7 +440,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>KD TREE</h1>
+    <h1>k-Vecinos Más Cercanos</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -441,18 +450,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">KD TREE</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ball-tree">Ball Tree</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#faiss">FAISS</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graficas-de-desempeno">Gráficas de Desempeño</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matrices-de-confusion-comparativas-smote-vs-adasyn-3-algoritmos">MATRICES DE CONFUSIÓN COMPARATIVAS – SMOTE vs ADASYN × 3 ALGORITMOS</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-de-aprendizaje">Curva de Aprendizaje</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-barras-de-metricas-por-modelo">Gráfico de barras de métricas por modelo</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-de-recall1-agrupado-por-algoritmo-y-tecnica-de-balanceo">Heatmap de Recall1 agrupado por algoritmo y técnica de balanceo</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-tiempo-de-computo-por-modelo">Gráfico de tiempo de cómputo por modelo</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-precisionrecall-por-tecnica-de-balanceo">Curvas Precision–Recall (por técnica de balanceo)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#radar-plot-por-modelo-comparar-todas-las-metricas">Radar Plot (por modelo) – Comparar todas las métricas</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-de-metricas-por-algoritmo">Boxplot de métricas por algoritmo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">23. <strong>k-Vecinos Más Cercanos</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kd-tree">23.1. KD TREE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ball-tree">23.2. Ball Tree</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#faiss">23.3. FAISS</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graficas-de-desempeno">24. Gráficas de Desempeño</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matrices-de-confusion-comparativas-smote-vs-adasyn-3-algoritmos">25. MATRICES DE CONFUSIÓN COMPARATIVAS – SMOTE vs ADASYN × 3 ALGORITMOS</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-de-aprendizaje">26. Curva de Aprendizaje</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-barras-de-metricas-por-modelo">27. Gráfico de barras de métricas por modelo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-de-recall1-agrupado-por-algoritmo-y-tecnica-de-balanceo">28. Heatmap de Recall1 agrupado por algoritmo y técnica de balanceo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-tiempo-de-computo-por-modelo">29. Gráfico de tiempo de cómputo por modelo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-precisionrecall-por-tecnica-de-balanceo">30. Curvas Precision–Recall (por técnica de balanceo)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#radar-plot-por-modelo-comparar-todas-las-metricas">31. Radar Plot (por modelo) – Comparar todas las métricas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-de-metricas-por-algoritmo">32. Boxplot de métricas por algoritmo</a></li>
 </ul>
 
             </nav>
@@ -465,15 +477,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <h1 style="
-  background: linear-gradient(to right,rgb(0, 0, 108),rgb(159, 207, 255));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: 38px;
-  font-weight: bold;
-">
-  k-Vecinos Más Cercanos
-</h1><div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="k-vecinos-mas-cercanos">
+<h1><span class="section-number">23. </span><strong>k-Vecinos Más Cercanos</strong><a class="headerlink" href="#k-vecinos-mas-cercanos" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>faiss-cpu<span class="w"> </span>--quiet
 </pre></div>
@@ -557,7 +563,7 @@ document.write(`
 </div>
 </div>
 <section id="kd-tree">
-<h1>KD TREE<a class="headerlink" href="#kd-tree" title="Link to this heading">#</a></h1>
+<h2><span class="section-number">23.1. </span>KD TREE<a class="headerlink" href="#kd-tree" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ===========================================</span>
@@ -738,7 +744,7 @@ Entrenando → ADASYN
 </div>
 </section>
 <section id="ball-tree">
-<h1>Ball Tree<a class="headerlink" href="#ball-tree" title="Link to this heading">#</a></h1>
+<h2><span class="section-number">23.2. </span>Ball Tree<a class="headerlink" href="#ball-tree" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ===========================================</span>
@@ -918,7 +924,7 @@ Entrenando → ADASYN
 </div>
 </section>
 <section id="faiss">
-<h1>FAISS<a class="headerlink" href="#faiss" title="Link to this heading">#</a></h1>
+<h2><span class="section-number">23.3. </span>FAISS<a class="headerlink" href="#faiss" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
@@ -1340,8 +1346,9 @@ ADASYN_faiss: k = 3
 </div></div>
 </div>
 </section>
+</section>
 <section class="tex2jax_ignore mathjax_ignore" id="graficas-de-desempeno">
-<h1>Gráficas de Desempeño<a class="headerlink" href="#graficas-de-desempeno" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">24. </span>Gráficas de Desempeño<a class="headerlink" href="#graficas-de-desempeno" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">RocCurveDisplay</span>
@@ -1378,7 +1385,7 @@ ADASYN_faiss: k = 3
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="matrices-de-confusion-comparativas-smote-vs-adasyn-3-algoritmos">
-<h1>MATRICES DE CONFUSIÓN COMPARATIVAS – SMOTE vs ADASYN × 3 ALGORITMOS<a class="headerlink" href="#matrices-de-confusion-comparativas-smote-vs-adasyn-3-algoritmos" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">25. </span>MATRICES DE CONFUSIÓN COMPARATIVAS – SMOTE vs ADASYN × 3 ALGORITMOS<a class="headerlink" href="#matrices-de-confusion-comparativas-smote-vs-adasyn-3-algoritmos" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -1420,7 +1427,7 @@ ADASYN_faiss: k = 3
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="curva-de-aprendizaje">
-<h1>Curva de Aprendizaje<a class="headerlink" href="#curva-de-aprendizaje" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">26. </span>Curva de Aprendizaje<a class="headerlink" href="#curva-de-aprendizaje" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ===========================================</span>
@@ -1554,7 +1561,7 @@ ADASYN_faiss: k = 3
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="grafico-de-barras-de-metricas-por-modelo">
-<h1>Gráfico de barras de métricas por modelo<a class="headerlink" href="#grafico-de-barras-de-metricas-por-modelo" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">27. </span>Gráfico de barras de métricas por modelo<a class="headerlink" href="#grafico-de-barras-de-metricas-por-modelo" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Seleccionamos las métricas de resultados_completo</span>
@@ -1651,7 +1658,7 @@ ADASYN_faiss: k = 3
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="heatmap-de-recall1-agrupado-por-algoritmo-y-tecnica-de-balanceo">
-<h1>Heatmap de Recall1 agrupado por algoritmo y técnica de balanceo<a class="headerlink" href="#heatmap-de-recall1-agrupado-por-algoritmo-y-tecnica-de-balanceo" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">28. </span>Heatmap de Recall1 agrupado por algoritmo y técnica de balanceo<a class="headerlink" href="#heatmap-de-recall1-agrupado-por-algoritmo-y-tecnica-de-balanceo" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Crear DataFrame de comparación</span>
@@ -1678,7 +1685,7 @@ ADASYN_faiss: k = 3
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="grafico-de-tiempo-de-computo-por-modelo">
-<h1>Gráfico de tiempo de cómputo por modelo<a class="headerlink" href="#grafico-de-tiempo-de-computo-por-modelo" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">29. </span>Gráfico de tiempo de cómputo por modelo<a class="headerlink" href="#grafico-de-tiempo-de-computo-por-modelo" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Crear tabla de tiempos de entrenamiento</span>
@@ -1703,7 +1710,7 @@ ADASYN_faiss: k = 3
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="curvas-precisionrecall-por-tecnica-de-balanceo">
-<h1>Curvas Precision–Recall (por técnica de balanceo)<a class="headerlink" href="#curvas-precisionrecall-por-tecnica-de-balanceo" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">30. </span>Curvas Precision–Recall (por técnica de balanceo)<a class="headerlink" href="#curvas-precisionrecall-por-tecnica-de-balanceo" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">PrecisionRecallDisplay</span>
@@ -1739,7 +1746,7 @@ ADASYN_faiss: k = 3
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="radar-plot-por-modelo-comparar-todas-las-metricas">
-<h1>Radar Plot (por modelo) – Comparar todas las métricas<a class="headerlink" href="#radar-plot-por-modelo-comparar-todas-las-metricas" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">31. </span>Radar Plot (por modelo) – Comparar todas las métricas<a class="headerlink" href="#radar-plot-por-modelo-comparar-todas-las-metricas" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">pi</span>
@@ -1784,7 +1791,7 @@ ADASYN_faiss: k = 3
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="boxplot-de-metricas-por-algoritmo">
-<h1>Boxplot de métricas por algoritmo<a class="headerlink" href="#boxplot-de-metricas-por-algoritmo" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">32. </span>Boxplot de métricas por algoritmo<a class="headerlink" href="#boxplot-de-metricas-por-algoritmo" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_box</span> <span class="o">=</span> <span class="p">[]</span>
@@ -2009,7 +2016,7 @@ ADASYN_faiss: k = 3
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">1.Instalación de Librerías</p>
+        <p class="prev-next-title"><span class="section-number">6. </span><strong>Clasificación Bayesiana</strong></p>
       </div>
     </a>
     <a class="right-next"
@@ -2017,7 +2024,7 @@ ADASYN_faiss: k = 3
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">1.Imports y configuración</p>
+        <p class="prev-next-title"><span class="section-number">33. </span><strong>Regresión Logística Ridge (L2) y Lasso (L1)</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2037,18 +2044,21 @@ ADASYN_faiss: k = 3
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">KD TREE</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ball-tree">Ball Tree</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#faiss">FAISS</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graficas-de-desempeno">Gráficas de Desempeño</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matrices-de-confusion-comparativas-smote-vs-adasyn-3-algoritmos">MATRICES DE CONFUSIÓN COMPARATIVAS – SMOTE vs ADASYN × 3 ALGORITMOS</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-de-aprendizaje">Curva de Aprendizaje</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-barras-de-metricas-por-modelo">Gráfico de barras de métricas por modelo</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-de-recall1-agrupado-por-algoritmo-y-tecnica-de-balanceo">Heatmap de Recall1 agrupado por algoritmo y técnica de balanceo</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-tiempo-de-computo-por-modelo">Gráfico de tiempo de cómputo por modelo</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-precisionrecall-por-tecnica-de-balanceo">Curvas Precision–Recall (por técnica de balanceo)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#radar-plot-por-modelo-comparar-todas-las-metricas">Radar Plot (por modelo) – Comparar todas las métricas</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-de-metricas-por-algoritmo">Boxplot de métricas por algoritmo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">23. <strong>k-Vecinos Más Cercanos</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kd-tree">23.1. KD TREE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ball-tree">23.2. Ball Tree</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#faiss">23.3. FAISS</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#graficas-de-desempeno">24. Gráficas de Desempeño</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matrices-de-confusion-comparativas-smote-vs-adasyn-3-algoritmos">25. MATRICES DE CONFUSIÓN COMPARATIVAS – SMOTE vs ADASYN × 3 ALGORITMOS</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-de-aprendizaje">26. Curva de Aprendizaje</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-barras-de-metricas-por-modelo">27. Gráfico de barras de métricas por modelo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-de-recall1-agrupado-por-algoritmo-y-tecnica-de-balanceo">28. Heatmap de Recall1 agrupado por algoritmo y técnica de balanceo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-tiempo-de-computo-por-modelo">29. Gráfico de tiempo de cómputo por modelo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-precisionrecall-por-tecnica-de-balanceo">30. Curvas Precision–Recall (por técnica de balanceo)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#radar-plot-por-modelo-comparar-todas-las-metricas">31. Radar Plot (por modelo) – Comparar todas las métricas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-de-metricas-por-algoritmo">32. Boxplot de métricas por algoritmo</a></li>
 </ul>
 
   </nav></div>

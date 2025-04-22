@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1.Imports y configuración &#8212; jbook_Proyecto_Final_Clasificacion</title>
+    <title>33. Regresión Logística Ridge (L2) y Lasso (L1) &#8212; jbook_Proyecto_Final_Clasificacion</title>
   
   
   
@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'regresion_logistica_l1_l2';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. Importación de librerías" href="arbol_de_decision.html" />
-    <link rel="prev" title="KD TREE" href="knn.html" />
+    <link rel="next" title="49. Árbol de Decisión" href="arbol_de_decision.html" />
+    <link rel="prev" title="23. k-Vecinos Más Cercanos" href="knn.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -180,54 +180,12 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="eda.html"><strong>1. Carga de Datos y Librerías</strong></a></li>
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="clasificacion_bayesiana.html">1.Instalación de Librerías</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eda.html">1. <strong>Análisis Exploratorio (EDA)</strong></a></li>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="knn.html">KD TREE</a></li>
-
-
-
-
-
-
-
-
-
-
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">1.Imports y configuración</a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="arbol_de_decision.html">1. Importación de librerías</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clasificacion_bayesiana.html">6. <strong>Clasificación Bayesiana</strong></a></li>
 
 
 
@@ -244,8 +202,59 @@
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="knn.html">23. <strong>k-Vecinos Más Cercanos</strong></a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="xgboost.html">6. XGBoost</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">33. <strong>Regresión Logística Ridge (L2) y Lasso (L1)</strong></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="arbol_de_decision.html">49. <strong>Árbol de Decisión</strong></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="bosques_aleatorios.html">68. Bosques Aleatorios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xgboost.html">69. XGBoost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="svm.html">70. Máquina de Soporte Vectorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mlp.html">71. Redes Neuronales Perceptrón Multicapa</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rnn.html">72. Redes Neuronales Recurrente</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lstm.html">73. Redes Neuronales Memoria Larga a Corto Plazo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cnn.html">74. Redes Neuronales Convolucionales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoencoders.html">75. Redes Neuronales Autoencoders</a></li>
 </ul>
 
     </div>
@@ -431,7 +440,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>1.Imports y configuración</h1>
+    <h1>Regresión Logística Ridge (L2) y Lasso (L1)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -441,21 +450,22 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1.Imports y configuración</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cargar-datos-y-separacion">2.Cargar datos y separación</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesamiento">3.Preprocesamiento</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#definir-pipelines-por-penalizacion-y-tecnica-de-balanceo">4.Definir Pipelines por Penalización y Técnica de Balanceo</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-de-metricas-por-algoritmo">6. Métricas de Métricas por Algoritmo</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-de-metricas-por-algoritmo">7. Boxplot de Métricas por Algoritmo</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-roc">8.Curvas ROC</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matrices-de-confusion">9.Matrices de Confusión</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-tiempo-de-entrenamiento">10.Gráfico de tiempo de entrenamiento</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-hiperparametros-optimos-por-tecnica-y-penalizacion">11.Tabla de Hiperparámetros Óptimos por Técnica y Penalización</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-de-aprendizaje">12.Curva de aprendizaje</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#codigo-para-curva-precision-recall-todos-los-modelos-comparados">13.Código para Curva Precision-Recall (todos los modelos comparados)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-de-recall1-por-tecnica-vs-penalizacion">14.Heatmap de Recall1 por Técnica vs Penalización</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#radar-plot-por-modelo-para-comparar-metricas">15.Radar Plot por modelo para comparar métricas</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#guardar">16.Guardar</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">33. <strong>Regresión Logística Ridge (L2) y Lasso (L1)</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#imports-y-configuracion">34. 1.Imports y configuración</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cargar-datos-y-separacion">35. 2.Cargar datos y separación</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesamiento">36. 3.Preprocesamiento</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#definir-pipelines-por-penalizacion-y-tecnica-de-balanceo">37. 4.Definir Pipelines por Penalización y Técnica de Balanceo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-de-metricas-por-algoritmo">38. 6. Métricas de Métricas por Algoritmo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-de-metricas-por-algoritmo">39. 7. Boxplot de Métricas por Algoritmo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-roc">40. 8.Curvas ROC</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matrices-de-confusion">41. 9.Matrices de Confusión</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-tiempo-de-entrenamiento">42. 10.Gráfico de tiempo de entrenamiento</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-hiperparametros-optimos-por-tecnica-y-penalizacion">43. 11.Tabla de Hiperparámetros Óptimos por Técnica y Penalización</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-de-aprendizaje">44. 12.Curva de aprendizaje</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#codigo-para-curva-precision-recall-todos-los-modelos-comparados">45. 13.Código para Curva Precision-Recall (todos los modelos comparados)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-de-recall1-por-tecnica-vs-penalizacion">46. 14.Heatmap de Recall1 por Técnica vs Penalización</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#radar-plot-por-modelo-para-comparar-metricas">47. 15.Radar Plot por modelo para comparar métricas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#guardar">48. 16.Guardar</a></li>
 </ul>
 
             </nav>
@@ -468,16 +478,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <h1 style="
-  background: linear-gradient(to right,rgb(0, 0, 108),rgb(159, 207, 255));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: 38px;
-  font-weight: bold;
-">
-  Regresión Logística Ridge (L2) y Lasso (L1)
-</h1><section class="tex2jax_ignore mathjax_ignore" id="imports-y-configuracion">
-<h1>1.Imports y configuración<a class="headerlink" href="#imports-y-configuracion" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="regresion-logistica-ridge-l2-y-lasso-l1">
+<h1><span class="section-number">33. </span><strong>Regresión Logística Ridge (L2) y Lasso (L1)</strong><a class="headerlink" href="#regresion-logistica-ridge-l2-y-lasso-l1" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="imports-y-configuracion">
+<h1><span class="section-number">34. </span>1.Imports y configuración<a class="headerlink" href="#imports-y-configuracion" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -526,7 +531,7 @@ document.write(`
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="cargar-datos-y-separacion">
-<h1>2.Cargar datos y separación<a class="headerlink" href="#cargar-datos-y-separacion" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">35. </span>2.Cargar datos y separación<a class="headerlink" href="#cargar-datos-y-separacion" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df = pd.read_csv(&quot;ruta_al_dataset.csv&quot;)</span>
@@ -543,7 +548,7 @@ document.write(`
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="preprocesamiento">
-<h1>3.Preprocesamiento<a class="headerlink" href="#preprocesamiento" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">36. </span>3.Preprocesamiento<a class="headerlink" href="#preprocesamiento" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_cols</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;float64&quot;</span><span class="p">,</span> <span class="s2">&quot;int64&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
@@ -569,7 +574,7 @@ document.write(`
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="definir-pipelines-por-penalizacion-y-tecnica-de-balanceo">
-<h1>4.Definir Pipelines por Penalización y Técnica de Balanceo<a class="headerlink" href="#definir-pipelines-por-penalizacion-y-tecnica-de-balanceo" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">37. </span>4.Definir Pipelines por Penalización y Técnica de Balanceo<a class="headerlink" href="#definir-pipelines-por-penalizacion-y-tecnica-de-balanceo" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipelines</span> <span class="o">=</span> <span class="p">{</span>
@@ -655,7 +660,7 @@ document.write(`
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="metricas-de-metricas-por-algoritmo">
-<h1>6. Métricas de Métricas por Algoritmo<a class="headerlink" href="#metricas-de-metricas-por-algoritmo" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">38. </span>6. Métricas de Métricas por Algoritmo<a class="headerlink" href="#metricas-de-metricas-por-algoritmo" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
@@ -804,7 +809,7 @@ document.write(`
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="boxplot-de-metricas-por-algoritmo">
-<h1>7. Boxplot de Métricas por Algoritmo<a class="headerlink" href="#boxplot-de-metricas-por-algoritmo" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">39. </span>7. Boxplot de Métricas por Algoritmo<a class="headerlink" href="#boxplot-de-metricas-por-algoritmo" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reorganizar para gráfico de barras agrupadas</span>
@@ -830,7 +835,7 @@ document.write(`
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="curvas-roc">
-<h1>8.Curvas ROC<a class="headerlink" href="#curvas-roc" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">40. </span>8.Curvas ROC<a class="headerlink" href="#curvas-roc" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -855,7 +860,7 @@ document.write(`
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="matrices-de-confusion">
-<h1>9.Matrices de Confusión<a class="headerlink" href="#matrices-de-confusion" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">41. </span>9.Matrices de Confusión<a class="headerlink" href="#matrices-de-confusion" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfusionMatrixDisplay</span>
@@ -892,7 +897,7 @@ document.write(`
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="grafico-de-tiempo-de-entrenamiento">
-<h1>10.Gráfico de tiempo de entrenamiento<a class="headerlink" href="#grafico-de-tiempo-de-entrenamiento" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">42. </span>10.Gráfico de tiempo de entrenamiento<a class="headerlink" href="#grafico-de-tiempo-de-entrenamiento" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_metrics</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
@@ -938,7 +943,7 @@ document.write(`
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="tabla-de-hiperparametros-optimos-por-tecnica-y-penalizacion">
-<h1>11.Tabla de Hiperparámetros Óptimos por Técnica y Penalización<a class="headerlink" href="#tabla-de-hiperparametros-optimos-por-tecnica-y-penalizacion" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">43. </span>11.Tabla de Hiperparámetros Óptimos por Técnica y Penalización<a class="headerlink" href="#tabla-de-hiperparametros-optimos-por-tecnica-y-penalizacion" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Crear tabla resumen de parámetros óptimos</span>
@@ -1030,7 +1035,7 @@ document.write(`
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="curva-de-aprendizaje">
-<h1>12.Curva de aprendizaje<a class="headerlink" href="#curva-de-aprendizaje" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">44. </span>12.Curva de aprendizaje<a class="headerlink" href="#curva-de-aprendizaje" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">learning_curve</span>
@@ -1081,7 +1086,7 @@ document.write(`
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="codigo-para-curva-precision-recall-todos-los-modelos-comparados">
-<h1>13.Código para Curva Precision-Recall (todos los modelos comparados)<a class="headerlink" href="#codigo-para-curva-precision-recall-todos-los-modelos-comparados" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">45. </span>13.Código para Curva Precision-Recall (todos los modelos comparados)<a class="headerlink" href="#codigo-para-curva-precision-recall-todos-los-modelos-comparados" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">precision_recall_curve</span><span class="p">,</span> <span class="n">average_precision_score</span>
@@ -1109,7 +1114,7 @@ document.write(`
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="heatmap-de-recall1-por-tecnica-vs-penalizacion">
-<h1>14.Heatmap de Recall1 por Técnica vs Penalización<a class="headerlink" href="#heatmap-de-recall1-por-tecnica-vs-penalizacion" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">46. </span>14.Heatmap de Recall1 por Técnica vs Penalización<a class="headerlink" href="#heatmap-de-recall1-por-tecnica-vs-penalizacion" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
@@ -1141,7 +1146,7 @@ document.write(`
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="radar-plot-por-modelo-para-comparar-metricas">
-<h1>15.Radar Plot por modelo para comparar métricas<a class="headerlink" href="#radar-plot-por-modelo-para-comparar-metricas" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">47. </span>15.Radar Plot por modelo para comparar métricas<a class="headerlink" href="#radar-plot-por-modelo-para-comparar-metricas" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
@@ -1191,7 +1196,7 @@ document.write(`
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="guardar">
-<h1>16.Guardar<a class="headerlink" href="#guardar" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">48. </span>16.Guardar<a class="headerlink" href="#guardar" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
@@ -1257,7 +1262,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">KD TREE</p>
+        <p class="prev-next-title"><span class="section-number">23. </span><strong>k-Vecinos Más Cercanos</strong></p>
       </div>
     </a>
     <a class="right-next"
@@ -1265,7 +1270,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">1. Importación de librerías</p>
+        <p class="prev-next-title"><span class="section-number">49. </span><strong>Árbol de Decisión</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1285,21 +1290,22 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1.Imports y configuración</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cargar-datos-y-separacion">2.Cargar datos y separación</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesamiento">3.Preprocesamiento</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#definir-pipelines-por-penalizacion-y-tecnica-de-balanceo">4.Definir Pipelines por Penalización y Técnica de Balanceo</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-de-metricas-por-algoritmo">6. Métricas de Métricas por Algoritmo</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-de-metricas-por-algoritmo">7. Boxplot de Métricas por Algoritmo</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-roc">8.Curvas ROC</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matrices-de-confusion">9.Matrices de Confusión</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-tiempo-de-entrenamiento">10.Gráfico de tiempo de entrenamiento</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-hiperparametros-optimos-por-tecnica-y-penalizacion">11.Tabla de Hiperparámetros Óptimos por Técnica y Penalización</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-de-aprendizaje">12.Curva de aprendizaje</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#codigo-para-curva-precision-recall-todos-los-modelos-comparados">13.Código para Curva Precision-Recall (todos los modelos comparados)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-de-recall1-por-tecnica-vs-penalizacion">14.Heatmap de Recall1 por Técnica vs Penalización</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#radar-plot-por-modelo-para-comparar-metricas">15.Radar Plot por modelo para comparar métricas</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#guardar">16.Guardar</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">33. <strong>Regresión Logística Ridge (L2) y Lasso (L1)</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#imports-y-configuracion">34. 1.Imports y configuración</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cargar-datos-y-separacion">35. 2.Cargar datos y separación</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesamiento">36. 3.Preprocesamiento</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#definir-pipelines-por-penalizacion-y-tecnica-de-balanceo">37. 4.Definir Pipelines por Penalización y Técnica de Balanceo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-de-metricas-por-algoritmo">38. 6. Métricas de Métricas por Algoritmo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-de-metricas-por-algoritmo">39. 7. Boxplot de Métricas por Algoritmo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-roc">40. 8.Curvas ROC</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matrices-de-confusion">41. 9.Matrices de Confusión</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-tiempo-de-entrenamiento">42. 10.Gráfico de tiempo de entrenamiento</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-hiperparametros-optimos-por-tecnica-y-penalizacion">43. 11.Tabla de Hiperparámetros Óptimos por Técnica y Penalización</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-de-aprendizaje">44. 12.Curva de aprendizaje</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#codigo-para-curva-precision-recall-todos-los-modelos-comparados">45. 13.Código para Curva Precision-Recall (todos los modelos comparados)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-de-recall1-por-tecnica-vs-penalizacion">46. 14.Heatmap de Recall1 por Técnica vs Penalización</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#radar-plot-por-modelo-para-comparar-metricas">47. 15.Radar Plot por modelo para comparar métricas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#guardar">48. 16.Guardar</a></li>
 </ul>
 
   </nav></div>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; jbook_Proyecto_Final_Clasificacion</title>
+    <title>74. Redes Neuronales Convolucionales &#8212; jbook_Proyecto_Final_Clasificacion</title>
   
   
   
@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'cnn';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="autoencoders.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="lstm.html" />
+    <link rel="next" title="75. Redes Neuronales Autoencoders" href="autoencoders.html" />
+    <link rel="prev" title="73. Redes Neuronales Memoria Larga a Corto Plazo" href="lstm.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -179,55 +179,13 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="eda.html"><strong>1. Carga de Datos y Librerías</strong></a></li>
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="clasificacion_bayesiana.html">1.Instalación de Librerías</a></li>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="eda.html">1. <strong>Análisis Exploratorio (EDA)</strong></a></li>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="knn.html">KD TREE</a></li>
-
-
-
-
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="regresion_logistica_l1_l2.html">1.Imports y configuración</a></li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="arbol_de_decision.html">1. Importación de librerías</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clasificacion_bayesiana.html">6. <strong>Clasificación Bayesiana</strong></a></li>
 
 
 
@@ -244,8 +202,59 @@
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="knn.html">23. <strong>k-Vecinos Más Cercanos</strong></a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="xgboost.html">6. XGBoost</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="regresion_logistica_l1_l2.html">33. <strong>Regresión Logística Ridge (L2) y Lasso (L1)</strong></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="arbol_de_decision.html">49. <strong>Árbol de Decisión</strong></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="bosques_aleatorios.html">68. Bosques Aleatorios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xgboost.html">69. XGBoost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="svm.html">70. Máquina de Soporte Vectorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mlp.html">71. Redes Neuronales Perceptrón Multicapa</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rnn.html">72. Redes Neuronales Recurrente</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lstm.html">73. Redes Neuronales Memoria Larga a Corto Plazo</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">74. Redes Neuronales Convolucionales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoencoders.html">75. Redes Neuronales Autoencoders</a></li>
 </ul>
 
     </div>
@@ -418,9 +427,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -431,19 +438,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Redes Neuronales Convolucionales</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -453,15 +452,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <h1 style="
-  background: linear-gradient(to right,rgb(0, 0, 108),rgb(159, 207, 255));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: 38px;
-  font-weight: bold;
-">
-  11. Redes Neuronales Convolucionales
-</h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="redes-neuronales-convolucionales">
+<h1><span class="section-number">74. </span><strong>Redes Neuronales Convolucionales</strong><a class="headerlink" href="#redes-neuronales-convolucionales" title="Link to this heading">#</a></h1>
+</section>
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -498,7 +492,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title"><span class="section-number">73. </span><strong>Redes Neuronales Memoria Larga a Corto Plazo</strong></p>
       </div>
     </a>
     <a class="right-next"
@@ -506,7 +500,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title"><span class="section-number">75. </span><strong>Redes Neuronales Autoencoders</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -516,21 +510,6 @@ document.write(`
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-  </nav></div>
-
-</div></div>
               
             
           </div>
