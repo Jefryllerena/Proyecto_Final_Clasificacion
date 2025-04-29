@@ -1,0 +1,1590 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Redes Neuronales Perceptrón Multicapa &#8212; jbook_Proyecto_Final_Clasificacion</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'mlp';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="RNN Sobre Datos Estáticos" href="rnn.html" />
+    <link rel="prev" title="Máquina de Soporte Vectorial" href="svm.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="descripcion_del_proyecto.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo-uninorte.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo-uninorte.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="descripcion_del_proyecto.html">
+                    <no title>
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="eda.html">Análisis Exploratorio (EDA)</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="clasificacion_bayesiana.html">Clasificación Bayesiana</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="knn.html">k-Vecinos Más Cercanos</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="regresion_logistica_l1_l2.html">Regresión Logística Ridge (L2) y Lasso (L1)</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="arbol_de_decision.html">Árbol de Decisión</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="bosques_aleatorios.html">Bosques Aleatorios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xgboost.html">XGBoost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="svm.html">Máquina de Soporte Vectorial</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Redes Neuronales Perceptrón Multicapa</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="rnn.html">RNN Sobre Datos Estáticos</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="lstm.html">Redes Neuronales Memoria Larga a Corto Plazo</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="cnn.html">Redes Neuronales Convolucionales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoencoders.html">LSTM Autoencoder para Detección de Anomalías en Crédito</a></li>
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fmlp.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/mlp.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Redes Neuronales Perceptrón Multicapa</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Redes Neuronales Perceptrón Multicapa</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-e-importacion-de-librerias">1.Configuración e Importación de Librerías</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-y-division-de-datos">2.Carga y División de Datos</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesamiento-de-datos">3.Preprocesamiento de Datos</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-auxiliares">4.Funciones Auxiliares</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registro-de-learning-rate">4.1 Registro de Learning Rate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-del-mlp">4.2 Construcción del MLP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#balanceo-de-datos">4.3 Balanceo de Datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-umbral-optimo-maximizar-f1-score">4.4 Cálculo de Umbral Óptimo (maximizar F1-score)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-de-entrenamiento-y-evaluacion">5.Función de Entrenamiento y Evaluación</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-tecnicas-de-balanceo">6.Comparación de Técnicas de Balanceo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-de-resultados-y-comparacion-de-umbrales">7.Visualización de Resultados y Comparación de Umbrales</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#guardar-resultados">8.Guardar Resultados</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="redes-neuronales-perceptron-multicapa">
+<h1>Redes Neuronales Perceptrón Multicapa<a class="headerlink" href="#redes-neuronales-perceptron-multicapa" title="Permalink to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="configuracion-e-importacion-de-librerias">
+<h1>1.Configuración e Importación de Librerías<a class="headerlink" href="#configuracion-e-importacion-de-librerias" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.callbacks</span> <span class="kn">import</span> <span class="n">Callback</span><span class="p">,</span> <span class="n">EarlyStopping</span><span class="p">,</span> <span class="n">ReduceLROnPlateau</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span>    <span class="kn">import</span> <span class="n">Sequential</span><span class="p">,</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span>    <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">BatchNormalization</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.optimizers</span> <span class="kn">import</span> <span class="n">SGD</span><span class="p">,</span> <span class="n">Adam</span><span class="p">,</span> <span class="n">RMSprop</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.utils</span>     <span class="kn">import</span> <span class="n">plot_model</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">,</span>
+    <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">roc_curve</span><span class="p">,</span> <span class="n">precision_recall_curve</span><span class="p">,</span>
+    <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span>
+    <span class="n">precision_score</span><span class="p">,</span> <span class="n">f1_score</span>
+<span class="p">)</span>
+
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span>   <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.compose</span>         <span class="kn">import</span> <span class="n">ColumnTransformer</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span>   <span class="kn">import</span> <span class="n">OneHotEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils</span>           <span class="kn">import</span> <span class="n">class_weight</span> <span class="k">as</span> <span class="n">cw</span>
+
+<span class="kn">from</span> <span class="nn">imblearn.over_sampling</span> <span class="kn">import</span> <span class="n">SMOTE</span><span class="p">,</span> <span class="n">ADASYN</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span>
+    <span class="s2">&quot;ignore&quot;</span><span class="p">,</span>
+    <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Do not pass an `input_shape`/`input_dim` argument to a layer&quot;</span><span class="p">,</span>
+    <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">f1_score</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="carga-y-division-de-datos">
+<h1>2.Carga y División de Datos<a class="headerlink" href="#carga-y-division-de-datos" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\Users\DELL\Desktop\Aprendizaje_de_Maquina\credit_risk_the_end.csv&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dimensiones del dataset:&quot;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># 2.a) Separar X e y</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;incumplimiento_credito&#39;</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;incumplimiento_credito&#39;</span><span class="p">]</span>
+
+<span class="c1"># 2.b) Train/Test split estratificado</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;X_train: </span><span class="si">{</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, X_test: </span><span class="si">{</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;y_train: </span><span class="si">{</span><span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, y_test: </span><span class="si">{</span><span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dimensiones del dataset: (78441, 54)
+X_train: (62752, 53), X_test: (15689, 53)
+y_train: (62752,), y_test: (15689,)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="preprocesamiento-de-datos">
+<h1>3.Preprocesamiento de Datos<a class="headerlink" href="#preprocesamiento-de-datos" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">categorical_cols</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">dummy_cols</span>       <span class="o">=</span> <span class="p">[]</span>
+<span class="n">numeric_cols</span>     <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="k">if</span>    <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="s1">&#39;object&#39;</span><span class="p">:</span>
+        <span class="n">categorical_cols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;int64&#39;</span><span class="p">,</span><span class="s1">&#39;float64&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">dummy_cols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">numeric_cols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+
+<span class="c1"># Quitar la target de las dummies</span>
+<span class="n">dummy_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">dummy_cols</span> <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="s1">&#39;incumplimiento_credito&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Categóricas (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">categorical_cols</span><span class="p">)</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">,</span> <span class="n">categorical_cols</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dummies     (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dummy_cols</span><span class="p">)</span><span class="si">}</span><span class="s2">) :&quot;</span><span class="p">,</span> <span class="n">dummy_cols</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Numéricas   (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">numeric_cols</span><span class="p">)</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">,</span> <span class="n">numeric_cols</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Categóricas (10): [&#39;numero_hijos&#39;, &#39;acompanantes_solicitud&#39;, &#39;tipo_ingreso&#39;, &#39;nivel_educativo&#39;, &#39;estado_civil&#39;, &#39;tipo_vivienda&#39;, &#39;ocupacion&#39;, &#39;dia_solicitud&#39;, &#39;hora_solicitud&#39;, &#39;tipo_organizacion&#39;]
+Dummies     (22) : [&#39;tipo_contrato&#39;, &#39;genero&#39;, &#39;posee_auto&#39;, &#39;posee_vivienda&#39;, &#39;telefono_trabajo&#39;, &#39;telefono_personal&#39;, &#39;tiene_email&#39;, &#39;trabaja_fuera_region_registrada&#39;, &#39;vive_fuera_ciudad_registrada&#39;, &#39;trabaja_fuera_ciudad_registrada&#39;, &#39;ciudad_residencia_distinta_trabajo&#39;, &#39;incumplimientos_30_dias&#39;, &#39;default_60_dias_circulo_social&#39;, &#39;dias_ultimo_cambio_telefono&#39;, &#39;documento_3&#39;, &#39;documento_6&#39;, &#39;documento_8&#39;, &#39;consultas_buro_hora&#39;, &#39;consultas_buro_dia&#39;, &#39;consultas_buro_semana&#39;, &#39;consultas_buro_mes&#39;, &#39;consultas_buro_trimestre&#39;]
+Numéricas   (21): [&#39;ingreso_total&#39;, &#39;cuota_periodica&#39;, &#39;poblacion_relativa_region&#39;, &#39;dias_desde_nacimiento&#39;, &#39;dias_desde_registro&#39;, &#39;dias_desde_emision_id&#39;, &#39;numero_miembros_familia&#39;, &#39;fuente_externa_2&#39;, &#39;fuente_externa_3&#39;, &#39;consultas_buro_anio&#39;, &#39;entradas_buro&#39;, &#39;tipos_credito_activo&#39;, &#39;suma_total_credito&#39;, &#39;cantidad_solicitudes_previas&#39;, &#39;monto_promedio_solicitudes&#39;, &#39;monto_total_credito&#39;, &#39;cuentas_pos_cash&#39;, &#39;promedio_meses_saldo&#39;, &#39;total_cuotas&#39;, &#39;total_pagado&#39;, &#39;promedio_dias_entre_registro_y_pago&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preprocessor</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
+    <span class="n">transformers</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;onehot&quot;</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">sparse_output</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">categorical_cols</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;scale&quot;</span><span class="p">,</span>  <span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">numeric_cols</span> <span class="o">+</span> <span class="n">dummy_cols</span><span class="p">),</span>
+    <span class="p">],</span>
+    <span class="n">remainder</span><span class="o">=</span><span class="s2">&quot;drop&quot;</span>
+<span class="p">)</span>
+
+<span class="n">X_train_proc</span> <span class="o">=</span> <span class="n">preprocessor</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_proc</span>  <span class="o">=</span> <span class="n">preprocessor</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span> <span class="n">X_test</span> <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Preprocesamiento completado:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot; - X_train_proc shape:&quot;</span><span class="p">,</span> <span class="n">X_train_proc</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot; - X_test_proc  shape:&quot;</span><span class="p">,</span> <span class="n">X_test_proc</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Preprocesamiento completado:
+ - X_train_proc shape: (62752, 90)
+ - X_test_proc  shape: (15689, 90)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="funciones-auxiliares">
+<h1>4.Funciones Auxiliares<a class="headerlink" href="#funciones-auxiliares" title="Permalink to this heading">#</a></h1>
+<section id="registro-de-learning-rate">
+<h2>4.1 Registro de Learning Rate<a class="headerlink" href="#registro-de-learning-rate" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LRScheduleHistory</span><span class="p">(</span><span class="n">Callback</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">on_train_begin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">logs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lrs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span> <span class="nf">on_epoch_end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epoch</span><span class="p">,</span> <span class="n">logs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">lr</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">learning_rate</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lrs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="construccion-del-mlp">
+<h2>4.2 Construcción del MLP<a class="headerlink" href="#construccion-del-mlp" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build_mlp</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">use_bn</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">l2</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">dropout_rate</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">neurons</span><span class="o">=</span><span class="p">[</span><span class="mi">64</span><span class="p">,</span><span class="mi">32</span><span class="p">]):</span>
+    <span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">regularizers</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">neurons</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">input_dim</span><span class="o">=</span><span class="n">input_dim</span><span class="p">,</span>
+                    <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span>
+                    <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">regularizers</span><span class="o">.</span><span class="n">l2</span><span class="p">(</span><span class="n">l2</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="n">use_bn</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">BatchNormalization</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">dropout_rate</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="n">dropout_rate</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">neurons</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span>
+                        <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">regularizers</span><span class="o">.</span><span class="n">l2</span><span class="p">(</span><span class="n">l2</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="n">use_bn</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">BatchNormalization</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">dropout_rate</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="n">dropout_rate</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="balanceo-de-datos">
+<h2>4.3 Balanceo de Datos<a class="headerlink" href="#balanceo-de-datos" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">balance_data</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">method</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;SMOTE&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">SMOTE</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;ADASYN&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ADASYN</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;class_weight&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Método de balanceo </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2"> no reconocido&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculo-de-umbral-optimo-maximizar-f1-score">
+<h2>4.4 Cálculo de Umbral Óptimo (maximizar F1-score)<a class="headerlink" href="#calculo-de-umbral-optimo-maximizar-f1-score" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">optimal_threshold</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">):</span>
+    <span class="n">best_thr</span><span class="p">,</span> <span class="n">best_f1</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">thr</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">101</span><span class="p">):</span>
+        <span class="n">f1</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="p">(</span><span class="n">y_prob</span><span class="o">&gt;=</span><span class="n">thr</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">f1</span> <span class="o">&gt;</span> <span class="n">best_f1</span><span class="p">:</span>
+            <span class="n">best_f1</span><span class="p">,</span> <span class="n">best_thr</span> <span class="o">=</span> <span class="n">f1</span><span class="p">,</span> <span class="n">thr</span>
+    <span class="k">return</span> <span class="n">best_thr</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="funcion-de-entrenamiento-y-evaluacion">
+<h1>5.Función de Entrenamiento y Evaluación<a class="headerlink" href="#funcion-de-entrenamiento-y-evaluacion" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_and_evaluate</span><span class="p">(</span><span class="n">X_tr</span><span class="p">,</span> <span class="n">y_tr</span><span class="p">,</span> <span class="n">X_te</span><span class="p">,</span> <span class="n">y_te</span><span class="p">,</span>
+                       <span class="n">balance_method</span><span class="o">=</span><span class="s2">&quot;SMOTE&quot;</span><span class="p">,</span>
+                       <span class="n">optimizer_choice</span><span class="o">=</span><span class="s1">&#39;Adam&#39;</span><span class="p">,</span>
+                       <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
+                       <span class="n">epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
+                       <span class="n">use_lr_scheduler</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+
+    <span class="c1"># --- Balanceo con class_weight corregido ---</span>
+    <span class="k">if</span> <span class="n">balance_method</span> <span class="o">==</span> <span class="s2">&quot;class_weight&quot;</span><span class="p">:</span>
+        <span class="c1"># No remuestreamos, aplicamos pesos de clase</span>
+        <span class="n">Xb</span><span class="p">,</span> <span class="n">yb</span> <span class="o">=</span> <span class="n">X_tr</span><span class="p">,</span> <span class="n">y_tr</span>
+        <span class="n">classes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_tr</span><span class="p">)</span>  <span class="c1"># array([0, 1])</span>
+        <span class="n">cw_vals</span> <span class="o">=</span> <span class="n">cw</span><span class="o">.</span><span class="n">compute_class_weight</span><span class="p">(</span>
+            <span class="n">class_weight</span><span class="o">=</span><span class="s1">&#39;balanced&#39;</span><span class="p">,</span>
+            <span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">,</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">y_tr</span>
+        <span class="p">)</span>
+        <span class="n">class_w</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">w</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cw_vals</span><span class="p">)}</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># SMOTE o ADASYN</span>
+        <span class="n">Xb</span><span class="p">,</span> <span class="n">yb</span> <span class="o">=</span> <span class="n">balance_data</span><span class="p">(</span><span class="n">X_tr</span><span class="p">,</span> <span class="n">y_tr</span><span class="p">,</span> <span class="n">balance_method</span><span class="p">)</span>
+        <span class="n">class_w</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+    <span class="c1"># --- Optimizador ---</span>
+    <span class="n">opt</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;SGD&#39;</span><span class="p">:</span> <span class="n">SGD</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">),</span>
+        <span class="s1">&#39;Adam&#39;</span><span class="p">:</span> <span class="n">Adam</span><span class="p">(</span><span class="n">lr</span><span class="p">),</span>
+        <span class="s1">&#39;RMSProp&#39;</span><span class="p">:</span> <span class="n">RMSprop</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+    <span class="p">}[</span><span class="n">optimizer_choice</span><span class="p">]</span>
+
+    <span class="c1"># --- Construir y compilar modelo ---</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">build_mlp</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="n">Xb</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">use_bn</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">l2</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">opt</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;binary_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+
+    <span class="c1"># --- Callbacks ---</span>
+    <span class="n">lr_hist</span> <span class="o">=</span> <span class="n">LRScheduleHistory</span><span class="p">()</span>
+    <span class="n">cbs</span> <span class="o">=</span> <span class="p">[</span><span class="n">EarlyStopping</span><span class="p">(</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="n">patience</span><span class="p">,</span> <span class="n">restore_best_weights</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+           <span class="n">lr_hist</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">use_lr_scheduler</span><span class="p">:</span>
+        <span class="n">cbs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ReduceLROnPlateau</span><span class="p">(</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="c1"># --- Mostrar arquitectura ---</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">plot_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">to_file</span><span class="o">=</span><span class="s1">&#39;model_architecture.png&#39;</span><span class="p">,</span> <span class="n">show_shapes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Diagrama guardado en &#39;model_architecture.png&#39;&quot;</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># --- Entrenamiento ---</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xb</span><span class="p">,</span> <span class="n">yb</span><span class="p">,</span>
+                        <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">X_te</span><span class="p">,</span> <span class="n">y_te</span><span class="p">),</span>
+                        <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+                        <span class="n">class_weight</span><span class="o">=</span><span class="n">class_w</span><span class="p">,</span> <span class="n">callbacks</span><span class="o">=</span><span class="n">cbs</span><span class="p">,</span>
+                        <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+
+    <span class="c1"># --- Predicciones y métricas ---</span>
+    <span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_te</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+    <span class="n">thr</span>    <span class="o">=</span> <span class="n">optimal_threshold</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_prob</span> <span class="o">&gt;=</span> <span class="n">thr</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Reporte de Clasificación ===&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+
+    <span class="c1"># Matriz de confusión</span>
+    <span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CM: </span><span class="si">{</span><span class="n">balance_method</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1"># --- ROC Curve ---</span>
+    <span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">)</span>
+    <span class="n">roc_auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;AUC = </span><span class="si">{</span><span class="n">roc_auc</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Aleatorio&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Curva ROC (</span><span class="si">{</span><span class="n">balance_method</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;False Positive Rate&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True Positive Rate&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1"># --- Evolución del Learning Rate ---</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lr_hist</span><span class="o">.</span><span class="n">lrs</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Learning Rate Evolution&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Época&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;LR&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1"># Curvas de accuracy y loss</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;train acc&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_accuracy&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;val acc&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Accuracy vs Epochs&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;train loss&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_loss&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;val loss&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Loss vs Epochs&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1"># Evolución del LR</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lr_hist</span><span class="o">.</span><span class="n">lrs</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Learning Rate Evolution&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1"># Devolver resultados</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;balance_method&quot;</span><span class="p">:</span> <span class="n">balance_method</span><span class="p">,</span>
+        <span class="s2">&quot;optimizer&quot;</span><span class="p">:</span> <span class="n">optimizer_choice</span><span class="p">,</span>
+        <span class="s2">&quot;training_time&quot;</span><span class="p">:</span> <span class="n">elapsed</span><span class="p">,</span>
+        <span class="s2">&quot;y_pred_prob&quot;</span><span class="p">:</span> <span class="n">y_prob</span><span class="p">,</span>
+        <span class="s2">&quot;optimal_threshold&quot;</span><span class="p">:</span> <span class="n">thr</span><span class="p">,</span>
+        <span class="s2">&quot;roc_auc&quot;</span><span class="p">:</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">),</span>
+        <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;Precision&quot;</span><span class="p">:</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+            <span class="s2">&quot;Recall&quot;</span><span class="p">:</span>    <span class="n">recall_score</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+            <span class="s2">&quot;Accuracy&quot;</span><span class="p">:</span>  <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span>
+            <span class="s2">&quot;F1-score&quot;</span><span class="p">:</span>  <span class="n">f1_score</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span>
+            <span class="s2">&quot;AUC&quot;</span><span class="p">:</span>       <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="comparacion-de-tecnicas-de-balanceo">
+<h1>6.Comparación de Técnicas de Balanceo<a class="headerlink" href="#comparacion-de-tecnicas-de-balanceo" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">balance_methods</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;SMOTE&quot;</span><span class="p">,</span> <span class="s2">&quot;ADASYN&quot;</span><span class="p">,</span> <span class="s2">&quot;class_weight&quot;</span><span class="p">]</span>
+<span class="n">results_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">balance_methods</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- Método de balanceo: </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2"> ---&quot;</span><span class="p">)</span>
+    <span class="n">results_dict</span><span class="p">[</span><span class="n">method</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_and_evaluate</span><span class="p">(</span>
+        <span class="n">X_train_proc</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test_proc</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span>
+        <span class="n">balance_method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
+        <span class="n">optimizer_choice</span><span class="o">=</span><span class="s2">&quot;Adam&quot;</span><span class="p">,</span>
+        <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
+        <span class="n">epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
+        <span class="n">use_lr_scheduler</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">patience</span><span class="o">=</span><span class="mi">5</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Método de balanceo: SMOTE ---
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\sklearn\base.py:474: FutureWarning: `BaseEstimator._validate_data` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation.validate_data` instead. This function becomes public and is part of the scikit-learn developer API.
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_1&quot;
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ dense_3 (Dense)             (None, 64)                5824      
+                                                                 
+ batch_normalization_2 (Batc  (None, 64)               256       
+ hNormalization)                                                 
+                                                                 
+ dropout_2 (Dropout)         (None, 64)                0         
+                                                                 
+ dense_4 (Dense)             (None, 32)                2080      
+                                                                 
+ batch_normalization_3 (Batc  (None, 32)               128       
+ hNormalization)                                                 
+                                                                 
+ dropout_3 (Dropout)         (None, 32)                0         
+                                                                 
+ dense_5 (Dense)             (None, 1)                 33        
+                                                                 
+=================================================================
+Total params: 8,321
+Trainable params: 8,129
+Non-trainable params: 192
+_________________________________________________________________
+You must install pydot (`pip install pydot`) and install graphviz (see instructions at https://graphviz.gitlab.io/download/) for plot_model to work.
+Diagrama guardado en &#39;model_architecture.png&#39;
+Epoch 1/50
+1794/1794 [==============================] - 6s 3ms/step - loss: 0.5907 - accuracy: 0.7048 - val_loss: 0.6096 - val_accuracy: 0.6642 - lr: 0.0010
+Epoch 2/50
+1794/1794 [==============================] - 6s 3ms/step - loss: 0.5271 - accuracy: 0.7500 - val_loss: 0.5733 - val_accuracy: 0.7060 - lr: 0.0010
+Epoch 3/50
+1794/1794 [==============================] - 6s 3ms/step - loss: 0.4977 - accuracy: 0.7708 - val_loss: 0.5382 - val_accuracy: 0.7329 - lr: 0.0010
+Epoch 4/50
+1794/1794 [==============================] - 6s 3ms/step - loss: 0.4755 - accuracy: 0.7865 - val_loss: 0.5186 - val_accuracy: 0.7477 - lr: 0.0010
+Epoch 5/50
+1794/1794 [==============================] - 6s 3ms/step - loss: 0.4604 - accuracy: 0.7973 - val_loss: 0.5009 - val_accuracy: 0.7570 - lr: 0.0010
+Epoch 6/50
+1794/1794 [==============================] - 6s 3ms/step - loss: 0.4518 - accuracy: 0.8006 - val_loss: 0.4925 - val_accuracy: 0.7663 - lr: 0.0010
+Epoch 7/50
+1794/1794 [==============================] - 6s 3ms/step - loss: 0.4432 - accuracy: 0.8067 - val_loss: 0.4687 - val_accuracy: 0.7823 - lr: 0.0010
+Epoch 8/50
+1794/1794 [==============================] - 6s 3ms/step - loss: 0.4390 - accuracy: 0.8090 - val_loss: 0.4744 - val_accuracy: 0.7781 - lr: 0.0010
+Epoch 9/50
+1794/1794 [==============================] - 6s 3ms/step - loss: 0.4337 - accuracy: 0.8117 - val_loss: 0.4553 - val_accuracy: 0.7924 - lr: 0.0010
+Epoch 10/50
+1794/1794 [==============================] - 6s 3ms/step - loss: 0.4290 - accuracy: 0.8153 - val_loss: 0.4633 - val_accuracy: 0.7925 - lr: 0.0010
+Epoch 11/50
+1794/1794 [==============================] - 6s 3ms/step - loss: 0.4250 - accuracy: 0.8186 - val_loss: 0.5135 - val_accuracy: 0.7603 - lr: 0.0010
+Epoch 12/50
+1780/1794 [============================&gt;.] - ETA: 0s - loss: 0.4239 - accuracy: 0.8190
+Epoch 12: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+1794/1794 [==============================] - 6s 3ms/step - loss: 0.4239 - accuracy: 0.8189 - val_loss: 0.4690 - val_accuracy: 0.7852 - lr: 0.0010
+Epoch 13/50
+1794/1794 [==============================] - 6s 3ms/step - loss: 0.4097 - accuracy: 0.8272 - val_loss: 0.4452 - val_accuracy: 0.8059 - lr: 5.0000e-04
+Epoch 14/50
+1794/1794 [==============================] - 6s 3ms/step - loss: 0.4044 - accuracy: 0.8292 - val_loss: 0.4460 - val_accuracy: 0.8032 - lr: 5.0000e-04
+Epoch 15/50
+1794/1794 [==============================] - 5s 3ms/step - loss: 0.4017 - accuracy: 0.8315 - val_loss: 0.4751 - val_accuracy: 0.7880 - lr: 5.0000e-04
+Epoch 16/50
+1784/1794 [============================&gt;.] - ETA: 0s - loss: 0.3984 - accuracy: 0.8335
+Epoch 16: ReduceLROnPlateau reducing learning rate to 0.0002500000118743628.
+1794/1794 [==============================] - 6s 3ms/step - loss: 0.3983 - accuracy: 0.8336 - val_loss: 0.4573 - val_accuracy: 0.7986 - lr: 5.0000e-04
+Epoch 17/50
+1794/1794 [==============================] - 6s 3ms/step - loss: 0.3914 - accuracy: 0.8364 - val_loss: 0.4609 - val_accuracy: 0.7963 - lr: 2.5000e-04
+Epoch 18/50
+1794/1794 [==============================] - 6s 3ms/step - loss: 0.3883 - accuracy: 0.8366 - val_loss: 0.4614 - val_accuracy: 0.7954 - lr: 2.5000e-04
+491/491 [==============================] - 0s 713us/step
+
+=== Reporte de Clasificación ===
+              precision    recall  f1-score   support
+
+           0       0.94      0.85      0.89     14348
+           1       0.20      0.38      0.26      1341
+
+    accuracy                           0.81     15689
+   macro avg       0.57      0.62      0.58     15689
+weighted avg       0.87      0.81      0.84     15689
+</pre></div>
+</div>
+<img alt="_images/b030f7172e98582886d226a4368a97bdeaa9b1285c6096177782619492024a7f.png" src="_images/b030f7172e98582886d226a4368a97bdeaa9b1285c6096177782619492024a7f.png" />
+<img alt="_images/404d56e9696b1a8b237480434c021ae41380f940ad101d09bc7e1430325fce38.png" src="_images/404d56e9696b1a8b237480434c021ae41380f940ad101d09bc7e1430325fce38.png" />
+<img alt="_images/6393a460aa167a547598db6cfc2cc5db548a4343e08b06f3fcc34bdfb1b3379e.png" src="_images/6393a460aa167a547598db6cfc2cc5db548a4343e08b06f3fcc34bdfb1b3379e.png" />
+<img alt="_images/1eb9fa4a2c0a5cfeab782147756b7b94d37dbeb5d9ca86ef242d166abd7d51a3.png" src="_images/1eb9fa4a2c0a5cfeab782147756b7b94d37dbeb5d9ca86ef242d166abd7d51a3.png" />
+<img alt="_images/a91ca8cd37cd00e35e9d06c571867a9de6711734c936936b5f0572da4ba38f9a.png" src="_images/a91ca8cd37cd00e35e9d06c571867a9de6711734c936936b5f0572da4ba38f9a.png" />
+<img alt="_images/63c98fe26a293ca51d81a9050bda578356af78710b209efe016ad1e059697f8e.png" src="_images/63c98fe26a293ca51d81a9050bda578356af78710b209efe016ad1e059697f8e.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Método de balanceo: ADASYN ---
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\sklearn\base.py:474: FutureWarning: `BaseEstimator._validate_data` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation.validate_data` instead. This function becomes public and is part of the scikit-learn developer API.
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_2&quot;
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ dense_6 (Dense)             (None, 64)                5824      
+                                                                 
+ batch_normalization_4 (Batc  (None, 64)               256       
+ hNormalization)                                                 
+                                                                 
+ dropout_4 (Dropout)         (None, 64)                0         
+                                                                 
+ dense_7 (Dense)             (None, 32)                2080      
+                                                                 
+ batch_normalization_5 (Batc  (None, 32)               128       
+ hNormalization)                                                 
+                                                                 
+ dropout_5 (Dropout)         (None, 32)                0         
+                                                                 
+ dense_8 (Dense)             (None, 1)                 33        
+                                                                 
+=================================================================
+Total params: 8,321
+Trainable params: 8,129
+Non-trainable params: 192
+_________________________________________________________________
+You must install pydot (`pip install pydot`) and install graphviz (see instructions at https://graphviz.gitlab.io/download/) for plot_model to work.
+Diagrama guardado en &#39;model_architecture.png&#39;
+Epoch 1/50
+1795/1795 [==============================] - 6s 3ms/step - loss: 0.6043 - accuracy: 0.6964 - val_loss: 0.5720 - val_accuracy: 0.6900 - lr: 0.0010
+Epoch 2/50
+1795/1795 [==============================] - 6s 3ms/step - loss: 0.5314 - accuracy: 0.7486 - val_loss: 0.5242 - val_accuracy: 0.7378 - lr: 0.0010
+Epoch 3/50
+1795/1795 [==============================] - 6s 3ms/step - loss: 0.5003 - accuracy: 0.7687 - val_loss: 0.5049 - val_accuracy: 0.7591 - lr: 0.0010
+Epoch 4/50
+1795/1795 [==============================] - 6s 3ms/step - loss: 0.4786 - accuracy: 0.7838 - val_loss: 0.4877 - val_accuracy: 0.7696 - lr: 0.0010
+Epoch 5/50
+1795/1795 [==============================] - 6s 3ms/step - loss: 0.4664 - accuracy: 0.7907 - val_loss: 0.4960 - val_accuracy: 0.7668 - lr: 0.0010
+Epoch 6/50
+1795/1795 [==============================] - 6s 3ms/step - loss: 0.4546 - accuracy: 0.7996 - val_loss: 0.4622 - val_accuracy: 0.7902 - lr: 0.0010
+Epoch 7/50
+1795/1795 [==============================] - 6s 3ms/step - loss: 0.4459 - accuracy: 0.8051 - val_loss: 0.4616 - val_accuracy: 0.7955 - lr: 0.0010
+Epoch 8/50
+1795/1795 [==============================] - 6s 3ms/step - loss: 0.4379 - accuracy: 0.8085 - val_loss: 0.4491 - val_accuracy: 0.7981 - lr: 0.0010
+Epoch 9/50
+1795/1795 [==============================] - 6s 3ms/step - loss: 0.4336 - accuracy: 0.8121 - val_loss: 0.4766 - val_accuracy: 0.7832 - lr: 0.0010
+Epoch 10/50
+1795/1795 [==============================] - 6s 3ms/step - loss: 0.4287 - accuracy: 0.8147 - val_loss: 0.4658 - val_accuracy: 0.7916 - lr: 0.0010
+Epoch 11/50
+1795/1795 [==============================] - 6s 3ms/step - loss: 0.4220 - accuracy: 0.8198 - val_loss: 0.4323 - val_accuracy: 0.8169 - lr: 0.0010
+Epoch 12/50
+1795/1795 [==============================] - 6s 3ms/step - loss: 0.4200 - accuracy: 0.8198 - val_loss: 0.4166 - val_accuracy: 0.8247 - lr: 0.0010
+Epoch 13/50
+1795/1795 [==============================] - 5s 3ms/step - loss: 0.4159 - accuracy: 0.8239 - val_loss: 0.4355 - val_accuracy: 0.8167 - lr: 0.0010
+Epoch 14/50
+1795/1795 [==============================] - 5s 3ms/step - loss: 0.4128 - accuracy: 0.8256 - val_loss: 0.4249 - val_accuracy: 0.8224 - lr: 0.0010
+Epoch 15/50
+1788/1795 [============================&gt;.] - ETA: 0s - loss: 0.4074 - accuracy: 0.8287
+Epoch 15: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+1795/1795 [==============================] - 5s 3ms/step - loss: 0.4073 - accuracy: 0.8287 - val_loss: 0.4569 - val_accuracy: 0.8000 - lr: 0.0010
+Epoch 16/50
+1795/1795 [==============================] - 6s 3ms/step - loss: 0.3928 - accuracy: 0.8357 - val_loss: 0.4246 - val_accuracy: 0.8217 - lr: 5.0000e-04
+Epoch 17/50
+1795/1795 [==============================] - 6s 3ms/step - loss: 0.3879 - accuracy: 0.8386 - val_loss: 0.4226 - val_accuracy: 0.8240 - lr: 5.0000e-04
+491/491 [==============================] - 0s 833us/step
+
+=== Reporte de Clasificación ===
+              precision    recall  f1-score   support
+
+           0       0.94      0.79      0.86     14348
+           1       0.17      0.47      0.25      1341
+
+    accuracy                           0.77     15689
+   macro avg       0.56      0.63      0.56     15689
+weighted avg       0.88      0.77      0.81     15689
+</pre></div>
+</div>
+<img alt="_images/389776291811a0061b804c717fff9fb4788aa05ba6862ac0d688d39e51271acd.png" src="_images/389776291811a0061b804c717fff9fb4788aa05ba6862ac0d688d39e51271acd.png" />
+<img alt="_images/2aa6e7242cfa3971404a82d477ff7a597f28121f553b0d030c5c581c8bf8607d.png" src="_images/2aa6e7242cfa3971404a82d477ff7a597f28121f553b0d030c5c581c8bf8607d.png" />
+<img alt="_images/67764bff2da209e9296df7b768f0b23da6f54b44c5adfb40eae0971e98e620d5.png" src="_images/67764bff2da209e9296df7b768f0b23da6f54b44c5adfb40eae0971e98e620d5.png" />
+<img alt="_images/b2aab7b313931fca5c18d22fe3716b680fa49cbd7b744ffd4e7fbd8e81b4d9a0.png" src="_images/b2aab7b313931fca5c18d22fe3716b680fa49cbd7b744ffd4e7fbd8e81b4d9a0.png" />
+<img alt="_images/698d8a6010688c829aff1fa34105d5776e0c0a7ac6159d722260db883e056d39.png" src="_images/698d8a6010688c829aff1fa34105d5776e0c0a7ac6159d722260db883e056d39.png" />
+<img alt="_images/b8bc16157c0dc436bbbbcc2a5c46f51cdb9739fa71c650a9614db063d93aab40.png" src="_images/b8bc16157c0dc436bbbbcc2a5c46f51cdb9739fa71c650a9614db063d93aab40.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Método de balanceo: class_weight ---
+Model: &quot;sequential_3&quot;
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ dense_9 (Dense)             (None, 64)                5824      
+                                                                 
+ batch_normalization_6 (Batc  (None, 64)               256       
+ hNormalization)                                                 
+                                                                 
+ dropout_6 (Dropout)         (None, 64)                0         
+                                                                 
+ dense_10 (Dense)            (None, 32)                2080      
+                                                                 
+ batch_normalization_7 (Batc  (None, 32)               128       
+ hNormalization)                                                 
+                                                                 
+ dropout_7 (Dropout)         (None, 32)                0         
+                                                                 
+ dense_11 (Dense)            (None, 1)                 33        
+                                                                 
+=================================================================
+Total params: 8,321
+Trainable params: 8,129
+Non-trainable params: 192
+_________________________________________________________________
+You must install pydot (`pip install pydot`) and install graphviz (see instructions at https://graphviz.gitlab.io/download/) for plot_model to work.
+Diagrama guardado en &#39;model_architecture.png&#39;
+Epoch 1/50
+981/981 [==============================] - 4s 4ms/step - loss: 0.6893 - accuracy: 0.6084 - val_loss: 0.6444 - val_accuracy: 0.6373 - lr: 0.0010
+Epoch 2/50
+981/981 [==============================] - 3s 3ms/step - loss: 0.6233 - accuracy: 0.6569 - val_loss: 0.6171 - val_accuracy: 0.6809 - lr: 0.0010
+Epoch 3/50
+981/981 [==============================] - 3s 3ms/step - loss: 0.6104 - accuracy: 0.6828 - val_loss: 0.6201 - val_accuracy: 0.6664 - lr: 0.0010
+Epoch 4/50
+981/981 [==============================] - 3s 3ms/step - loss: 0.6043 - accuracy: 0.6831 - val_loss: 0.6085 - val_accuracy: 0.6833 - lr: 0.0010
+Epoch 5/50
+981/981 [==============================] - 3s 3ms/step - loss: 0.6024 - accuracy: 0.6842 - val_loss: 0.6124 - val_accuracy: 0.6692 - lr: 0.0010
+Epoch 6/50
+981/981 [==============================] - 3s 3ms/step - loss: 0.5998 - accuracy: 0.6837 - val_loss: 0.6218 - val_accuracy: 0.6528 - lr: 0.0010
+Epoch 7/50
+981/981 [==============================] - 3s 3ms/step - loss: 0.5994 - accuracy: 0.6799 - val_loss: 0.6050 - val_accuracy: 0.6796 - lr: 0.0010
+Epoch 8/50
+981/981 [==============================] - 3s 3ms/step - loss: 0.5961 - accuracy: 0.6823 - val_loss: 0.6002 - val_accuracy: 0.6844 - lr: 0.0010
+Epoch 9/50
+981/981 [==============================] - 3s 3ms/step - loss: 0.5926 - accuracy: 0.6858 - val_loss: 0.6022 - val_accuracy: 0.6708 - lr: 0.0010
+Epoch 10/50
+981/981 [==============================] - 3s 3ms/step - loss: 0.5922 - accuracy: 0.6871 - val_loss: 0.6319 - val_accuracy: 0.6485 - lr: 0.0010
+Epoch 11/50
+981/981 [==============================] - 3s 3ms/step - loss: 0.5886 - accuracy: 0.6806 - val_loss: 0.5916 - val_accuracy: 0.6811 - lr: 0.0010
+Epoch 12/50
+981/981 [==============================] - 3s 3ms/step - loss: 0.5879 - accuracy: 0.6868 - val_loss: 0.5895 - val_accuracy: 0.6785 - lr: 0.0010
+Epoch 13/50
+981/981 [==============================] - 3s 3ms/step - loss: 0.5853 - accuracy: 0.6842 - val_loss: 0.5985 - val_accuracy: 0.6783 - lr: 0.0010
+Epoch 14/50
+981/981 [==============================] - 3s 3ms/step - loss: 0.5834 - accuracy: 0.6849 - val_loss: 0.5870 - val_accuracy: 0.6808 - lr: 0.0010
+Epoch 15/50
+981/981 [==============================] - 3s 3ms/step - loss: 0.5812 - accuracy: 0.6868 - val_loss: 0.5767 - val_accuracy: 0.6942 - lr: 0.0010
+Epoch 16/50
+981/981 [==============================] - 3s 3ms/step - loss: 0.5813 - accuracy: 0.6881 - val_loss: 0.6068 - val_accuracy: 0.6666 - lr: 0.0010
+Epoch 17/50
+981/981 [==============================] - 3s 3ms/step - loss: 0.5774 - accuracy: 0.6858 - val_loss: 0.5929 - val_accuracy: 0.6835 - lr: 0.0010
+Epoch 18/50
+970/981 [============================&gt;.] - ETA: 0s - loss: 0.5784 - accuracy: 0.6876
+Epoch 18: ReduceLROnPlateau reducing learning rate to 0.0005000000237487257.
+981/981 [==============================] - 4s 4ms/step - loss: 0.5780 - accuracy: 0.6876 - val_loss: 0.6037 - val_accuracy: 0.6747 - lr: 0.0010
+Epoch 19/50
+981/981 [==============================] - 3s 3ms/step - loss: 0.5705 - accuracy: 0.6831 - val_loss: 0.5810 - val_accuracy: 0.6825 - lr: 5.0000e-04
+Epoch 20/50
+981/981 [==============================] - 3s 3ms/step - loss: 0.5633 - accuracy: 0.6920 - val_loss: 0.5884 - val_accuracy: 0.6812 - lr: 5.0000e-04
+491/491 [==============================] - 0s 842us/step
+
+=== Reporte de Clasificación ===
+              precision    recall  f1-score   support
+
+           0       0.94      0.89      0.92     14348
+           1       0.26      0.39      0.31      1341
+
+    accuracy                           0.85     15689
+   macro avg       0.60      0.64      0.61     15689
+weighted avg       0.88      0.85      0.86     15689
+</pre></div>
+</div>
+<img alt="_images/845ec619e0c06fe604afdb450d4a91f3db0c2b18a94585a2e6ba607a1b01ec07.png" src="_images/845ec619e0c06fe604afdb450d4a91f3db0c2b18a94585a2e6ba607a1b01ec07.png" />
+<img alt="_images/f50eaa1cf3173bf9c3f77322ea983cf24535d258bdb6db7ff019ae5058cdd05c.png" src="_images/f50eaa1cf3173bf9c3f77322ea983cf24535d258bdb6db7ff019ae5058cdd05c.png" />
+<img alt="_images/6b55929fa55720370db7f5e4cf316a60eac2d12795d153a5150c94cb947903a8.png" src="_images/6b55929fa55720370db7f5e4cf316a60eac2d12795d153a5150c94cb947903a8.png" />
+<img alt="_images/4239e1baefe5f5e6d7da3c260020b8c50a87e54beb88b231f68bb241cba2a997.png" src="_images/4239e1baefe5f5e6d7da3c260020b8c50a87e54beb88b231f68bb241cba2a997.png" />
+<img alt="_images/46ea2be023f58c4eead0233056e3542c467ed514a98650834e7e8978a4477202.png" src="_images/46ea2be023f58c4eead0233056e3542c467ed514a98650834e7e8978a4477202.png" />
+<img alt="_images/304e56a1587deb9bf34a51c345d5976d3df13ece1f3cca3217468e5b03433ddc.png" src="_images/304e56a1587deb9bf34a51c345d5976d3df13ece1f3cca3217468e5b03433ddc.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dispositivos físicos:&quot;</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s1">&#39;GPU&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dispositivos físicos: [PhysicalDevice(name=&#39;/physical_device:GPU:0&#39;, device_type=&#39;GPU&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TensorFlow version:&quot;</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CUDA version:&quot;</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">sysconfig</span><span class="o">.</span><span class="n">get_build_info</span><span class="p">()[</span><span class="s2">&quot;cuda_version&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cuDNN version:&quot;</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">sysconfig</span><span class="o">.</span><span class="n">get_build_info</span><span class="p">()[</span><span class="s2">&quot;cudnn_version&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TensorFlow version: 2.10.1
+CUDA version: 64_112
+cuDNN version: 64_8
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="visualizacion-de-resultados-y-comparacion-de-umbrales">
+<h1>7.Visualización de Resultados y Comparación de Umbrales<a class="headerlink" href="#visualizacion-de-resultados-y-comparacion-de-umbrales" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 7.a) Crear tabla de métricas</span>
+<span class="n">table_data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">method</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">results_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;y_pred_prob&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;optimal_threshold&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">table_data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+        <span class="s2">&quot;Método&quot;</span><span class="p">:</span>     <span class="n">method</span><span class="p">,</span>
+        <span class="s2">&quot;Precision&quot;</span><span class="p">:</span>  <span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+        <span class="s2">&quot;Recall&quot;</span><span class="p">:</span>     <span class="n">recall_score</span><span class="p">(</span>   <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+        <span class="s2">&quot;Accuracy&quot;</span><span class="p">:</span>   <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span>
+        <span class="s2">&quot;F1-score&quot;</span><span class="p">:</span>   <span class="n">f1_score</span><span class="p">(</span>      <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+        <span class="s2">&quot;AUC&quot;</span><span class="p">:</span>        <span class="n">res</span><span class="p">[</span><span class="s2">&quot;roc_auc&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;Tiempo (s)&quot;</span><span class="p">:</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;training_time&quot;</span><span class="p">]</span>
+    <span class="p">})</span>
+
+<span class="n">df_metrics</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">table_data</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Método&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 7.b) Imprimir la tabla</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">===== Resumen de Métricas por Método de Balanceo =====&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_metrics</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">format</span><span class="p">({</span>
+    <span class="s2">&quot;Precision&quot;</span><span class="p">:</span>  <span class="s2">&quot;</span><span class="si">{:.4f}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Recall&quot;</span><span class="p">:</span>     <span class="s2">&quot;</span><span class="si">{:.4f}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Accuracy&quot;</span><span class="p">:</span>   <span class="s2">&quot;</span><span class="si">{:.4f}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;F1-score&quot;</span><span class="p">:</span>   <span class="s2">&quot;</span><span class="si">{:.4f}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AUC&quot;</span><span class="p">:</span>        <span class="s2">&quot;</span><span class="si">{:.4f}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Tiempo (s)&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span>
+<span class="p">}))</span>
+
+<span class="c1"># 7.c) Graficar comparación de F1, AUC y Tiempo</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df_metrics</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;F1-score&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_metrics</span><span class="o">.</span><span class="n">reset_index</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;F1-score por método&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df_metrics</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;AUC&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_metrics</span><span class="o">.</span><span class="n">reset_index</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;AUC por método&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df_metrics</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Tiempo (s)&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_metrics</span><span class="o">.</span><span class="n">reset_index</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Tiempo de entrenamiento (s)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===== Resumen de Métricas por Método de Balanceo =====
+</pre></div>
+</div>
+<div class="output text_html"><style type="text/css">
+</style>
+<table id="T_5b44f">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_5b44f_level0_col0" class="col_heading level0 col0" >Precision</th>
+      <th id="T_5b44f_level0_col1" class="col_heading level0 col1" >Recall</th>
+      <th id="T_5b44f_level0_col2" class="col_heading level0 col2" >Accuracy</th>
+      <th id="T_5b44f_level0_col3" class="col_heading level0 col3" >F1-score</th>
+      <th id="T_5b44f_level0_col4" class="col_heading level0 col4" >AUC</th>
+      <th id="T_5b44f_level0_col5" class="col_heading level0 col5" >Tiempo (s)</th>
+    </tr>
+    <tr>
+      <th class="index_name level0" >Método</th>
+      <th class="blank col0" >&nbsp;</th>
+      <th class="blank col1" >&nbsp;</th>
+      <th class="blank col2" >&nbsp;</th>
+      <th class="blank col3" >&nbsp;</th>
+      <th class="blank col4" >&nbsp;</th>
+      <th class="blank col5" >&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_5b44f_level0_row0" class="row_heading level0 row0" >SMOTE</th>
+      <td id="T_5b44f_row0_col0" class="data row0 col0" >0.1973</td>
+      <td id="T_5b44f_row0_col1" class="data row0 col1" >0.3840</td>
+      <td id="T_5b44f_row0_col2" class="data row0 col2" >0.8138</td>
+      <td id="T_5b44f_row0_col3" class="data row0 col3" >0.2607</td>
+      <td id="T_5b44f_row0_col4" class="data row0 col4" >0.7015</td>
+      <td id="T_5b44f_row0_col5" class="data row0 col5" >104.06</td>
+    </tr>
+    <tr>
+      <th id="T_5b44f_level0_row1" class="row_heading level0 row1" >ADASYN</th>
+      <td id="T_5b44f_row1_col0" class="data row1 col0" >0.1743</td>
+      <td id="T_5b44f_row1_col1" class="data row1 col1" >0.4668</td>
+      <td id="T_5b44f_row1_col2" class="data row1 col2" >0.7654</td>
+      <td id="T_5b44f_row1_col3" class="data row1 col3" >0.2539</td>
+      <td id="T_5b44f_row1_col4" class="data row1 col4" >0.6992</td>
+      <td id="T_5b44f_row1_col5" class="data row1 col5" >96.90</td>
+    </tr>
+    <tr>
+      <th id="T_5b44f_level0_row2" class="row_heading level0 row2" >class_weight</th>
+      <td id="T_5b44f_row2_col0" class="data row2 col0" >0.2576</td>
+      <td id="T_5b44f_row2_col1" class="data row2 col1" >0.3922</td>
+      <td id="T_5b44f_row2_col2" class="data row2 col2" >0.8514</td>
+      <td id="T_5b44f_row2_col3" class="data row2 col3" >0.3110</td>
+      <td id="T_5b44f_row2_col4" class="data row2 col4" >0.7437</td>
+      <td id="T_5b44f_row2_col5" class="data row2 col5" >66.10</td>
+    </tr>
+  </tbody>
+</table>
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+</pre></div>
+</div>
+<img alt="_images/840019f3b07bd023f5ae998982e835a907fc9bc35f89a602a60eb2b0185079f5.png" src="_images/840019f3b07bd023f5ae998982e835a907fc9bc35f89a602a60eb2b0185079f5.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 7.d) VISUALIZAR Y APLICAR EL UMBRAL ÓPTIMO</span>
+
+<span class="k">for</span> <span class="n">method</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">results_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">thr</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;optimal_threshold&quot;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Umbral óptimo para </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">thr</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Predecir con el umbral por defecto 0.5</span>
+    <span class="n">y_pred_default</span> <span class="o">=</span> <span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;y_pred_prob&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">acc_def</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_default</span><span class="p">)</span>
+
+    <span class="c1"># Predecir con el umbral óptimo</span>
+    <span class="n">y_pred_opt</span> <span class="o">=</span> <span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;y_pred_prob&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">thr</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">acc_opt</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_opt</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Accuracy @ 0.50: </span><span class="si">{</span><span class="n">acc_def</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Accuracy @ </span><span class="si">{</span><span class="n">thr</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">acc_opt</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Umbral óptimo para SMOTE: 0.520
+  Accuracy @ 0.50: 0.8059
+  Accuracy @ 0.52: 0.8138
+
+Umbral óptimo para ADASYN: 0.370
+  Accuracy @ 0.50: 0.8247
+  Accuracy @ 0.37: 0.7654
+
+Umbral óptimo para class_weight: 0.690
+  Accuracy @ 0.50: 0.6942
+  Accuracy @ 0.69: 0.8514
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 7.e. COMPARAR MÉTRICAS @ UMBRALES 0.5 VS ÓPTIMO</span>
+<span class="c1"># Construimos la tabla</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">method</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">results_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">y_prob</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;y_pred_prob&quot;</span><span class="p">]</span>
+    <span class="n">thr</span>    <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;optimal_threshold&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Predicciones con umbral 0.5</span>
+    <span class="n">y_def</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_prob</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">prec_def</span> <span class="o">=</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_def</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">rec_def</span>  <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span>   <span class="n">y_test</span><span class="p">,</span> <span class="n">y_def</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">f1_def</span>   <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span>      <span class="n">y_test</span><span class="p">,</span> <span class="n">y_def</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">acc_def</span>  <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_def</span><span class="p">)</span>
+
+    <span class="c1"># Predicciones con umbral óptimo</span>
+    <span class="n">y_opt</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_prob</span> <span class="o">&gt;=</span> <span class="n">thr</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">prec_opt</span> <span class="o">=</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_opt</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">rec_opt</span>  <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span>   <span class="n">y_test</span><span class="p">,</span> <span class="n">y_opt</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">f1_opt</span>   <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span>      <span class="n">y_test</span><span class="p">,</span> <span class="n">y_opt</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">acc_opt</span>  <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_opt</span><span class="p">)</span>
+
+    <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+        <span class="s2">&quot;Método&quot;</span><span class="p">:</span>       <span class="n">method</span><span class="p">,</span>
+        <span class="s2">&quot;Umbral&quot;</span><span class="p">:</span>       <span class="s2">&quot;0.50&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Precision&quot;</span><span class="p">:</span>    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prec_def</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Recall&quot;</span><span class="p">:</span>       <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rec_def</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;F1-score&quot;</span><span class="p">:</span>     <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">f1_def</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Accuracy&quot;</span><span class="p">:</span>     <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">acc_def</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">})</span>
+    <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+        <span class="s2">&quot;Método&quot;</span><span class="p">:</span>       <span class="n">method</span><span class="p">,</span>
+        <span class="s2">&quot;Umbral&quot;</span><span class="p">:</span>       <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">thr</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Precision&quot;</span><span class="p">:</span>    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prec_opt</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Recall&quot;</span><span class="p">:</span>       <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rec_opt</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;F1-score&quot;</span><span class="p">:</span>     <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">f1_opt</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Accuracy&quot;</span><span class="p">:</span>     <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">acc_opt</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">})</span>
+
+<span class="n">df_thresholds</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+
+<span class="c1"># Mostramos la tabla ordenada por método y umbral</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">===== Métricas @ Umbrales =====&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_thresholds</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">&quot;Método&quot;</span><span class="p">,</span><span class="s2">&quot;Umbral&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===== Métricas @ Umbrales =====
+      Método Umbral Precision Recall F1-score Accuracy
+      ADASYN   0.37    0.1743 0.4668   0.2539   0.7654
+      ADASYN   0.50    0.1924 0.3289   0.2428   0.8247
+       SMOTE   0.50    0.1930 0.3997   0.2603   0.8059
+       SMOTE   0.52    0.1973 0.3840   0.2607   0.8138
+class_weight   0.50    0.1694 0.6607   0.2697   0.6942
+class_weight   0.69    0.2576 0.3922   0.3110   0.8514
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="guardar-resultados">
+<h1>8.Guardar Resultados<a class="headerlink" href="#guardar-resultados" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Guardar la tabla resumen de métricas en un archivo CSV</span>
+<span class="n">df_metrics</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;resultados_metricas.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tabla de métricas guardada en &#39;resultados_metricas.csv&#39;&quot;</span><span class="p">)</span>
+
+<span class="c1"># Guardar el diccionario de resultados (results_dict) usando pickle</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;results_dict.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">results_dict</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Diccionario de resultados guardado en &#39;results_dict.pkl&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tabla de métricas guardada en &#39;resultados_metricas.csv&#39;
+Diccionario de resultados guardado en &#39;results_dict.pkl&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;📁 Carpeta actual:&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>📁 Carpeta actual: c:\Users\DELL\AppData\Local\Programs\Microsoft VS Code
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="svm.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Máquina de Soporte Vectorial</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="rnn.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">RNN Sobre Datos Estáticos</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Redes Neuronales Perceptrón Multicapa</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-e-importacion-de-librerias">1.Configuración e Importación de Librerías</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-y-division-de-datos">2.Carga y División de Datos</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesamiento-de-datos">3.Preprocesamiento de Datos</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-auxiliares">4.Funciones Auxiliares</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#registro-de-learning-rate">4.1 Registro de Learning Rate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-del-mlp">4.2 Construcción del MLP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#balanceo-de-datos">4.3 Balanceo de Datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-umbral-optimo-maximizar-f1-score">4.4 Cálculo de Umbral Óptimo (maximizar F1-score)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-de-entrenamiento-y-evaluacion">5.Función de Entrenamiento y Evaluación</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-tecnicas-de-balanceo">6.Comparación de Técnicas de Balanceo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-de-resultados-y-comparacion-de-umbrales">7.Visualización de Resultados y Comparación de Umbrales</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#guardar-resultados">8.Guardar Resultados</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Angélica Sepúlveda, Andrés Pedraza y Jefry Llerena
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

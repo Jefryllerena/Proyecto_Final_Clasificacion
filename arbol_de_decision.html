@@ -1,0 +1,1576 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Árbol de Decisión &#8212; jbook_Proyecto_Final_Clasificacion</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'arbol_de_decision';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bosques Aleatorios" href="bosques_aleatorios.html" />
+    <link rel="prev" title="Regresión Logística Ridge (L2) y Lasso (L1)" href="regresion_logistica_l1_l2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="descripcion_del_proyecto.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo-uninorte.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo-uninorte.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="descripcion_del_proyecto.html">
+                    <no title>
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="eda.html">Análisis Exploratorio (EDA)</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="clasificacion_bayesiana.html">Clasificación Bayesiana</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="knn.html">k-Vecinos Más Cercanos</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="regresion_logistica_l1_l2.html">Regresión Logística Ridge (L2) y Lasso (L1)</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Árbol de Decisión</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="bosques_aleatorios.html">Bosques Aleatorios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xgboost.html">XGBoost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="svm.html">Máquina de Soporte Vectorial</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="mlp.html">Redes Neuronales Perceptrón Multicapa</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="rnn.html">RNN Sobre Datos Estáticos</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="lstm.html">Redes Neuronales Memoria Larga a Corto Plazo</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="cnn.html">Redes Neuronales Convolucionales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoencoders.html">LSTM Autoencoder para Detección de Anomalías en Crédito</a></li>
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Farbol_de_decision.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/arbol_de_decision.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Árbol de Decisión</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Árbol de Decisión</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">1. Importación de librerías</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cargar-y-dividir-datos">2. Cargar y dividir datos</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesamiento-numericas-categoricas">3. Preprocesamiento (numéricas + categóricas)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-pipelines-con-distintas-tecnicas">4. Crear Pipelines con distintas técnicas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-y-evaluacion-con-gridsearchcv">5. Entrenamiento y Evaluación con GridSearchCV</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-de-metricas">6. Tabla comparativa de métricas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-de-metricas-por-algoritmo">7.Boxplot de Métricas por Algoritmo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mapa-de-calor-heatmap-de-metricas">8.Mapa de calor (heatmap) de métricas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-roc-por-tecnica-de-balanceo">9.Curvas ROC por técnica de Balanceo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matrices-de-confusion">10.Matrices de confusión</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-tiempo-de-entrenamiento">11.Gráfico Tiempo de Entrenamiento</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-hiperparametros-optimos-por-tecnica">12.Tabla de Hiperparámetros Óptimos por Técnica</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-de-aprendizaje-recall1">13.Curva de aprendizaje (Recall1)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-precision-recall">14.Curvas Precision-Recall</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#estructura-del-arbol">15.Estructura del Arbol</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-de-recall1-por-tecnica-y-penalizacion">16.Heatmap de Recall1 por Técnica y Penalización</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#radar-plot-por-modelo-para-comparar-metricas">17.Radar Plot por modelo para comparar métricas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#guardar-modelos-entrenado">9. Guardar modelos entrenado</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="arbol-de-decision">
+<h1>Árbol de Decisión<a class="headerlink" href="#arbol-de-decision" title="Permalink to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="importacion-de-librerias">
+<h1>1. Importación de librerías<a class="headerlink" href="#importacion-de-librerias" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">joblib</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">GridSearchCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">OneHotEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">ColumnTransformer</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">imblearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span> <span class="k">as</span> <span class="n">ImbPipeline</span>
+<span class="kn">from</span> <span class="nn">imblearn.over_sampling</span> <span class="kn">import</span> <span class="n">SMOTE</span><span class="p">,</span> <span class="n">ADASYN</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">,</span>
+    <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">ConfusionMatrixDisplay</span><span class="p">,</span> <span class="n">RocCurveDisplay</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="cargar-y-dividir-datos">
+<h1>2. Cargar y dividir datos<a class="headerlink" href="#cargar-y-dividir-datos" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\Users\DELL\Desktop\Aprendizaje_de_Maquina\credit_risk_the_end.csv&quot;</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;incumplimiento_credito&quot;</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;incumplimiento_credito&quot;</span><span class="p">]</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="preprocesamiento-numericas-categoricas">
+<h1>3. Preprocesamiento (numéricas + categóricas)<a class="headerlink" href="#preprocesamiento-numericas-categoricas" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat_cols</span>  <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s2">&quot;object&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">num_cols</span>  <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;int64&quot;</span><span class="p">,</span> <span class="s2">&quot;float64&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="n">preprocessor</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">&quot;num&quot;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">num_cols</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">),</span> <span class="n">cat_cols</span><span class="p">)</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="crear-pipelines-con-distintas-tecnicas">
+<h1>4. Crear Pipelines con distintas técnicas<a class="headerlink" href="#crear-pipelines-con-distintas-tecnicas" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;clf__criterion&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;gini&quot;</span><span class="p">,</span> <span class="s2">&quot;entropy&quot;</span><span class="p">,</span> <span class="s2">&quot;log_loss&quot;</span><span class="p">],</span>  <span class="c1"># tipo de función de impureza</span>
+    <span class="s1">&#39;clf__splitter&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;best&quot;</span><span class="p">,</span> <span class="s2">&quot;random&quot;</span><span class="p">],</span>                <span class="c1"># estrategia de división</span>
+    <span class="s1">&#39;clf__max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>              <span class="c1"># profundidad máxima</span>
+    <span class="s1">&#39;clf__min_samples_split&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span>            <span class="c1"># min muestras para dividir nodo</span>
+    <span class="s1">&#39;clf__min_samples_leaf&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>              <span class="c1"># min muestras por hoja</span>
+    <span class="s1">&#39;clf__max_features&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;sqrt&quot;</span><span class="p">,</span> <span class="s2">&quot;log2&quot;</span><span class="p">],</span>         <span class="c1"># número máx de features por split</span>
+    <span class="s1">&#39;clf__ccp_alpha&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">]</span>                  <span class="c1"># complejidad de poda (pruning)</span>
+<span class="p">}</span>
+
+
+<span class="n">pipelines</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;SMOTE&quot;</span><span class="p">:</span> <span class="n">ImbPipeline</span><span class="p">([</span>
+        <span class="p">(</span><span class="s2">&quot;pre&quot;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;smote&quot;</span><span class="p">,</span> <span class="n">SMOTE</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)),</span>
+        <span class="p">(</span><span class="s2">&quot;clf&quot;</span><span class="p">,</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">))</span>
+    <span class="p">]),</span>
+    <span class="s2">&quot;ADASYN&quot;</span><span class="p">:</span> <span class="n">ImbPipeline</span><span class="p">([</span>
+        <span class="p">(</span><span class="s2">&quot;pre&quot;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;adasyn&quot;</span><span class="p">,</span> <span class="n">ADASYN</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)),</span>
+        <span class="p">(</span><span class="s2">&quot;clf&quot;</span><span class="p">,</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">))</span>
+    <span class="p">]),</span>
+    <span class="s2">&quot;class_weight&quot;</span><span class="p">:</span> <span class="n">Pipeline</span><span class="p">([</span>
+        <span class="p">(</span><span class="s2">&quot;pre&quot;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;clf&quot;</span><span class="p">,</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">class_weight</span><span class="o">=</span><span class="s2">&quot;balanced&quot;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">))</span>
+    <span class="p">])</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="entrenamiento-y-evaluacion-con-gridsearchcv">
+<h1>5. Entrenamiento y Evaluación con GridSearchCV<a class="headerlink" href="#entrenamiento-y-evaluacion-con-gridsearchcv" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># 1. Definir grilla de hiperparámetros (igual para todos)</span>
+<span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;clf__criterion&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;gini&quot;</span><span class="p">,</span> <span class="s2">&quot;entropy&quot;</span><span class="p">,</span> <span class="s2">&quot;log_loss&quot;</span><span class="p">],</span>  <span class="c1"># tipo de función de impureza</span>
+    <span class="s1">&#39;clf__splitter&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;best&quot;</span><span class="p">,</span> <span class="s2">&quot;random&quot;</span><span class="p">],</span>                <span class="c1"># estrategia de división</span>
+    <span class="s1">&#39;clf__max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>              <span class="c1"># profundidad máxima</span>
+    <span class="s1">&#39;clf__min_samples_split&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span>            <span class="c1"># min muestras para dividir nodo</span>
+    <span class="s1">&#39;clf__min_samples_leaf&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>              <span class="c1"># min muestras por hoja</span>
+    <span class="s1">&#39;clf__max_features&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;sqrt&quot;</span><span class="p">,</span> <span class="s2">&quot;log2&quot;</span><span class="p">],</span>         <span class="c1"># número máx de features por split</span>
+    <span class="s1">&#39;clf__ccp_alpha&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">]</span>                  <span class="c1"># complejidad de poda (pruning)</span>
+<span class="p">}</span>
+
+<span class="c1"># 2. Crear carpeta para guardar modelos si no existe</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;modelos_arbol_balanceados&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 3. Entrenamiento con GridSearchCV y evaluación</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">pipe</span> <span class="ow">in</span> <span class="n">pipelines</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Entrenando con GridSearchCV: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Definir GridSearch para cada pipeline</span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span>
+        <span class="n">estimator</span><span class="o">=</span><span class="n">pipe</span><span class="p">,</span>
+        <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span>
+        <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;recall&quot;</span><span class="p">,</span>  <span class="c1"># Muy importante en problemas desbalanceados</span>
+        <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">n_jobs</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Medir tiempo de entrenamiento</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">fit_time</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span> <span class="o">/</span> <span class="mi">60</span>
+
+    <span class="c1"># Obtener mejor pipeline y hacer predicciones</span>
+    <span class="n">best_model</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">best_estimator_</span>
+    <span class="n">y_prob</span> <span class="o">=</span> <span class="n">best_model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_prob</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="c1"># Evaluar métricas</span>
+    <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">best_model</span><span class="p">,</span>
+        <span class="s2">&quot;grid&quot;</span><span class="p">:</span> <span class="n">grid</span><span class="p">,</span>
+        <span class="s2">&quot;y_prob&quot;</span><span class="p">:</span> <span class="n">y_prob</span><span class="p">,</span>
+        <span class="s2">&quot;y_pred&quot;</span><span class="p">:</span> <span class="n">y_pred</span><span class="p">,</span>
+        <span class="s2">&quot;fit_minutes&quot;</span><span class="p">:</span> <span class="n">fit_time</span><span class="p">,</span>
+        <span class="s2">&quot;Accuracy&quot;</span><span class="p">:</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span>
+        <span class="s2">&quot;Precision&quot;</span><span class="p">:</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+        <span class="s2">&quot;Recall1&quot;</span><span class="p">:</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+        <span class="s2">&quot;F1&quot;</span><span class="p">:</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+        <span class="s2">&quot;AUC&quot;</span><span class="p">:</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Guardar mejor modelo</span>
+    <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">best_model</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;modelos_arbol_balanceados/arbol_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.joblib&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Entrenando con GridSearchCV: SMOTE
+Fitting 5 folds for each of 4320 candidates, totalling 21600 fits
+
+ Entrenando con GridSearchCV: ADASYN
+Fitting 5 folds for each of 4320 candidates, totalling 21600 fits
+
+ Entrenando con GridSearchCV: class_weight
+Fitting 5 folds for each of 4320 candidates, totalling 21600 fits
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="tabla-comparativa-de-metricas">
+<h1>6. Tabla comparativa de métricas<a class="headerlink" href="#tabla-comparativa-de-metricas" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">LinearSegmentedColormap</span>
+
+<span class="c1"># Crear un colormap basado en Pastel1</span>
+<span class="n">pastel1_colors</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;Pastel1&quot;</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="n">pastel1_cmap</span> <span class="o">=</span> <span class="n">LinearSegmentedColormap</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="s2">&quot;Pastel1&quot;</span><span class="p">,</span> <span class="n">pastel1_colors</span><span class="o">.</span><span class="n">as_hex</span><span class="p">())</span>
+
+<span class="c1"># Crear tabla de métricas</span>
+<span class="n">df_metrics</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">[</span>
+    <span class="p">[</span><span class="s2">&quot;Accuracy&quot;</span><span class="p">,</span> <span class="s2">&quot;Precision&quot;</span><span class="p">,</span> <span class="s2">&quot;Recall1&quot;</span><span class="p">,</span> <span class="s2">&quot;F1&quot;</span><span class="p">,</span> <span class="s2">&quot;AUC&quot;</span><span class="p">,</span> <span class="s2">&quot;fit_minutes&quot;</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="c1"># Aplicar estilo con colores Pastel1</span>
+<span class="n">styled</span> <span class="o">=</span> <span class="n">df_metrics</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="n">pastel1_cmap</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Recall1&quot;</span><span class="p">,</span> <span class="s2">&quot;AUC&quot;</span><span class="p">,</span> <span class="s2">&quot;F1&quot;</span><span class="p">]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.4f}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Accuracy&quot;</span><span class="p">,</span> <span class="s2">&quot;Precision&quot;</span><span class="p">,</span> <span class="s2">&quot;Recall1&quot;</span><span class="p">,</span> <span class="s2">&quot;F1&quot;</span><span class="p">,</span> <span class="s2">&quot;AUC&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;fit_minutes&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">styled</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_2d6e9_row0_col2, #T_2d6e9_row1_col3, #T_2d6e9_row1_col4 {
+  background-color: #fbb4ae;
+  color: #000000;
+}
+#T_2d6e9_row0_col3 {
+  background-color: #efe7c3;
+  color: #000000;
+}
+#T_2d6e9_row0_col4 {
+  background-color: #f2d4bc;
+  color: #000000;
+}
+#T_2d6e9_row1_col2, #T_2d6e9_row2_col3, #T_2d6e9_row2_col4 {
+  background-color: #f2f2f2;
+  color: #000000;
+}
+#T_2d6e9_row2_col2 {
+  background-color: #fdd9a7;
+  color: #000000;
+}
+</style>
+<table id="T_2d6e9">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_2d6e9_level0_col0" class="col_heading level0 col0" >Accuracy</th>
+      <th id="T_2d6e9_level0_col1" class="col_heading level0 col1" >Precision</th>
+      <th id="T_2d6e9_level0_col2" class="col_heading level0 col2" >Recall1</th>
+      <th id="T_2d6e9_level0_col3" class="col_heading level0 col3" >F1</th>
+      <th id="T_2d6e9_level0_col4" class="col_heading level0 col4" >AUC</th>
+      <th id="T_2d6e9_level0_col5" class="col_heading level0 col5" >fit_minutes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_2d6e9_level0_row0" class="row_heading level0 row0" >SMOTE</th>
+      <td id="T_2d6e9_row0_col0" class="data row0 col0" >0.5672</td>
+      <td id="T_2d6e9_row0_col1" class="data row0 col1" >0.1158</td>
+      <td id="T_2d6e9_row0_col2" class="data row0 col2" >0.6122</td>
+      <td id="T_2d6e9_row0_col3" class="data row0 col3" >0.1947</td>
+      <td id="T_2d6e9_row0_col4" class="data row0 col4" >0.5785</td>
+      <td id="T_2d6e9_row0_col5" class="data row0 col5" >49.80</td>
+    </tr>
+    <tr>
+      <th id="T_2d6e9_level0_row1" class="row_heading level0 row1" >ADASYN</th>
+      <td id="T_2d6e9_row1_col0" class="data row1 col0" >0.0855</td>
+      <td id="T_2d6e9_row1_col1" class="data row1 col1" >0.0855</td>
+      <td id="T_2d6e9_row1_col2" class="data row1 col2" >1.0000</td>
+      <td id="T_2d6e9_row1_col3" class="data row1 col3" >0.1575</td>
+      <td id="T_2d6e9_row1_col4" class="data row1 col4" >0.5000</td>
+      <td id="T_2d6e9_row1_col5" class="data row1 col5" >89.84</td>
+    </tr>
+    <tr>
+      <th id="T_2d6e9_level0_row2" class="row_heading level0 row2" >class_weight</th>
+      <td id="T_2d6e9_row2_col0" class="data row2 col0" >0.4842</td>
+      <td id="T_2d6e9_row2_col1" class="data row2 col1" >0.1211</td>
+      <td id="T_2d6e9_row2_col2" class="data row2 col2" >0.8046</td>
+      <td id="T_2d6e9_row2_col3" class="data row2 col3" >0.2105</td>
+      <td id="T_2d6e9_row2_col4" class="data row2 col4" >0.6717</td>
+      <td id="T_2d6e9_row2_col5" class="data row2 col5" >27.77</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="boxplot-de-metricas-por-algoritmo">
+<h1>7.Boxplot de Métricas por Algoritmo<a class="headerlink" href="#boxplot-de-metricas-por-algoritmo" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_plot</span> <span class="o">=</span> <span class="n">df_metrics</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;fit_minutes&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_plot</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;variable&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">,</span>
+    <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Pastel1&quot;</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Comparación de Métricas por Técnica&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Valor&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Métrica&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Técnica&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c7f93546b64ba9ee620bc0aaece015484ee0fb256efb13984b9fed7c573ba91a.png" src="_images/c7f93546b64ba9ee620bc0aaece015484ee0fb256efb13984b9fed7c573ba91a.png" />
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="mapa-de-calor-heatmap-de-metricas">
+<h1>8.Mapa de calor (heatmap) de métricas<a class="headerlink" href="#mapa-de-calor-heatmap-de-metricas" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span>
+
+<span class="c1"># 1. Asegurar solo columnas numéricas</span>
+<span class="n">heatmap_data</span> <span class="o">=</span> <span class="n">df_metrics</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;fit_minutes&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">heatmap_data</span> <span class="o">=</span> <span class="n">heatmap_data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;coerce&quot;</span><span class="p">)</span>
+
+<span class="c1"># 2. Crear un colormap basado en Pastel1</span>
+<span class="n">pastel_palette</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;Pastel1&quot;</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># colormap continuo</span>
+
+<span class="c1"># 3. Dibujar heatmap</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">heatmap_data</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">pastel_palette</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.4f&quot;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Heatmap de Métricas por Técnica&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/758810f0f4ec3d6c750e88eba2e2e9892f5aa521ffb913027cbd393d65b4bf01.png" src="_images/758810f0f4ec3d6c750e88eba2e2e9892f5aa521ffb913027cbd393d65b4bf01.png" />
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="curvas-roc-por-tecnica-de-balanceo">
+<h1>9.Curvas ROC por técnica de Balanceo<a class="headerlink" href="#curvas-roc-por-tecnica-de-balanceo" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">RocCurveDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;y_prob&quot;</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Curvas ROC por técnica de balanceo&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c0b39d637b5b134ad24c6e302d23acac06dc943d2481f2e6463a5d1d84479d59.png" src="_images/c0b39d637b5b134ad24c6e302d23acac06dc943d2481f2e6463a5d1d84479d59.png" />
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="matrices-de-confusion">
+<h1>10.Matrices de confusión<a class="headerlink" href="#matrices-de-confusion" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+
+<span class="c1"># Crear un colormap personalizado similar a Pastel1</span>
+<span class="n">pastel_colors</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">ListedColormap</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;Pastel1&quot;</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">as_hex</span><span class="p">())</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;y_pred&quot;</span><span class="p">])</span>
+
+    <span class="c1"># Dibujar como imagen de matriz</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">pastel_colors</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="c1"># Agregar etiquetas</span>
+    <span class="n">tick_marks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cm</span><span class="p">))</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">tick_marks</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">tick_marks</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Predicción&quot;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Real&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Mostrar valores en celdas</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="nb">format</span><span class="p">(</span><span class="n">cm</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">],</span> <span class="s1">&#39;d&#39;</span><span class="p">),</span>
+                        <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Matrices de Confusión por Técnica&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/39feb4838ad93d162c044eacc577cc1a107482057a7176415ff101db56811eda.png" src="_images/39feb4838ad93d162c044eacc577cc1a107482057a7176415ff101db56811eda.png" />
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="grafico-tiempo-de-entrenamiento">
+<h1>11.Gráfico Tiempo de Entrenamiento<a class="headerlink" href="#grafico-tiempo-de-entrenamiento" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+<span class="c1"># Extraer los tiempos de entrenamiento</span>
+<span class="n">df_tiempo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Técnica&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+    <span class="s2">&quot;Tiempo (minutos)&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;fit_minutes&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+<span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;Tiempo (minutos)&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Dibujar gráfico de barras</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_tiempo</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Técnica&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Tiempo (minutos)&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Pastel1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Tiempo de Entrenamiento por Técnica de Balanceo&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Minutos&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Técnica&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bc718ab8360f87c9979e898af56fad8020d2061dfa2c0b0aa6a16cb229395550.png" src="_images/bc718ab8360f87c9979e898af56fad8020d2061dfa2c0b0aa6a16cb229395550.png" />
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="tabla-de-hiperparametros-optimos-por-tecnica">
+<h1>12.Tabla de Hiperparámetros Óptimos por Técnica<a class="headerlink" href="#tabla-de-hiperparametros-optimos-por-tecnica" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Extraer mejores hiperparámetros</span>
+<span class="n">params_rows</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Técnica&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">}</span>
+    <span class="n">row</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;grid&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+    <span class="n">params_rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+<span class="c1"># 2. Crear DataFrame</span>
+<span class="n">df_params</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">params_rows</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Técnica&quot;</span><span class="p">)</span>
+
+<span class="c1"># 3. Aplicar estilo visual como df_metrics</span>
+<span class="n">styled_params</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df_params</span><span class="o">.</span><span class="n">style</span>
+    <span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s2">&quot;📌 Mejores hiperparámetros por técnica&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">highlight_max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightgreen&quot;</span><span class="p">)</span>  <span class="c1"># resaltar los más altos</span>
+    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">na_rep</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">styled_params</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">File c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\IPython\core\formatters.py:344,</span> in <span class="ni">BaseFormatter.__call__</span><span class="nt">(self, obj)</span>
+<span class="g g-Whitespace">    </span><span class="mi">342</span>     <span class="n">method</span> <span class="o">=</span> <span class="n">get_real_method</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_method</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">343</span>     <span class="k">if</span> <span class="n">method</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">344</span>         <span class="k">return</span> <span class="n">method</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">345</span>     <span class="k">return</span> <span class="kc">None</span>
+<span class="g g-Whitespace">    </span><span class="mi">346</span> <span class="k">else</span><span class="p">:</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\pandas\io\formats\style.py:405,</span> in <span class="ni">Styler._repr_html_</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">400</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">401</span><span class="sd"> Hooks into Jupyter notebook rich display system, which calls _repr_html_ by</span>
+<span class="g g-Whitespace">    </span><span class="mi">402</span><span class="sd"> default if an object is returned at the end of a cell.</span>
+<span class="g g-Whitespace">    </span><span class="mi">403</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">404</span> <span class="k">if</span> <span class="n">get_option</span><span class="p">(</span><span class="s2">&quot;styler.render.repr&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;html&quot;</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">405</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">406</span> <span class="k">return</span> <span class="kc">None</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\pandas\io\formats\style.py:1345,</span> in <span class="ni">Styler.to_html</span><span class="nt">(self, buf, table_uuid, table_attributes, sparse_index, sparse_columns, bold_headers, caption, max_rows, max_columns, encoding, doctype_html, exclude_styles, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1342</span>     <span class="n">obj</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="n">caption</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1344</span> <span class="c1"># Build HTML string..</span>
+<span class="ne">-&gt; </span><span class="mi">1345</span> <span class="n">html</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">_render_html</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1346</span>     <span class="n">sparse_index</span><span class="o">=</span><span class="n">sparse_index</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1347</span>     <span class="n">sparse_columns</span><span class="o">=</span><span class="n">sparse_columns</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1348</span>     <span class="n">max_rows</span><span class="o">=</span><span class="n">max_rows</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1349</span>     <span class="n">max_cols</span><span class="o">=</span><span class="n">max_columns</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1350</span>     <span class="n">exclude_styles</span><span class="o">=</span><span class="n">exclude_styles</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1351</span>     <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span> <span class="ow">or</span> <span class="n">get_option</span><span class="p">(</span><span class="s2">&quot;styler.render.encoding&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1352</span>     <span class="n">doctype_html</span><span class="o">=</span><span class="n">doctype_html</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1353</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1354</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1356</span> <span class="k">return</span> <span class="n">save_to_buffer</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1357</span>     <span class="n">html</span><span class="p">,</span> <span class="n">buf</span><span class="o">=</span><span class="n">buf</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="p">(</span><span class="n">encoding</span> <span class="k">if</span> <span class="n">buf</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1358</span> <span class="p">)</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\pandas\io\formats\style_render.py:204,</span> in <span class="ni">StylerRenderer._render_html</span><span class="nt">(self, sparse_index, sparse_columns, max_rows, max_cols, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">192</span> <span class="k">def</span> <span class="nf">_render_html</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">193</span>     <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">194</span>     <span class="n">sparse_index</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">198</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">199</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">200</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">201</span><span class="sd">     Renders the ``Styler`` including all applied styles to HTML.</span>
+<span class="g g-Whitespace">    </span><span class="mi">202</span><span class="sd">     Generates a dict with necessary kwargs passed to jinja2 template.</span>
+<span class="g g-Whitespace">    </span><span class="mi">203</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">204</span>     <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_render</span><span class="p">(</span><span class="n">sparse_index</span><span class="p">,</span> <span class="n">sparse_columns</span><span class="p">,</span> <span class="n">max_rows</span><span class="p">,</span> <span class="n">max_cols</span><span class="p">,</span> <span class="s2">&quot;&amp;nbsp;&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">205</span>     <span class="n">d</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">206</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">template_html</span><span class="o">.</span><span class="n">render</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">207</span>         <span class="o">**</span><span class="n">d</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">208</span>         <span class="n">html_table_tpl</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">template_html_table</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">209</span>         <span class="n">html_style_tpl</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">template_html_style</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">210</span>     <span class="p">)</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\pandas\io\formats\style_render.py:161,</span> in <span class="ni">StylerRenderer._render</span><span class="nt">(self, sparse_index, sparse_columns, max_rows, max_cols, blank)</span>
+<span class="g g-Whitespace">    </span><span class="mi">147</span> <span class="k">def</span> <span class="nf">_render</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">148</span>     <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">149</span>     <span class="n">sparse_index</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">153</span>     <span class="n">blank</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">154</span> <span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">155</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">156</span><span class="sd">     Computes and applies styles and then generates the general render dicts.</span>
+<span class="g g-Whitespace">    </span><span class="mi">157</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">158</span><span class="sd">     Also extends the `ctx` and `ctx_index` attributes with those of concatenated</span>
+<span class="g g-Whitespace">    </span><span class="mi">159</span><span class="sd">     stylers for use within `_translate_latex`</span>
+<span class="g g-Whitespace">    </span><span class="mi">160</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">161</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_compute</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">162</span>     <span class="n">dxs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="g g-Whitespace">    </span><span class="mi">163</span>     <span class="n">ctx_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\pandas\io\formats\style_render.py:256,</span> in <span class="ni">StylerRenderer._compute</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">254</span> <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span>
+<span class="g g-Whitespace">    </span><span class="mi">255</span> <span class="k">for</span> <span class="n">func</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_todo</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">256</span>     <span class="n">r</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">257</span> <span class="k">return</span> <span class="n">r</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\pandas\io\formats\style.py:1726,</span> in <span class="ni">Styler._apply</span><span class="nt">(self, func, axis, subset, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1724</span> <span class="n">axis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">_get_axis_number</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1725</span> <span class="k">if</span> <span class="n">axis</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1726</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1727</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1728</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>  <span class="c1"># see GH 42005</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\pandas\core\frame.py:10374,</span> in <span class="ni">DataFrame.apply</span><span class="nt">(self, func, axis, raw, result_type, args, by_row, engine, engine_kwargs, **kwargs)</span>
+<span class="g g-Whitespace">  </span><span class="mi">10360</span> <span class="kn">from</span> <span class="nn">pandas.core.apply</span> <span class="kn">import</span> <span class="n">frame_apply</span>
+<span class="g g-Whitespace">  </span><span class="mi">10362</span> <span class="n">op</span> <span class="o">=</span> <span class="n">frame_apply</span><span class="p">(</span>
+<span class="g g-Whitespace">  </span><span class="mi">10363</span>     <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">10364</span>     <span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">  </span><span class="mi">10372</span>     <span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">10373</span> <span class="p">)</span>
+<span class="ne">&gt; </span><span class="mi">10374</span> <span class="k">return</span> <span class="n">op</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span><span class="o">.</span><span class="n">__finalize__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;apply&quot;</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\pandas\core\apply.py:916,</span> in <span class="ni">FrameApply.apply</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">913</span> <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">914</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_raw</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">,</span> <span class="n">engine_kwargs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">engine_kwargs</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">916</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_standard</span><span class="p">()</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\pandas\core\apply.py:1063,</span> in <span class="ni">FrameApply.apply_standard</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1061</span> <span class="k">def</span> <span class="nf">apply_standard</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1062</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">==</span> <span class="s2">&quot;python&quot;</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1063</span>         <span class="n">results</span><span class="p">,</span> <span class="n">res_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_series_generator</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1064</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1065</span>         <span class="n">results</span><span class="p">,</span> <span class="n">res_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_series_numba</span><span class="p">()</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\pandas\core\apply.py:1081,</span> in <span class="ni">FrameApply.apply_series_generator</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1078</span> <span class="k">with</span> <span class="n">option_context</span><span class="p">(</span><span class="s2">&quot;mode.chained_assignment&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1079</span>     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">series_gen</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1080</span>         <span class="c1"># ignore SettingWithCopy here in case the user mutates</span>
+<span class="ne">-&gt; </span><span class="mi">1081</span>         <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1082</span>         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ABCSeries</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1083</span>             <span class="c1"># If we have a view on v, we need to make a copy because</span>
+<span class="g g-Whitespace">   </span><span class="mi">1084</span>             <span class="c1">#  series_generator will swap out the underlying data</span>
+<span class="g g-Whitespace">   </span><span class="mi">1085</span>             <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\pandas\io\formats\style.py:3923,</span> in <span class="ni">_highlight_value</span><span class="nt">(data, op, props)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3919</span> <span class="k">def</span> <span class="nf">_highlight_value</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">DataFrame</span> <span class="o">|</span> <span class="n">Series</span><span class="p">,</span> <span class="n">op</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">props</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3920</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">3921</span><span class="sd">     Return an array of css strings based on the condition of values matching an op.</span>
+<span class="g g-Whitespace">   </span><span class="mi">3922</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">3923</span>     <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">op</span><span class="p">)(</span><span class="n">skipna</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3924</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">):</span>  <span class="c1"># min/max must be done twice to return scalar</span>
+<span class="g g-Whitespace">   </span><span class="mi">3925</span>         <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">op</span><span class="p">)(</span><span class="n">skipna</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\pandas\core\series.py:6517,</span> in <span class="ni">Series.max</span><span class="nt">(self, axis, skipna, numeric_only, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6509</span> <span class="nd">@doc</span><span class="p">(</span><span class="n">make_doc</span><span class="p">(</span><span class="s2">&quot;max&quot;</span><span class="p">,</span> <span class="n">ndim</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="g g-Whitespace">   </span><span class="mi">6510</span> <span class="k">def</span> <span class="nf">max</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">6511</span>     <span class="bp">self</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6515</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">6516</span> <span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">6517</span>     <span class="k">return</span> <span class="n">NDFrame</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="p">,</span> <span class="n">numeric_only</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\pandas\core\generic.py:12404,</span> in <span class="ni">NDFrame.max</span><span class="nt">(self, axis, skipna, numeric_only, **kwargs)</span>
+<span class="g g-Whitespace">  </span><span class="mi">12397</span> <span class="k">def</span> <span class="nf">max</span><span class="p">(</span>
+<span class="g g-Whitespace">  </span><span class="mi">12398</span>     <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">12399</span>     <span class="n">axis</span><span class="p">:</span> <span class="n">Axis</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">  </span><span class="mi">12402</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">12403</span> <span class="p">):</span>
+<span class="ne">&gt; </span><span class="mi">12404</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stat_function</span><span class="p">(</span>
+<span class="g g-Whitespace">  </span><span class="mi">12405</span>         <span class="s2">&quot;max&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">12406</span>         <span class="n">nanops</span><span class="o">.</span><span class="n">nanmax</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">12407</span>         <span class="n">axis</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">12408</span>         <span class="n">skipna</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">12409</span>         <span class="n">numeric_only</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">12410</span>         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">  </span><span class="mi">12411</span>     <span class="p">)</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\pandas\core\generic.py:12377,</span> in <span class="ni">NDFrame._stat_function</span><span class="nt">(self, name, func, axis, skipna, numeric_only, **kwargs)</span>
+<span class="g g-Whitespace">  </span><span class="mi">12373</span> <span class="n">nv</span><span class="o">.</span><span class="n">validate_func</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">(),</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">  </span><span class="mi">12375</span> <span class="n">validate_bool_kwarg</span><span class="p">(</span><span class="n">skipna</span><span class="p">,</span> <span class="s2">&quot;skipna&quot;</span><span class="p">,</span> <span class="n">none_allowed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="ne">&gt; </span><span class="mi">12377</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reduce</span><span class="p">(</span>
+<span class="g g-Whitespace">  </span><span class="mi">12378</span>     <span class="n">func</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="n">numeric_only</span><span class="o">=</span><span class="n">numeric_only</span>
+<span class="g g-Whitespace">  </span><span class="mi">12379</span> <span class="p">)</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\pandas\core\series.py:6457,</span> in <span class="ni">Series._reduce</span><span class="nt">(self, op, name, axis, skipna, numeric_only, filter_type, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6452</span>     <span class="c1"># GH#47500 - change to TypeError to match other methods</span>
+<span class="g g-Whitespace">   </span><span class="mi">6453</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">6454</span>         <span class="sa">f</span><span class="s2">&quot;Series.</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> does not allow </span><span class="si">{</span><span class="n">kwd_name</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">numeric_only</span><span class="si">}</span><span class="s2"> &quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">6455</span>         <span class="s2">&quot;with non-numeric dtypes.&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">6456</span>     <span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">6457</span> <span class="k">return</span> <span class="n">op</span><span class="p">(</span><span class="n">delegate</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\pandas\core\nanops.py:147,</span> in <span class="ni">bottleneck_switch.__call__.&lt;locals&gt;.f</span><span class="nt">(values, axis, skipna, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">145</span>         <span class="n">result</span> <span class="o">=</span> <span class="n">alt</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">146</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">147</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">alt</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">149</span> <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\pandas\core\nanops.py:404,</span> in <span class="ni">_datetimelike_compat.&lt;locals&gt;.new_func</span><span class="nt">(values, axis, skipna, mask, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">401</span> <span class="k">if</span> <span class="n">datetimelike</span> <span class="ow">and</span> <span class="n">mask</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">402</span>     <span class="n">mask</span> <span class="o">=</span> <span class="n">isna</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">404</span> <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">skipna</span><span class="o">=</span><span class="n">skipna</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">406</span> <span class="k">if</span> <span class="n">datetimelike</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">407</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">_wrap_results</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">orig_values</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="n">iNaT</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\pandas\core\nanops.py:1098,</span> in <span class="ni">_nanminmax.&lt;locals&gt;.reduction</span><span class="nt">(values, axis, skipna, mask)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1093</span>     <span class="k">return</span> <span class="n">_na_for_min_count</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1095</span> <span class="n">values</span><span class="p">,</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">_get_values</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1096</span>     <span class="n">values</span><span class="p">,</span> <span class="n">skipna</span><span class="p">,</span> <span class="n">fill_value_typ</span><span class="o">=</span><span class="n">fill_value_typ</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span>
+<span class="g g-Whitespace">   </span><span class="mi">1097</span> <span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1098</span> <span class="n">result</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">meth</span><span class="p">)(</span><span class="n">axis</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1099</span> <span class="n">result</span> <span class="o">=</span> <span class="n">_maybe_null_out</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">values</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1100</span> <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\ml_venv\lib\site-packages\numpy\core\_methods.py:41,</span> in <span class="ni">_amax</span><span class="nt">(a, axis, out, keepdims, initial, where)</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span> <span class="k">def</span> <span class="nf">_amax</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span>           <span class="n">initial</span><span class="o">=</span><span class="n">_NoValue</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">41</span>     <span class="k">return</span> <span class="n">umr_maximum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">keepdims</span><span class="p">,</span> <span class="n">initial</span><span class="p">,</span> <span class="n">where</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: &#39;&gt;=&#39; not supported between instances of &#39;str&#39; and &#39;float&#39;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.io.formats.style.Styler at 0x1d52cb25fd0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="curva-de-aprendizaje-recall1">
+<h1>13.Curva de aprendizaje (Recall1)<a class="headerlink" href="#curva-de-aprendizaje-recall1" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">learning_curve</span>
+
+<span class="c1"># Suprimir todos los warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">learning_curve</span>
+
+<span class="c1"># Usamos el mejor pipeline (por ejemplo, con SMOTE)</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;SMOTE&quot;</span><span class="p">][</span><span class="s2">&quot;model&quot;</span><span class="p">]</span>  <span class="c1"># O el que desees</span>
+
+<span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="p">,</span> <span class="n">val_scores</span> <span class="o">=</span> <span class="n">learning_curve</span><span class="p">(</span>
+    <span class="n">estimator</span><span class="o">=</span><span class="n">pipe</span><span class="p">,</span>
+    <span class="n">X</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span>
+    <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;recall&quot;</span><span class="p">,</span>
+    <span class="n">train_sizes</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="n">n_jobs</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="c1"># Calcular medias</span>
+<span class="n">train_mean</span> <span class="o">=</span> <span class="n">train_scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">val_mean</span>   <span class="o">=</span> <span class="n">val_scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Dibujar curva</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_mean</span><span class="p">,</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Entrenamiento&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightcoral&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">train_sizes</span><span class="p">,</span> <span class="n">val_mean</span><span class="p">,</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Validación&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;cornflowerblue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_mean</span> <span class="o">-</span> <span class="n">train_scores</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">train_mean</span> <span class="o">+</span> <span class="n">train_scores</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightcoral&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">train_sizes</span><span class="p">,</span> <span class="n">val_mean</span> <span class="o">-</span> <span class="n">val_scores</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">val_mean</span> <span class="o">+</span> <span class="n">val_scores</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;cornflowerblue&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Curva de Aprendizaje – Árbol de Decisión (Recall)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Tamaño del conjunto de entrenamiento&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Recall&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e4dcdf01bd5b96e5e27905ebbb1fd1c53c750937e89334f8e99cc754ade2c681.png" src="_images/e4dcdf01bd5b96e5e27905ebbb1fd1c53c750937e89334f8e99cc754ade2c681.png" />
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="curvas-precision-recall">
+<h1>14.Curvas Precision-Recall<a class="headerlink" href="#curvas-precision-recall" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">precision_recall_curve</span><span class="p">,</span> <span class="n">PrecisionRecallDisplay</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">precision</span><span class="p">,</span> <span class="n">recall</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">precision_recall_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;y_prob&quot;</span><span class="p">])</span>
+    <span class="n">disp</span> <span class="o">=</span> <span class="n">PrecisionRecallDisplay</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="n">precision</span><span class="p">,</span> <span class="n">recall</span><span class="o">=</span><span class="n">recall</span><span class="p">)</span>
+    <span class="n">disp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Curva Precision-Recall por Técnica de Balanceo&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Recall&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Precision&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Técnica&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/57dcd7402fc5fe1d8c51898facbbe3f0b58c325a368ec02d403bcf80d1404a1e.png" src="_images/57dcd7402fc5fe1d8c51898facbbe3f0b58c325a368ec02d403bcf80d1404a1e.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extraer los tiempos de entrenamiento</span>
+<span class="n">df_tiempo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Técnica&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+    <span class="s2">&quot;Tiempo (minutos)&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;fit_minutes&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+<span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;Tiempo (minutos)&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Dibujar gráfico de barras</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_tiempo</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Técnica&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Tiempo (minutos)&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Pastel1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;⏱️ Tiempo de Entrenamiento por Técnica de Balanceo&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Minutos&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Técnica&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1886f776467158cb39b3da4101f10ca52a16d10ef2da48059baa4c2fa644b484.png" src="_images/1886f776467158cb39b3da4101f10ca52a16d10ef2da48059baa4c2fa644b484.png" />
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="estructura-del-arbol">
+<h1>15.Estructura del Arbol<a class="headerlink" href="#estructura-del-arbol" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">plot_tree</span>
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span>
+
+<span class="c1"># Paleta Pastel1 (9 colores disponibles)</span>
+<span class="n">pastel_colors</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;Pastel1&quot;</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">as_hex</span><span class="p">()</span>
+
+<span class="c1"># Elegir el modelo con mayor Recall1</span>
+<span class="n">mejor_tecnica</span> <span class="o">=</span> <span class="n">df_metrics</span><span class="p">[</span><span class="s2">&quot;Recall1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
+<span class="n">mejor_modelo</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">mejor_tecnica</span><span class="p">][</span><span class="s2">&quot;model&quot;</span><span class="p">]</span>
+
+<span class="c1"># Extraer el clasificador</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">mejor_modelo</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s2">&quot;clf&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;clf&quot;</span> <span class="ow">in</span> <span class="n">mejor_modelo</span><span class="o">.</span><span class="n">named_steps</span> <span class="k">else</span> <span class="n">mejor_modelo</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s2">&quot;classifier&quot;</span><span class="p">]</span>
+
+<span class="c1"># Asignar estilo general</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plot_tree</span><span class="p">(</span>
+    <span class="n">clf</span><span class="p">,</span>
+    <span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">feature_names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">impurity</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">class_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;No Incumple&quot;</span><span class="p">,</span> <span class="s2">&quot;Incumple&quot;</span><span class="p">],</span>
+    <span class="n">proportion</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">rounded</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="c1"># Aplicar título</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estructura del Árbol – Técnica: </span><span class="si">{</span><span class="n">mejor_tecnica</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="c1"># Cambiar colores de fondo del gráfico a tonos suaves</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">box</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">patches</span><span class="p">:</span>
+    <span class="n">box</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">pastel_colors</span><span class="p">))</span>  <span class="c1"># colores pastel aleatorios</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/64240bf997b2c86ca72f4065d2b652f057549fff373d38d78353516009ababf3.png" src="_images/64240bf997b2c86ca72f4065d2b652f057549fff373d38d78353516009ababf3.png" />
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="heatmap-de-recall1-por-tecnica-y-penalizacion">
+<h1>16.Heatmap de Recall1 por Técnica y Penalización<a class="headerlink" href="#heatmap-de-recall1-por-tecnica-y-penalizacion" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+<span class="c1"># Construir DataFrame con Recall1 por técnica</span>
+<span class="n">df_heat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;Técnica&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+        <span class="s2">&quot;Recall1&quot;</span><span class="p">:</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;Recall1&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+<span class="p">])</span>
+
+<span class="c1"># Reorganizar para heatmap (una sola columna)</span>
+<span class="n">df_heat</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Técnica&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Dibujar heatmap</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
+    <span class="n">df_heat</span><span class="p">,</span>
+    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.3f&quot;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;Pastel1&quot;</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">linecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Heatmap de Recall1 por Técnica de Balanceo&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c6d39476a8322f72386d6d226c8cd6fd33945e3c5d305886db3a4f2d6d721e91.png" src="_images/c6d39476a8322f72386d6d226c8cd6fd33945e3c5d305886db3a4f2d6d721e91.png" />
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="radar-plot-por-modelo-para-comparar-metricas">
+<h1>17.Radar Plot por modelo para comparar métricas<a class="headerlink" href="#radar-plot-por-modelo-para-comparar-metricas" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span>
+
+<span class="c1"># 1. Prepara los datos</span>
+<span class="n">df_radar</span> <span class="o">=</span> <span class="n">df_metrics</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;fit_minutes&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df_radar</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Técnica&quot;</span>
+<span class="n">df_radar</span> <span class="o">=</span> <span class="n">df_radar</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1"># 2. Ejes del radar</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">df_radar</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>  <span class="c1"># columnas: Accuracy, Precision, Recall1, F1, AUC</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
+
+<span class="c1"># 3. Ángulos para cada métrica</span>
+<span class="n">angles</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+<span class="n">angles</span> <span class="o">+=</span> <span class="n">angles</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># cerrar el círculo</span>
+
+<span class="c1"># 4. Inicializar figura</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">polar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 5. Dibujar por técnica</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_radar</span><span class="p">)):</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">df_radar</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">values</span> <span class="o">+=</span> <span class="n">values</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># cerrar la figura</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">df_radar</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="c1"># 6. Estilo del radar</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">angles</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">metrics</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;0.2&quot;</span><span class="p">,</span> <span class="s2">&quot;0.4&quot;</span><span class="p">,</span> <span class="s2">&quot;0.6&quot;</span><span class="p">,</span> <span class="s2">&quot;0.8&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Radar Plot – Comparación de Métricas por Técnica&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.3</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/13dcb0ff8e1b2cc097d1872d885bd73918c77e79f731fa4161b7e51bec3ade44.png" src="_images/13dcb0ff8e1b2cc097d1872d885bd73918c77e79f731fa4161b7e51bec3ade44.png" />
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="guardar-modelos-entrenado">
+<h1>9. Guardar modelos entrenado<a class="headerlink" href="#guardar-modelos-entrenado" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">joblib</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="c1"># Función para limpiar nombres de archivo</span>
+<span class="k">def</span> <span class="nf">limpiar_nombre</span><span class="p">(</span><span class="n">nombre</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[^\w\-_.]&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="n">nombre</span><span class="p">)</span>
+
+<span class="c1"># Ruta del escritorio</span>
+<span class="n">desktop_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;USERPROFILE&quot;</span><span class="p">],</span> <span class="s2">&quot;Desktop&quot;</span><span class="p">)</span>
+<span class="n">base_folder_name</span> <span class="o">=</span> <span class="s2">&quot;modelos_guardados&quot;</span>
+<span class="n">model_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">desktop_path</span><span class="p">,</span> <span class="n">base_folder_name</span><span class="p">)</span>
+
+<span class="c1"># Evitar sobrescribir carpeta</span>
+<span class="n">counter</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">model_dir</span><span class="p">):</span>
+    <span class="n">model_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">desktop_path</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_folder_name</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">counter</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">model_dir</span><span class="p">)</span>
+
+<span class="c1"># Guardar modelos</span>
+<span class="k">for</span> <span class="n">metodo</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">metodo_limpio</span> <span class="o">=</span> <span class="n">limpiar_nombre</span><span class="p">(</span><span class="n">metodo</span><span class="p">)</span>
+    <span class="n">nombre_archivo</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">metodo_limpio</span><span class="si">}</span><span class="s2">.joblib&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="s2">&quot;model&quot;</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
+        <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">],</span> <span class="n">nombre_archivo</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠️  No se encontró modelo en: </span><span class="si">{</span><span class="n">metodo</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✅ Modelos guardados exitosamente en: </span><span class="si">{</span><span class="n">model_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✅ Modelos guardados exitosamente en: C:\Users\DELL\Desktop\modelos_guardados_2
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="regresion_logistica_l1_l2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Regresión Logística Ridge (L2) y Lasso (L1)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="bosques_aleatorios.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bosques Aleatorios</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Árbol de Decisión</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">1. Importación de librerías</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cargar-y-dividir-datos">2. Cargar y dividir datos</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesamiento-numericas-categoricas">3. Preprocesamiento (numéricas + categóricas)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-pipelines-con-distintas-tecnicas">4. Crear Pipelines con distintas técnicas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-y-evaluacion-con-gridsearchcv">5. Entrenamiento y Evaluación con GridSearchCV</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-de-metricas">6. Tabla comparativa de métricas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-de-metricas-por-algoritmo">7.Boxplot de Métricas por Algoritmo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mapa-de-calor-heatmap-de-metricas">8.Mapa de calor (heatmap) de métricas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-roc-por-tecnica-de-balanceo">9.Curvas ROC por técnica de Balanceo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matrices-de-confusion">10.Matrices de confusión</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-tiempo-de-entrenamiento">11.Gráfico Tiempo de Entrenamiento</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-hiperparametros-optimos-por-tecnica">12.Tabla de Hiperparámetros Óptimos por Técnica</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-de-aprendizaje-recall1">13.Curva de aprendizaje (Recall1)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-precision-recall">14.Curvas Precision-Recall</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#estructura-del-arbol">15.Estructura del Arbol</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-de-recall1-por-tecnica-y-penalizacion">16.Heatmap de Recall1 por Técnica y Penalización</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#radar-plot-por-modelo-para-comparar-metricas">17.Radar Plot por modelo para comparar métricas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#guardar-modelos-entrenado">9. Guardar modelos entrenado</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Angélica Sepúlveda, Andrés Pedraza y Jefry Llerena
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
