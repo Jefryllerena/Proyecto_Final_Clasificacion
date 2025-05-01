@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Regresión Logística Ridge (L2) y Lasso (L1) &#8212; jbook_Proyecto_Final_Clasificacion</title>
+    <title>Regresión Logística Ridge y Lasso &#8212; jbook_Proyecto_Final_Clasificacion</title>
   
   
   
@@ -157,7 +157,7 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="eda.html">Análisis Exploratorio (EDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eda.html">Análisis Exploratorio de Datos</a></li>
 
 
 
@@ -189,7 +189,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Regresión Logística Ridge (L2) y Lasso (L1)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Regresión Logística Ridge y Lasso</a></li>
 
 
 
@@ -240,7 +240,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="mlp.html">Redes Neuronales Perceptrón Multicapa</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mlp.html">MLP</a></li>
 
 
 
@@ -255,7 +255,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="lstm.html">Redes Neuronales Memoria Larga a Corto Plazo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lstm.html">Red LSTM</a></li>
 
 
 
@@ -279,13 +279,13 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="cnn.html">Red Neuronal Convolucional (CNN)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cnn.html">Red Neuronal Convolucional</a></li>
 
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="autoencoders.html">LSTM Autoencoder para Detección de Anomalías en Crédito</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoencoders.html">Red LSTM Autoencoder</a></li>
 
 
 
@@ -294,6 +294,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="modelo_propuesto.html">Modelo Original Propuesto</a></li>
 
 
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="proyecto.html">PALABRAS CLAVE / KEY WORDS:</a></li>
 
 
 
@@ -480,7 +484,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Regresión Logística Ridge (L2) y Lasso (L1)</h1>
+    <h1>Regresión Logística Ridge y Lasso</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -490,7 +494,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Regresión Logística Ridge (L2) y Lasso (L1)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Regresión Logística Ridge y Lasso</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#imports-y-configuracion">1.Imports y configuración</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cargar-datos-y-separacion">2.Cargar datos y separación</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesamiento">3.Preprocesamiento</a></li>
@@ -518,8 +522,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="regresion-logistica-ridge-l2-y-lasso-l1">
-<h1>Regresión Logística Ridge (L2) y Lasso (L1)<a class="headerlink" href="#regresion-logistica-ridge-l2-y-lasso-l1" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="regresion-logistica-ridge-y-lasso">
+<h1>Regresión Logística Ridge y Lasso<a class="headerlink" href="#regresion-logistica-ridge-y-lasso" title="Permalink to this heading">#</a></h1>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="imports-y-configuracion">
 <h1>1.Imports y configuración<a class="headerlink" href="#imports-y-configuracion" title="Permalink to this heading">#</a></h1>
@@ -1333,7 +1337,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Regresión Logística Ridge (L2) y Lasso (L1)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Regresión Logística Ridge y Lasso</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#imports-y-configuracion">1.Imports y configuración</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cargar-datos-y-separacion">2.Cargar datos y separación</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesamiento">3.Preprocesamiento</a></li>

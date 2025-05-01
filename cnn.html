@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Red Neuronal Convolucional (CNN) &#8212; jbook_Proyecto_Final_Clasificacion</title>
+    <title>Red Neuronal Convolucional &#8212; jbook_Proyecto_Final_Clasificacion</title>
   
   
   
@@ -64,8 +64,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'cnn';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="LSTM Autoencoder para Detección de Anomalías en Crédito" href="autoencoders.html" />
-    <link rel="prev" title="Redes Neuronales Memoria Larga a Corto Plazo" href="lstm.html" />
+    <link rel="next" title="Red LSTM Autoencoder" href="autoencoders.html" />
+    <link rel="prev" title="Red LSTM" href="lstm.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -157,7 +157,7 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="eda.html">Análisis Exploratorio (EDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eda.html">Análisis Exploratorio de Datos</a></li>
 
 
 
@@ -189,7 +189,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="regresion_logistica_l1_l2.html">Regresión Logística Ridge (L2) y Lasso (L1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regresion_logistica_l1_l2.html">Regresión Logística Ridge y Lasso</a></li>
 
 
 
@@ -240,7 +240,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="mlp.html">Redes Neuronales Perceptrón Multicapa</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mlp.html">MLP</a></li>
 
 
 
@@ -255,7 +255,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="lstm.html">Redes Neuronales Memoria Larga a Corto Plazo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lstm.html">Red LSTM</a></li>
 
 
 
@@ -279,13 +279,13 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Red Neuronal Convolucional (CNN)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Red Neuronal Convolucional</a></li>
 
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="autoencoders.html">LSTM Autoencoder para Detección de Anomalías en Crédito</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoencoders.html">Red LSTM Autoencoder</a></li>
 
 
 
@@ -294,6 +294,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="modelo_propuesto.html">Modelo Original Propuesto</a></li>
 
 
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="proyecto.html">PALABRAS CLAVE / KEY WORDS:</a></li>
 
 
 
@@ -480,7 +484,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Red Neuronal Convolucional (CNN)</h1>
+    <h1>Red Neuronal Convolucional</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -490,7 +494,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Red Neuronal Convolucional (CNN)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Red Neuronal Convolucional</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seccion-1-configuracion-inicial-y-preparacion-de-datos">Sección 1: Configuración Inicial y Preparación de Datos</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">1.Importación de Librerías</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-y-division-de-datos">2.Carga y División de Datos</a></li>
@@ -531,8 +535,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="red-neuronal-convolucional-cnn">
-<h1>Red Neuronal Convolucional (CNN)<a class="headerlink" href="#red-neuronal-convolucional-cnn" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="red-neuronal-convolucional">
+<h1>Red Neuronal Convolucional<a class="headerlink" href="#red-neuronal-convolucional" title="Permalink to this heading">#</a></h1>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="seccion-1-configuracion-inicial-y-preparacion-de-datos">
 <h1>Sección 1: Configuración Inicial y Preparación de Datos<a class="headerlink" href="#seccion-1-configuracion-inicial-y-preparacion-de-datos" title="Permalink to this heading">#</a></h1>
@@ -1385,7 +1389,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Redes Neuronales Memoria Larga a Corto Plazo</p>
+        <p class="prev-next-title">Red LSTM</p>
       </div>
     </a>
     <a class="right-next"
@@ -1393,7 +1397,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">LSTM Autoencoder para Detección de Anomalías en Crédito</p>
+        <p class="prev-next-title">Red LSTM Autoencoder</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1415,7 +1419,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Red Neuronal Convolucional (CNN)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Red Neuronal Convolucional</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seccion-1-configuracion-inicial-y-preparacion-de-datos">Sección 1: Configuración Inicial y Preparación de Datos</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importacion-de-librerias">1.Importación de Librerías</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-y-division-de-datos">2.Carga y División de Datos</a></li>
