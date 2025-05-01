@@ -226,6 +226,9 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l1"><a class="reference internal" href="bosques_aleatorios.html">Bosques Aleatorios</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">XGBoost</a></li>
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="svm.html">Máquina de Soporte Vectorial</a></li>
 
 
@@ -294,7 +297,6 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="informe_del_proyecto.html">Informe Proyecto Final</a></li>
 </ul>
 
     </div>
@@ -465,7 +467,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -481,6 +485,40 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">XGBoost</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seccion-1-configuracion-inicial-y-preparacion-de-datos">Sección 1: Configuración Inicial y Preparación de Datos</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias">1. Librerias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cargar-datos">2. Cargar Datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesamiento-de-datos">3.Preprocesamiento de Datos</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seccion-2-definicion-de-la-arquitectura-y-gridsearch">Sección 2: Definición de la Arquitectura y GridSearch</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-y-gridsearch-de-hiperparametros">1.Pipeline y GridSearch de Hiperparámetros</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seccion-3-evaluacion-basica-del-modelo">Sección 3: Evaluación Básica del Modelo</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-de-metricas">1.Tabla comparativa de métricas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matries-de-confusion">2.Matries de Confusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-roc-por-tecnica-de-balanceo">3.Curvas ROC por técnica de Balanceo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4.Curvas ROC por técnica de Balanceo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-hiperparametros-optimos">5.Tabla de hiperparámetros óptimos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-de-aprendizaje-y-perdida">6.Curvas de Aprendizaje y Pérdida</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-precision-recall-comparativa">7.Curva Precision-Recall comparativa</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-de-recall">8.Heatmap de Recall</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#radar-plot-de-metricas">9.Radar plot de métricas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-de-validacion-max-depth">10.Curvas de Validación (max_depth)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-gain-lift">11.Cumulative Gain &amp; Lift</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-ks">12.Curva KS</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -492,6 +530,877 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="xgboost">
 <h1>XGBoost<a class="headerlink" href="#xgboost" title="Permalink to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="seccion-1-configuracion-inicial-y-preparacion-de-datos">
+<h1>Sección 1: Configuración Inicial y Preparación de Datos<a class="headerlink" href="#seccion-1-configuracion-inicial-y-preparacion-de-datos" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install imbalanced-learn xgboost -q</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: imbalanced-learn in /usr/local/lib/python3.11/dist-packages (0.13.0)
+Requirement already satisfied: numpy&lt;3,&gt;=1.24.3 in /usr/local/lib/python3.11/dist-packages (from imbalanced-learn) (2.0.2)
+Requirement already satisfied: scipy&lt;2,&gt;=1.10.1 in /usr/local/lib/python3.11/dist-packages (from imbalanced-learn) (1.15.2)
+Requirement already satisfied: scikit-learn&lt;2,&gt;=1.3.2 in /usr/local/lib/python3.11/dist-packages (from imbalanced-learn) (1.6.1)
+Requirement already satisfied: sklearn-compat&lt;1,&gt;=0.1 in /usr/local/lib/python3.11/dist-packages (from imbalanced-learn) (0.1.3)
+Requirement already satisfied: joblib&lt;2,&gt;=1.1.1 in /usr/local/lib/python3.11/dist-packages (from imbalanced-learn) (1.4.2)
+Requirement already satisfied: threadpoolctl&lt;4,&gt;=2.0.0 in /usr/local/lib/python3.11/dist-packages (from imbalanced-learn) (3.6.0)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Cell 0: Comprueba versión de xgboost ===</span>
+<span class="kn">import</span> <span class="nn">xgboost</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;xgboost version:&quot;</span><span class="p">,</span> <span class="n">xgboost</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>xgboost version: 2.1.4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">imblearn</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">imblearn</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.12.4
+</pre></div>
+</div>
+</div>
+</div>
+<section id="librerias">
+<h2>1. Librerias<a class="headerlink" href="#librerias" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1) IMPORTS</span>
+<span class="kn">import</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">joblib</span><span class="o">,</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span><span class="o">,</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span><span class="o">,</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
+<span class="kn">from</span>   <span class="nn">sklearn.model_selection</span>    <span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">GridSearchCV</span><span class="p">,</span> <span class="n">StratifiedKFold</span>
+<span class="kn">from</span>   <span class="nn">sklearn.compose</span>            <span class="kn">import</span> <span class="n">ColumnTransformer</span>
+<span class="kn">from</span>   <span class="nn">sklearn.preprocessing</span>      <span class="kn">import</span> <span class="n">OneHotEncoder</span><span class="p">,</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span>   <span class="nn">sklearn.impute</span>             <span class="kn">import</span> <span class="n">SimpleImputer</span>
+<span class="kn">from</span>   <span class="nn">sklearn.pipeline</span>           <span class="kn">import</span> <span class="n">Pipeline</span> <span class="k">as</span> <span class="n">SKPipeline</span>
+<span class="kn">from</span>   <span class="nn">imblearn.pipeline</span>          <span class="kn">import</span> <span class="n">Pipeline</span> <span class="k">as</span> <span class="n">ImbPipeline</span>
+<span class="kn">from</span>   <span class="nn">imblearn.over_sampling</span>     <span class="kn">import</span> <span class="n">SMOTE</span><span class="p">,</span> <span class="n">ADASYN</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">recall_score</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">,</span>
+    <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">average_precision_score</span>
+<span class="p">)</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span><span class="o">,</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span><span class="o">,</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span><span class="o">,</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span><span class="o">,</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="kn">from</span>   <span class="nn">sklearn.metrics</span>            <span class="kn">import</span> <span class="p">(</span>
+        <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">,</span>
+        <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">average_precision_score</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="cargar-datos">
+<h2>2. Cargar Datos<a class="headerlink" href="#cargar-datos" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2) CARGA Y SPLIT (70 % train, 15 % val, 15 % test)</span>
+<span class="n">df</span>   <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\Users\DELL\Desktop\Aprendizaje_de_Maquina\credit_risk_the_end.csv&quot;</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span><span class="n">y</span>  <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;incumplimiento_credito&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;incumplimiento_credito&quot;</span><span class="p">]</span>
+
+<span class="n">X_tr</span><span class="p">,</span> <span class="n">X_tmp</span><span class="p">,</span> <span class="n">y_tr</span><span class="p">,</span> <span class="n">y_tmp</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.30</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">X_val</span><span class="p">,</span> <span class="n">X_te</span><span class="p">,</span>  <span class="n">y_val</span><span class="p">,</span> <span class="n">y_te</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_tmp</span><span class="p">,</span> <span class="n">y_tmp</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.50</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y_tmp</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="preprocesamiento-de-datos">
+<h2>3.Preprocesamiento de Datos<a class="headerlink" href="#preprocesamiento-de-datos" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3) PREPROCESADOR (One-Hot a categóricas, escala a numéricas)</span>
+<span class="n">cat_cols</span> <span class="o">=</span> <span class="n">X_tr</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;object&quot;</span><span class="p">,</span><span class="s2">&quot;category&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">num_cols</span> <span class="o">=</span> <span class="n">X_tr</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;int64&quot;</span><span class="p">,</span><span class="s2">&quot;float64&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="n">cat_pipe</span> <span class="o">=</span> <span class="n">SKPipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">&quot;imp&quot;</span><span class="p">,</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;most_frequent&quot;</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s2">&quot;ohe&quot;</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">))</span>
+<span class="p">])</span>
+<span class="n">num_pipe</span> <span class="o">=</span> <span class="n">SKPipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">&quot;imp&quot;</span><span class="p">,</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;median&quot;</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s2">&quot;sc&quot;</span><span class="p">,</span>  <span class="n">StandardScaler</span><span class="p">())</span>
+<span class="p">])</span>
+
+<span class="n">preproc</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="n">cat_pipe</span><span class="p">,</span> <span class="n">cat_cols</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;num&quot;</span><span class="p">,</span> <span class="n">num_pipe</span><span class="p">,</span> <span class="n">num_cols</span><span class="p">)</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="seccion-2-definicion-de-la-arquitectura-y-gridsearch">
+<h1>Sección 2: Definición de la Arquitectura y GridSearch<a class="headerlink" href="#seccion-2-definicion-de-la-arquitectura-y-gridsearch" title="Permalink to this heading">#</a></h1>
+<section id="pipeline-y-gridsearch-de-hiperparametros">
+<h2>1.Pipeline y GridSearch de Hiperparámetros<a class="headerlink" href="#pipeline-y-gridsearch-de-hiperparametros" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 4) PIPELINE + GRIDSEARCH (sin early-stopping)</span>
+<span class="n">scale_pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_tr</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="p">(</span><span class="n">y_tr</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">base_xgb</span>  <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBClassifier</span><span class="p">(</span>
+              <span class="n">objective</span><span class="o">=</span><span class="s2">&quot;binary:logistic&quot;</span><span class="p">,</span>
+              <span class="n">tree_method</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">,</span>
+              <span class="n">eval_metric</span><span class="o">=</span><span class="s2">&quot;logloss&quot;</span><span class="p">,</span>
+              <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">ImbPipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">&quot;pre&quot;</span><span class="p">,</span>      <span class="n">preproc</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span>   <span class="n">SMOTE</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)),</span>      <span class="c1"># se sobreescribe en grid</span>
+    <span class="p">(</span><span class="s2">&quot;clf&quot;</span><span class="p">,</span>      <span class="n">base_xgb</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="n">param_grid</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># SMOTE</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;sample&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">SMOTE</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)],</span>
+        <span class="s2">&quot;clf__scale_pos_weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>              <span class="c1"># NO se usa weight</span>
+        <span class="s2">&quot;clf__max_depth&quot;</span><span class="p">:</span>        <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+        <span class="s2">&quot;clf__learning_rate&quot;</span><span class="p">:</span>    <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">],</span>
+        <span class="s2">&quot;clf__n_estimators&quot;</span><span class="p">:</span>     <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">],</span>
+        <span class="s2">&quot;clf__subsample&quot;</span><span class="p">:</span>        <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+        <span class="s2">&quot;clf__colsample_bytree&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="c1"># ADASYN</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;sample&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">ADASYN</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)],</span>
+        <span class="s2">&quot;clf__scale_pos_weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>              <span class="c1"># idem</span>
+        <span class="s2">&quot;clf__max_depth&quot;</span><span class="p">:</span>        <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+        <span class="s2">&quot;clf__learning_rate&quot;</span><span class="p">:</span>    <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">],</span>
+        <span class="s2">&quot;clf__n_estimators&quot;</span><span class="p">:</span>     <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">],</span>
+        <span class="s2">&quot;clf__subsample&quot;</span><span class="p">:</span>        <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+        <span class="s2">&quot;clf__colsample_bytree&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="c1"># Sin remuestreo  (balance via scale_pos_weight)</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;sample&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;passthrough&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;clf__scale_pos_weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">scale_pos</span><span class="p">],</span>      <span class="c1"># calculado antes</span>
+        <span class="s2">&quot;clf__max_depth&quot;</span><span class="p">:</span>        <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+        <span class="s2">&quot;clf__learning_rate&quot;</span><span class="p">:</span>    <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">],</span>
+        <span class="s2">&quot;clf__n_estimators&quot;</span><span class="p">:</span>     <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">],</span>
+        <span class="s2">&quot;clf__subsample&quot;</span><span class="p">:</span>        <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+        <span class="s2">&quot;clf__colsample_bytree&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+
+
+<span class="n">cv</span>   <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipe</span><span class="p">,</span> <span class="n">param_grid</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;recall&quot;</span><span class="p">,</span>
+                    <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">return_train_score</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="n">tic</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_tr</span><span class="p">,</span> <span class="n">y_tr</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ GridSearch terminado en </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">tic</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">s  –  Mejor recall CV: </span><span class="si">{</span><span class="n">grid</span><span class="o">.</span><span class="n">best_score_</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔑 Parámetros óptimos:&quot;</span><span class="p">,</span> <span class="n">grid</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 5 folds for each of 144 candidates, totalling 720 fits
+✅ GridSearch terminado en 579.5s  –  Mejor recall CV: 0.6687
+🔑 Parámetros óptimos: {&#39;clf__colsample_bytree&#39;: 0.8, &#39;clf__learning_rate&#39;: 0.01, &#39;clf__max_depth&#39;: 3, &#39;clf__n_estimators&#39;: 200, &#39;clf__scale_pos_weight&#39;: 10.699978691668443, &#39;clf__subsample&#39;: 0.8, &#39;sample&#39;: &#39;passthrough&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="seccion-3-evaluacion-basica-del-modelo">
+<h1>Sección 3: Evaluación Básica del Modelo<a class="headerlink" href="#seccion-3-evaluacion-basica-del-modelo" title="Permalink to this heading">#</a></h1>
+<section id="tabla-comparativa-de-metricas">
+<h2>1.Tabla comparativa de métricas<a class="headerlink" href="#tabla-comparativa-de-metricas" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ------------------------------------------------------------------</span>
+<span class="c1"># 0.  Librerías necesarias (ya importadas antes) --------------------</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">recall_score</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">,</span>
+    <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">average_precision_score</span>
+<span class="p">)</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span><span class="o">,</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span><span class="o">,</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span><span class="o">,</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span><span class="o">,</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="c1"># ------------------------------------------------------------------</span>
+<span class="c1"># 1.  Extraer el mejor set de params para cada técnica --------------</span>
+<span class="c1"># ------------------------------------------------------------------</span>
+<span class="c1"># cv_results_ contiene un registro por combinación probada</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span>
+<span class="n">cv</span><span class="p">[</span><span class="s2">&quot;sampler_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">param_sample</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s2">&quot;passthrough&quot;</span> <span class="k">if</span> <span class="n">s</span><span class="o">==</span><span class="s2">&quot;passthrough&quot;</span> <span class="k">else</span> <span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+<span class="p">)</span>
+
+<span class="c1"># Te quedas con la fila de mayor recall CV por técnica</span>
+<span class="n">best_by_sampler</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">cv</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;mean_test_score&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+      <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;sampler_name&quot;</span><span class="p">)</span>
+      <span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># ------------------------------------------------------------------</span>
+<span class="c1"># 2.  Entrenar cada booster con early-stopping ----------------------</span>
+<span class="c1"># ------------------------------------------------------------------</span>
+<span class="n">metricas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">best_by_sampler</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">sampler_name</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;sampler_name&quot;</span><span class="p">]</span>
+
+    <span class="c1"># ---- 2.1 reconstruir preproc y sampler -----------------------</span>
+    <span class="n">pre_fitted</span>  <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">best_estimator_</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s2">&quot;pre&quot;</span><span class="p">]</span>  <span class="c1"># ya entrenado</span>
+    <span class="n">sampler_opt</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;param_sample&quot;</span><span class="p">]</span>
+    <span class="n">xgb_params</span>  <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;param_clf__&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">):</span> <span class="n">v</span>
+                   <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">row</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;param_clf__&quot;</span><span class="p">)}</span>
+
+    <span class="c1"># Transforma sets</span>
+    <span class="n">Xtr_p</span> <span class="o">=</span> <span class="n">pre_fitted</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_tr</span><span class="p">)</span>
+    <span class="n">Xval_p</span><span class="o">=</span> <span class="n">pre_fitted</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
+    <span class="n">Xte_p</span> <span class="o">=</span> <span class="n">pre_fitted</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_te</span><span class="p">)</span>
+
+    <span class="c1"># Re-muestra si es necesario</span>
+    <span class="k">if</span> <span class="n">sampler_name</span> <span class="o">==</span> <span class="s2">&quot;passthrough&quot;</span><span class="p">:</span>
+        <span class="n">Xtr_res</span><span class="p">,</span> <span class="n">ytr_res</span> <span class="o">=</span> <span class="n">Xtr_p</span><span class="p">,</span> <span class="n">y_tr</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">Sampler</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">sampler_opt</span><span class="p">)</span>
+        <span class="n">sampler</span> <span class="o">=</span> <span class="n">Sampler</span><span class="p">(</span><span class="o">**</span><span class="n">sampler_opt</span><span class="o">.</span><span class="n">get_params</span><span class="p">())</span>
+        <span class="n">Xtr_res</span><span class="p">,</span> <span class="n">ytr_res</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">Xtr_p</span><span class="p">,</span> <span class="n">y_tr</span><span class="p">)</span>
+
+    <span class="c1"># ---- 2.2 entrenar booster -----------------------------------</span>
+    <span class="n">dtrain</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">Xtr_res</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">ytr_res</span><span class="p">)</span>
+    <span class="n">dval</span>   <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">Xval_p</span><span class="p">,</span>  <span class="n">label</span><span class="o">=</span><span class="n">y_val</span><span class="p">)</span>
+    <span class="n">dtest</span>  <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">Xte_p</span><span class="p">,</span>   <span class="n">label</span><span class="o">=</span><span class="n">y_te</span><span class="p">)</span>
+
+    <span class="n">core_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;objective&quot;</span><span class="p">:</span><span class="s2">&quot;binary:logistic&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;eval_metric&quot;</span><span class="p">:</span><span class="s2">&quot;logloss&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tree_method&quot;</span><span class="p">:</span><span class="s2">&quot;hist&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span><span class="nb">float</span><span class="p">(</span><span class="n">xgb_params</span><span class="p">[</span><span class="s2">&quot;learning_rate&quot;</span><span class="p">]),</span>
+        <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="n">xgb_params</span><span class="p">[</span><span class="s2">&quot;max_depth&quot;</span><span class="p">]),</span>
+        <span class="s2">&quot;scale_pos_weight&quot;</span><span class="p">:</span><span class="nb">float</span><span class="p">(</span><span class="n">xgb_params</span><span class="p">[</span><span class="s2">&quot;scale_pos_weight&quot;</span><span class="p">]),</span>
+        <span class="s2">&quot;seed&quot;</span><span class="p">:</span><span class="mi">42</span>
+    <span class="p">}</span>
+
+    <span class="n">tic</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">booster</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+        <span class="n">params</span><span class="o">=</span><span class="n">core_params</span><span class="p">,</span>
+        <span class="n">dtrain</span><span class="o">=</span><span class="n">dtrain</span><span class="p">,</span>
+        <span class="n">num_boost_round</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">xgb_params</span><span class="p">[</span><span class="s2">&quot;n_estimators&quot;</span><span class="p">]),</span>
+        <span class="n">evals</span><span class="o">=</span><span class="p">[(</span><span class="n">dval</span><span class="p">,</span><span class="s2">&quot;val&quot;</span><span class="p">)],</span>
+        <span class="n">early_stopping_rounds</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">verbose_eval</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+    <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tic</span>
+
+    <span class="c1"># ---- 2.3 métricas en test ------------------------------------</span>
+    <span class="n">proba</span> <span class="o">=</span> <span class="n">booster</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dtest</span><span class="p">)</span>
+    <span class="n">pred</span>  <span class="o">=</span> <span class="p">(</span><span class="n">proba</span> <span class="o">&gt;</span> <span class="mf">0.50</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="n">metricas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+        <span class="s2">&quot;Técnica&quot;</span><span class="p">:</span> <span class="n">sampler_name</span><span class="p">,</span>
+        <span class="s2">&quot;Recall&quot;</span><span class="p">:</span>   <span class="n">recall_score</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+        <span class="s2">&quot;Precision&quot;</span><span class="p">:</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+        <span class="s2">&quot;F1-score&quot;</span><span class="p">:</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+        <span class="s2">&quot;AUC&quot;</span><span class="p">:</span>      <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">proba</span><span class="p">),</span>
+        <span class="s2">&quot;AvgPrec&quot;</span><span class="p">:</span>  <span class="n">average_precision_score</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">proba</span><span class="p">),</span>
+        <span class="s2">&quot;Tiempo (s)&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">elapsed</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">})</span>
+
+<span class="c1"># ------------------------------------------------------------------</span>
+<span class="c1"># 3.  Tabla comparativa + ranking ----------------------------------</span>
+<span class="c1"># ------------------------------------------------------------------</span>
+<span class="n">df_metricas</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">metricas</span><span class="p">)</span>
+      <span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Técnica&quot;</span><span class="p">)</span>
+      <span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+      <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;Recall&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">best_model</span> <span class="o">=</span> <span class="n">df_metricas</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">display</span><span class="p">(</span>
+    <span class="n">df_metricas</span><span class="o">.</span><span class="n">style</span>
+        <span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Recall&quot;</span><span class="p">,</span><span class="s2">&quot;AUC&quot;</span><span class="p">,</span><span class="s2">&quot;AvgPrec&quot;</span><span class="p">],</span>
+                             <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">highlight_max</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Recall&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;salmon&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s2">&quot;XGBoost – Métricas por técnica de balanceo&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🔝 Mejor modelo por Recall: **</span><span class="si">{</span><span class="n">best_model</span><span class="si">}</span><span class="s2">**&quot;</span><span class="p">)</span>
+
+<span class="c1"># ------------------------------------------------------------------</span>
+<span class="c1"># 4.  Heatmap rápido (opcional) ------------------------------------</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">df_metricas</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.4f&quot;</span><span class="p">,</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Pastel1&quot;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">cbar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Comparación de métricas – XGBoost&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:474: FutureWarning: `BaseEstimator._validate_data` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation.validate_data` instead. This function becomes public and is part of the scikit-learn developer API.
+  warnings.warn(
+c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:474: FutureWarning: `BaseEstimator._validate_data` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation.validate_data` instead. This function becomes public and is part of the scikit-learn developer API.
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output text_html"><style type="text/css">
+#T_fe3a7_row0_col0 {
+  background-color: #08306b;
+  color: #f1f1f1;
+  background-color: salmon;
+}
+#T_fe3a7_row0_col3, #T_fe3a7_row0_col4 {
+  background-color: #08306b;
+  color: #f1f1f1;
+}
+#T_fe3a7_row1_col0 {
+  background-color: #e7f0fa;
+  color: #000000;
+}
+#T_fe3a7_row1_col3 {
+  background-color: #e3eef9;
+  color: #000000;
+}
+#T_fe3a7_row1_col4 {
+  background-color: #e2edf8;
+  color: #000000;
+}
+#T_fe3a7_row2_col0, #T_fe3a7_row2_col3, #T_fe3a7_row2_col4 {
+  background-color: #f7fbff;
+  color: #000000;
+}
+</style>
+<table id="T_fe3a7">
+  <caption>XGBoost – Métricas por técnica de balanceo</caption>
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_fe3a7_level0_col0" class="col_heading level0 col0" >Recall</th>
+      <th id="T_fe3a7_level0_col1" class="col_heading level0 col1" >Precision</th>
+      <th id="T_fe3a7_level0_col2" class="col_heading level0 col2" >F1-score</th>
+      <th id="T_fe3a7_level0_col3" class="col_heading level0 col3" >AUC</th>
+      <th id="T_fe3a7_level0_col4" class="col_heading level0 col4" >AvgPrec</th>
+      <th id="T_fe3a7_level0_col5" class="col_heading level0 col5" >Tiempo (s)</th>
+    </tr>
+    <tr>
+      <th class="index_name level0" >Técnica</th>
+      <th class="blank col0" >&nbsp;</th>
+      <th class="blank col1" >&nbsp;</th>
+      <th class="blank col2" >&nbsp;</th>
+      <th class="blank col3" >&nbsp;</th>
+      <th class="blank col4" >&nbsp;</th>
+      <th class="blank col5" >&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_fe3a7_level0_row0" class="row_heading level0 row0" >passthrough</th>
+      <td id="T_fe3a7_row0_col0" class="data row0 col0" >0.655100</td>
+      <td id="T_fe3a7_row0_col1" class="data row0 col1" >0.158900</td>
+      <td id="T_fe3a7_row0_col2" class="data row0 col2" >0.255800</td>
+      <td id="T_fe3a7_row0_col3" class="data row0 col3" >0.727300</td>
+      <td id="T_fe3a7_row0_col4" class="data row0 col4" >0.219200</td>
+      <td id="T_fe3a7_row0_col5" class="data row0 col5" >0.600000</td>
+    </tr>
+    <tr>
+      <th id="T_fe3a7_level0_row1" class="row_heading level0 row1" >SMOTE</th>
+      <td id="T_fe3a7_row1_col0" class="data row1 col0" >0.244500</td>
+      <td id="T_fe3a7_row1_col1" class="data row1 col1" >0.218300</td>
+      <td id="T_fe3a7_row1_col2" class="data row1 col2" >0.230700</td>
+      <td id="T_fe3a7_row1_col3" class="data row1 col3" >0.697100</td>
+      <td id="T_fe3a7_row1_col4" class="data row1 col4" >0.174100</td>
+      <td id="T_fe3a7_row1_col5" class="data row1 col5" >1.600000</td>
+    </tr>
+    <tr>
+      <th id="T_fe3a7_level0_row2" class="row_heading level0 row2" >ADASYN</th>
+      <td id="T_fe3a7_row2_col0" class="data row2 col0" >0.206800</td>
+      <td id="T_fe3a7_row2_col1" class="data row2 col1" >0.208000</td>
+      <td id="T_fe3a7_row2_col2" class="data row2 col2" >0.207400</td>
+      <td id="T_fe3a7_row2_col3" class="data row2 col3" >0.693700</td>
+      <td id="T_fe3a7_row2_col4" class="data row2 col4" >0.168700</td>
+      <td id="T_fe3a7_row2_col5" class="data row2 col5" >1.400000</td>
+    </tr>
+  </tbody>
+</table>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🔝 Mejor modelo por Recall: **passthrough**
+</pre></div>
+</div>
+<img alt="_images/743e9c1726417eb70d83af3ed192b02db7e15a219a97c88b2eeac6d1675eca47.png" src="_images/743e9c1726417eb70d83af3ed192b02db7e15a219a97c88b2eeac6d1675eca47.png" />
+</div>
+</div>
+</section>
+<section id="matries-de-confusion">
+<h2>2.Matries de Confusión<a class="headerlink" href="#matries-de-confusion" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span><span class="o">,</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span><span class="o">,</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span><span class="o">,</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ConfusionMatrixDisplay</span><span class="p">,</span> <span class="n">RocCurveDisplay</span><span class="p">,</span> <span class="n">PrecisionRecallDisplay</span>
+<span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;Pastel1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.dpi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">110</span>
+
+<span class="c1"># ----------------------------------------------------------------</span>
+<span class="c1"># A. Recolectar boosters / proba / pred por técnica ---------------</span>
+<span class="c1"># ----------------------------------------------------------------</span>
+<span class="n">boosters</span>        <span class="o">=</span> <span class="p">{}</span>
+<span class="n">proba_dict</span>      <span class="o">=</span> <span class="p">{}</span>
+<span class="n">pred_dict</span>       <span class="o">=</span> <span class="p">{}</span>
+<span class="n">evals_hist_dict</span> <span class="o">=</span> <span class="p">{}</span>              <span class="c1"># ⬅️ historial de logloss por técnica</span>
+
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">best_by_sampler</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">tech</span>        <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;sampler_name&quot;</span><span class="p">]</span>
+    <span class="n">sampler_opt</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;param_sample&quot;</span><span class="p">]</span>
+    <span class="n">xgb_params</span>  <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;param_clf__&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">):</span> <span class="n">v</span>
+                   <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">row</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;param_clf__&quot;</span><span class="p">)}</span>
+
+    <span class="c1"># --- transformar y (si aplica) remuestrear ------------------</span>
+    <span class="n">Xtr_p</span> <span class="o">=</span> <span class="n">pre_fitted</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_tr</span><span class="p">)</span>
+    <span class="n">Xval_p</span><span class="o">=</span> <span class="n">pre_fitted</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
+    <span class="n">Xte_p</span> <span class="o">=</span> <span class="n">pre_fitted</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_te</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">tech</span> <span class="o">==</span> <span class="s2">&quot;passthrough&quot;</span><span class="p">:</span>
+        <span class="n">Xtr_res</span><span class="p">,</span> <span class="n">ytr_res</span> <span class="o">=</span> <span class="n">Xtr_p</span><span class="p">,</span> <span class="n">y_tr</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sampler</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">sampler_opt</span><span class="p">)(</span><span class="o">**</span><span class="n">sampler_opt</span><span class="o">.</span><span class="n">get_params</span><span class="p">())</span>
+        <span class="n">Xtr_res</span><span class="p">,</span> <span class="n">ytr_res</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">fit_resample</span><span class="p">(</span><span class="n">Xtr_p</span><span class="p">,</span> <span class="n">y_tr</span><span class="p">)</span>
+
+    <span class="c1"># --- booster con historial ----------------------------------</span>
+    <span class="n">dtrain</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">Xtr_res</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">ytr_res</span><span class="p">)</span>
+    <span class="n">dval</span>   <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">Xval_p</span><span class="p">,</span>  <span class="n">label</span><span class="o">=</span><span class="n">y_val</span><span class="p">)</span>
+    <span class="n">dtest</span>  <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">Xte_p</span><span class="p">,</span>   <span class="n">label</span><span class="o">=</span><span class="n">y_te</span><span class="p">)</span>
+
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;objective&quot;</span><span class="p">:</span><span class="s2">&quot;binary:logistic&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;eval_metric&quot;</span><span class="p">:</span><span class="s2">&quot;logloss&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tree_method&quot;</span><span class="p">:</span><span class="s2">&quot;hist&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span><span class="nb">float</span><span class="p">(</span><span class="n">xgb_params</span><span class="p">[</span><span class="s2">&quot;learning_rate&quot;</span><span class="p">]),</span>
+        <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="n">xgb_params</span><span class="p">[</span><span class="s2">&quot;max_depth&quot;</span><span class="p">]),</span>
+        <span class="s2">&quot;scale_pos_weight&quot;</span><span class="p">:</span><span class="nb">float</span><span class="p">(</span><span class="n">xgb_params</span><span class="p">[</span><span class="s2">&quot;scale_pos_weight&quot;</span><span class="p">]),</span>
+        <span class="s2">&quot;seed&quot;</span><span class="p">:</span><span class="mi">42</span>
+    <span class="p">}</span>
+
+    <span class="n">evals_result</span> <span class="o">=</span> <span class="p">{}</span>   <span class="c1"># se llenará durante el fit</span>
+    <span class="n">booster</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+        <span class="n">params</span><span class="p">,</span>
+        <span class="n">dtrain</span><span class="p">,</span>
+        <span class="n">num_boost_round</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">xgb_params</span><span class="p">[</span><span class="s2">&quot;n_estimators&quot;</span><span class="p">]),</span>
+        <span class="n">evals</span><span class="o">=</span><span class="p">[(</span><span class="n">dval</span><span class="p">,</span> <span class="s2">&quot;val&quot;</span><span class="p">)],</span>
+        <span class="n">early_stopping_rounds</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">evals_result</span><span class="o">=</span><span class="n">evals_result</span><span class="p">,</span>
+        <span class="n">verbose_eval</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+
+    <span class="n">boosters</span><span class="p">[</span><span class="n">tech</span><span class="p">]</span>        <span class="o">=</span> <span class="n">booster</span>
+    <span class="n">proba_dict</span><span class="p">[</span><span class="n">tech</span><span class="p">]</span>      <span class="o">=</span> <span class="n">booster</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dtest</span><span class="p">)</span>
+    <span class="n">pred_dict</span><span class="p">[</span><span class="n">tech</span><span class="p">]</span>       <span class="o">=</span> <span class="p">(</span><span class="n">proba_dict</span><span class="p">[</span><span class="n">tech</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.50</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">evals_hist_dict</span><span class="p">[</span><span class="n">tech</span><span class="p">]</span> <span class="o">=</span> <span class="n">evals_result</span>            <span class="c1"># guarda historial</span>
+
+<span class="c1"># ----------------------------------------------------------------</span>
+<span class="c1"># B. Matrices de Confusión lado a lado ----------------------------</span>
+<span class="c1"># ----------------------------------------------------------------</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">boosters</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="c1"># Asegurar que &#39;axes&#39; sea siempre iterable</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">axes</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">tech</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">pred_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="n">ConfusionMatrixDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span>
+        <span class="n">y_te</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Pastel1&quot;</span>
+    <span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Confusión – </span><span class="si">{</span><span class="n">tech</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:474: FutureWarning: `BaseEstimator._validate_data` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation.validate_data` instead. This function becomes public and is part of the scikit-learn developer API.
+  warnings.warn(
+c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:474: FutureWarning: `BaseEstimator._validate_data` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation.validate_data` instead. This function becomes public and is part of the scikit-learn developer API.
+  warnings.warn(
+</pre></div>
+</div>
+<img alt="_images/64af74aeb316b7d97037f1789bb36508e0dbdee8743a957adf649da1ed99314f.png" src="_images/64af74aeb316b7d97037f1789bb36508e0dbdee8743a957adf649da1ed99314f.png" />
+</div>
+</div>
+</section>
+<section id="curvas-roc-por-tecnica-de-balanceo">
+<h2>3.Curvas ROC por técnica de Balanceo<a class="headerlink" href="#curvas-roc-por-tecnica-de-balanceo" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">n</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">n</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span> <span class="n">axes</span><span class="o">=</span><span class="p">[</span><span class="n">axes</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,(</span><span class="n">tech</span><span class="p">,</span> <span class="n">proba</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">proba_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="n">RocCurveDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">proba</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ROC – </span><span class="si">{</span><span class="n">tech</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/66376cc9e4008d3305baaf56d7dac750a1b7f6512f0611b03d555cf912159b37.png" src="_images/66376cc9e4008d3305baaf56d7dac750a1b7f6512f0611b03d555cf912159b37.png" />
+</div>
+</div>
+</section>
+<section id="id1">
+<h2>4.Curvas ROC por técnica de Balanceo<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Técnica&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Tiempo (s)&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_metricas</span><span class="o">.</span><span class="n">reset_index</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;⏱️ Tiempo total de entrenamiento&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\DELL\AppData\Local\Temp\ipykernel_7928\2211252754.py:4: UserWarning: Glyph 9201 (\N{STOPWATCH}) missing from font(s) DejaVu Sans.
+  plt.tight_layout(); plt.show()
+c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 9201 (\N{STOPWATCH}) missing from font(s) DejaVu Sans.
+  fig.canvas.print_figure(bytes_io, **kw)
+</pre></div>
+</div>
+<img alt="_images/386f06d76df3d06f653ae027e93bb73957f7fb32fdc867ddd82fc150660a5601.png" src="_images/386f06d76df3d06f653ae027e93bb73957f7fb32fdc867ddd82fc150660a5601.png" />
+</div>
+</div>
+</section>
+<section id="tabla-de-hiperparametros-optimos">
+<h2>5.Tabla de hiperparámetros óptimos<a class="headerlink" href="#tabla-de-hiperparametros-optimos" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params_tbl</span> <span class="o">=</span> <span class="p">(</span><span class="n">best_by_sampler</span>
+              <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">regex</span><span class="o">=</span><span class="s2">&quot;param_clf__|sampler_name&quot;</span><span class="p">)</span>
+              <span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;sampler_name&quot;</span><span class="p">)</span>
+              <span class="o">.</span><span class="n">rename_axis</span><span class="p">(</span><span class="s2">&quot;Técnica&quot;</span><span class="p">)</span>
+              <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;param_clf__&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">params_tbl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>colsample_bytree</th>
+      <th>learning_rate</th>
+      <th>max_depth</th>
+      <th>n_estimators</th>
+      <th>scale_pos_weight</th>
+      <th>subsample</th>
+    </tr>
+    <tr>
+      <th>Técnica</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>passthrough</th>
+      <td>0.8</td>
+      <td>0.01</td>
+      <td>3</td>
+      <td>200</td>
+      <td>10.699979</td>
+      <td>0.8</td>
+    </tr>
+    <tr>
+      <th>SMOTE</th>
+      <td>0.8</td>
+      <td>0.01</td>
+      <td>3</td>
+      <td>200</td>
+      <td>1.000000</td>
+      <td>0.8</td>
+    </tr>
+    <tr>
+      <th>ADASYN</th>
+      <td>0.8</td>
+      <td>0.01</td>
+      <td>3</td>
+      <td>200</td>
+      <td>1.000000</td>
+      <td>0.8</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="curvas-de-aprendizaje-y-perdida">
+<h2>6.Curvas de Aprendizaje y Pérdida<a class="headerlink" href="#curvas-de-aprendizaje-y-perdida" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---------------------------------------------------------------</span>
+<span class="c1"># Curvas de pérdida (logloss) por técnica – validación ----------</span>
+<span class="c1"># ---------------------------------------------------------------</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span><span class="o">,</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span><span class="o">,</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;Pastel1&quot;</span><span class="p">)</span>           <span class="c1"># mantiene la paleta unificada</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">evals_hist_dict</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">axes</span><span class="p">)</span>          <span class="c1"># asegura iterabilidad en n=1</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">tech</span><span class="p">,</span> <span class="n">ev_res</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">evals_hist_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="c1"># El primer/único key suele ser &#39;val&#39; o &#39;validation_0&#39;</span>
+    <span class="n">valid_key</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ev_res</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">logloss</span>   <span class="o">=</span> <span class="n">ev_res</span><span class="p">[</span><span class="n">valid_key</span><span class="p">][</span><span class="s2">&quot;logloss&quot;</span><span class="p">]</span>
+
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">logloss</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pérdida vs iter – </span><span class="si">{</span><span class="n">tech</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Iteración&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Logloss&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1503270e552a9acdea0a6e4c444d58f54a986911b11997e95dc2c4050d110747.png" src="_images/1503270e552a9acdea0a6e4c444d58f54a986911b11997e95dc2c4050d110747.png" />
+</div>
+</div>
+</section>
+<section id="curva-precision-recall-comparativa">
+<h2>7.Curva Precision-Recall comparativa<a class="headerlink" href="#curva-precision-recall-comparativa" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">tech</span> <span class="ow">in</span> <span class="n">boosters</span><span class="p">:</span>
+    <span class="n">PrecisionRecallDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">proba_dict</span><span class="p">[</span><span class="n">tech</span><span class="p">],</span>
+                                            <span class="n">name</span><span class="o">=</span><span class="n">tech</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Curva Precision-Recall&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c6388e8ed4ad2d3356f1b44f4a96da38809faf811f9862d09397ac1b7a0de4b8.png" src="_images/c6388e8ed4ad2d3356f1b44f4a96da38809faf811f9862d09397ac1b7a0de4b8.png" />
+</div>
+</div>
+</section>
+<section id="heatmap-de-recall">
+<h2>8.Heatmap de Recall<a class="headerlink" href="#heatmap-de-recall" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">df_metricas</span><span class="p">[[</span><span class="s2">&quot;Recall&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.3f&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Pastel1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Heatmap de Recall por técnica&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2f11509134bf72f733e46134fa57cb89a2773669e328f39f722388a4a132a679.png" src="_images/2f11509134bf72f733e46134fa57cb89a2773669e328f39f722388a4a132a679.png" />
+</div>
+</div>
+</section>
+<section id="radar-plot-de-metricas">
+<h2>9.Radar plot de métricas<a class="headerlink" href="#radar-plot-de-metricas" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span>
+<span class="n">radar_metrics</span> <span class="o">=</span> <span class="n">df_metricas</span><span class="p">[</span><span class="n">metric_names</span><span class="p">]</span>
+<span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">metric_names</span><span class="p">),</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">angles</span><span class="p">,[</span><span class="n">angles</span><span class="p">[</span><span class="mi">0</span><span class="p">]]))</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">polar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">tech</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">radar_metrics</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">values</span> <span class="o">+=</span> <span class="n">values</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">tech</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">angles</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">metric_names</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">radar_metrics</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">*</span><span class="mf">1.1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Radar plot métricas&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span><span class="mi">1</span><span class="p">));</span> <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span> <span class="n">line</span> <span class="mi">9</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">metric_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Accuracy&quot;</span><span class="p">,</span> <span class="s2">&quot;Precision&quot;</span><span class="p">,</span> <span class="s2">&quot;Recall&quot;</span><span class="p">,</span> <span class="s2">&quot;F1&quot;</span><span class="p">,</span> <span class="s2">&quot;AUC&quot;</span><span class="p">]</span>  <span class="c1"># Ajusta según tus columnas</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># ✅ Extrae solo las columnas de interés</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">radar_metrics</span> <span class="o">=</span> <span class="n">df_metricas</span><span class="p">[</span><span class="n">metric_names</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># Ángulos para cada eje del radar</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">metric_names</span><span class="p">),</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\pandas\core\frame.py:4108,</span> in <span class="ni">DataFrame.__getitem__</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4106</span>     <span class="k">if</span> <span class="n">is_iterator</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">4107</span>         <span class="n">key</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">4108</span>     <span class="n">indexer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">_get_indexer_strict</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s2">&quot;columns&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">4110</span> <span class="c1"># take() does not accept boolean indexers</span>
+<span class="g g-Whitespace">   </span><span class="mi">4111</span> <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">indexer</span><span class="p">,</span> <span class="s2">&quot;dtype&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">==</span> <span class="nb">bool</span><span class="p">:</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\pandas\core\indexes\base.py:6200,</span> in <span class="ni">Index._get_indexer_strict</span><span class="nt">(self, key, axis_name)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6197</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">6198</span>     <span class="n">keyarr</span><span class="p">,</span> <span class="n">indexer</span><span class="p">,</span> <span class="n">new_indexer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reindex_non_unique</span><span class="p">(</span><span class="n">keyarr</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">6200</span> <span class="bp">self</span><span class="o">.</span><span class="n">_raise_if_missing</span><span class="p">(</span><span class="n">keyarr</span><span class="p">,</span> <span class="n">indexer</span><span class="p">,</span> <span class="n">axis_name</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6202</span> <span class="n">keyarr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">indexer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6203</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">Index</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">6204</span>     <span class="c1"># GH 42790 - Preserve name from an Index</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\pandas\core\indexes\base.py:6252,</span> in <span class="ni">Index._raise_if_missing</span><span class="nt">(self, key, indexer, axis_name)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6249</span>     <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;None of [</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">] are in the [</span><span class="si">{</span><span class="n">axis_name</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6251</span> <span class="n">not_found</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ensure_index</span><span class="p">(</span><span class="n">key</span><span class="p">)[</span><span class="n">missing_mask</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<span class="ne">-&gt; </span><span class="mi">6252</span> <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">not_found</span><span class="si">}</span><span class="s2"> not in index&quot;</span><span class="p">)</span>
+
+<span class="ne">KeyError</span>: &quot;[&#39;Accuracy&#39;, &#39;F1&#39;] not in index&quot;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="curvas-de-validacion-max-depth">
+<h2>10.Curvas de Validación (max_depth)<a class="headerlink" href="#curvas-de-validacion-max-depth" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---------------------------------------------------------------</span>
+<span class="c1"># Validation Curves *sin* reentrenar – usando grid.cv_results_</span>
+<span class="c1"># ---------------------------------------------------------------</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span><span class="o">,</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span><span class="o">,</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;Pastel1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.dpi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">110</span>
+
+<span class="c1"># 1️⃣  hiperparámetro a analizar -------------------------------</span>
+<span class="n">param_name_cv</span> <span class="o">=</span> <span class="s2">&quot;param_clf__max_depth&quot;</span>     <span class="c1"># cámbialo a otro param_</span>
+<span class="n">param_label</span>   <span class="o">=</span> <span class="s2">&quot;max_depth&quot;</span>                <span class="c1"># para el eje X</span>
+
+<span class="c1"># 2️⃣  DataFrame base ------------------------------------------</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span>
+<span class="n">cv</span><span class="p">[</span><span class="s2">&quot;sampler_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">param_sample</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s2">&quot;passthrough&quot;</span> <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="s2">&quot;passthrough&quot;</span> <span class="k">else</span> <span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+<span class="p">)</span>
+
+<span class="c1"># 3️⃣  Tabla agregada: mean ± std por valor del hiperparámetro --</span>
+<span class="n">agg</span> <span class="o">=</span> <span class="p">(</span><span class="n">cv</span>
+       <span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;sampler_name&quot;</span><span class="p">,</span> <span class="n">param_name_cv</span><span class="p">])</span>
+       <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">mean_recall</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;mean_test_score&quot;</span><span class="p">,</span> <span class="s2">&quot;mean&quot;</span><span class="p">),</span>
+            <span class="n">std_recall</span> <span class="o">=</span><span class="p">(</span><span class="s2">&quot;std_test_score&quot;</span><span class="p">,</span>  <span class="s2">&quot;mean&quot;</span><span class="p">))</span>
+       <span class="o">.</span><span class="n">reset_index</span><span class="p">())</span>
+
+<span class="c1"># 4️⃣  Graficar --------------------------------------------------</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">tech</span><span class="p">,</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">agg</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;sampler_name&quot;</span><span class="p">):</span>
+    <span class="c1"># convierte None a np.nan para ordenar correctamente</span>
+    <span class="n">x_vals</span> <span class="o">=</span> <span class="n">sub</span><span class="p">[</span><span class="n">param_name_cv</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+    <span class="n">y</span>      <span class="o">=</span> <span class="n">sub</span><span class="p">[</span><span class="s2">&quot;mean_recall&quot;</span><span class="p">]</span>
+    <span class="n">yerr</span>   <span class="o">=</span> <span class="n">sub</span><span class="p">[</span><span class="s2">&quot;std_recall&quot;</span><span class="p">]</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">yerr</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span>
+                 <span class="n">capsize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">tech</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">param_label</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Recall (CV)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Validation Curve – </span><span class="si">{</span><span class="n">param_label</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Técnica&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a138dfbc118bde9f6746270f665ef53b5b51de0594f1bdc1155f524d8223976f.png" src="_images/a138dfbc118bde9f6746270f665ef53b5b51de0594f1bdc1155f524d8223976f.png" />
+</div>
+</div>
+</section>
+<section id="cumulative-gain-lift">
+<h2>11.Cumulative Gain &amp; Lift<a class="headerlink" href="#cumulative-gain-lift" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">tech</span><span class="p">,</span> <span class="n">proba</span> <span class="ow">in</span> <span class="n">proba_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">-</span><span class="n">proba</span><span class="p">)</span>
+    <span class="n">y_sorted</span> <span class="o">=</span> <span class="n">y_te</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
+    <span class="n">cum_pos</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">y_sorted</span><span class="p">)</span>
+    <span class="n">pct_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">y_sorted</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">y_sorted</span><span class="p">)</span>
+    <span class="n">pct_pos</span>  <span class="o">=</span> <span class="n">cum_pos</span> <span class="o">/</span> <span class="n">cum_pos</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pct_data</span><span class="p">,</span> <span class="n">pct_pos</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">tech</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pct_data</span><span class="p">,</span> <span class="n">pct_pos</span><span class="o">/</span><span class="n">pct_data</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">tech</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Cumulative Gain&quot;</span><span class="p">);</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Lift Chart&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">% d</span><span class="s2">atos&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;% positivos acumulados / Lift&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7ebbe7247d1a0569b79805ffc2d4f16f9506132acfd972b7cfcf7b0a561bf614.png" src="_images/7ebbe7247d1a0569b79805ffc2d4f16f9506132acfd972b7cfcf7b0a561bf614.png" />
+</div>
+</div>
+</section>
+<section id="curva-ks">
+<h2>12.Curva KS<a class="headerlink" href="#curva-ks" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">tech</span><span class="p">,</span> <span class="n">proba</span> <span class="ow">in</span> <span class="n">proba_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">proba</span><span class="p">[</span><span class="n">y_te</span><span class="o">==</span><span class="mi">1</span><span class="p">]);</span> <span class="n">neg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">proba</span><span class="p">[</span><span class="n">y_te</span><span class="o">==</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">cdf_pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+    <span class="n">cdf_neg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">neg</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">neg</span><span class="p">)</span>
+    <span class="n">thresh</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">pos</span><span class="p">,</span><span class="n">neg</span><span class="p">]))</span>
+    <span class="n">cdfp_i</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">thresh</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+    <span class="n">cdfn_i</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">neg</span><span class="p">,</span> <span class="n">thresh</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">neg</span><span class="p">)</span>
+    <span class="n">ks</span>      <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">cdfp_i</span><span class="o">-</span><span class="n">cdfn_i</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">thresh</span><span class="p">,</span> <span class="n">cdfp_i</span><span class="o">-</span><span class="n">cdfn_i</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tech</span><span class="si">}</span><span class="s2"> (KS=</span><span class="si">{</span><span class="n">ks</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Curva KS (Diferencia CDFs)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Score&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;CDF_pos - CDF_neg&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2403e5ad5b8d54aa9094ce8241a8f23534963f8cc34cd12580e9c507f9df3d7c.png" src="_images/2403e5ad5b8d54aa9094ce8241a8f23534963f8cc34cd12580e9c507f9df3d7c.png" />
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -552,6 +1461,46 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">XGBoost</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seccion-1-configuracion-inicial-y-preparacion-de-datos">Sección 1: Configuración Inicial y Preparación de Datos</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias">1. Librerias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cargar-datos">2. Cargar Datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesamiento-de-datos">3.Preprocesamiento de Datos</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seccion-2-definicion-de-la-arquitectura-y-gridsearch">Sección 2: Definición de la Arquitectura y GridSearch</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-y-gridsearch-de-hiperparametros">1.Pipeline y GridSearch de Hiperparámetros</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seccion-3-evaluacion-basica-del-modelo">Sección 3: Evaluación Básica del Modelo</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa-de-metricas">1.Tabla comparativa de métricas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matries-de-confusion">2.Matries de Confusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-roc-por-tecnica-de-balanceo">3.Curvas ROC por técnica de Balanceo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4.Curvas ROC por técnica de Balanceo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-hiperparametros-optimos">5.Tabla de hiperparámetros óptimos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-de-aprendizaje-y-perdida">6.Curvas de Aprendizaje y Pérdida</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-precision-recall-comparativa">7.Curva Precision-Recall comparativa</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-de-recall">8.Heatmap de Recall</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#radar-plot-de-metricas">9.Radar plot de métricas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-de-validacion-max-depth">10.Curvas de Validación (max_depth)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-gain-lift">11.Cumulative Gain &amp; Lift</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-ks">12.Curva KS</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>

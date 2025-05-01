@@ -64,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'modelo_propuesto';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="📄 Informe del Proyecto" href="informe_del_proyecto.html" />
+    <link rel="next" title="&lt;no title&gt;" href="informe_del_proyecto.html" />
     <link rel="prev" title="LSTM Autoencoder para Detección de Anomalías en Crédito" href="autoencoders.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -226,6 +226,9 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l1"><a class="reference internal" href="bosques_aleatorios.html">Bosques Aleatorios</a></li>
 <li class="toctree-l1"><a class="reference internal" href="xgboost.html">XGBoost</a></li>
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="svm.html">Máquina de Soporte Vectorial</a></li>
 
 
@@ -294,7 +297,6 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="informe_del_proyecto.html">Informe Proyecto Final</a></li>
 </ul>
 
     </div>
@@ -555,7 +557,7 @@ document.write(`
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 
 <span class="c1"># 1. Carga</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\Users\DELL\Desktop\Aprendizaje_de_Maquina\jbook_Proyecto_Final_Clasificacion\docs2\credit_prueba.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\Users\DELL\Desktop\Aprendizaje_de_Maquina\credit_risk_the_end.csv&quot;</span><span class="p">)</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;incumplimiento_credito&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;incumplimiento_credito&quot;</span><span class="p">]</span>
 
@@ -1131,14 +1133,14 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
                                                   Index([&#x27;tipo_contrato&#x27;, &#x27;genero&#x27;, &#x27;posee_auto&#x27;, &#x27;posee_vivienda&#x27;,
        &#x27;ingreso_total&#x27;, &#x27;cuota_periodica&#x27;, &#x27;poblacion_relativa_region&#x27;,
        &#x27;dias_desde_nacimiento&#x27;, &#x27;dias_desde_registro&#x27;, &#x27;dias_desde_emision_id&#x27;...
-                                                                   OneHotEncoder(handle_unknown=&#x27;ignore&#x27;))]),
                                                   Index([&#x27;numero_hijos&#x27;, &#x27;acompanantes_solicitud&#x27;, &#x27;tipo_ingreso&#x27;,
        &#x27;nivel_educativo&#x27;, &#x27;estado_civil&#x27;, &#x27;tipo_vivienda&#x27;, &#x27;ocupacion&#x27;,
        &#x27;dia_solicitud&#x27;, &#x27;hora_solicitud&#x27;, &#x27;tipo_organizacion&#x27;],
       dtype=&#x27;object&#x27;))])),
                 (&#x27;sampler&#x27;, RandomUnderSampler(random_state=42)),
                 (&#x27;clf&#x27;,
-                 RandomForestClassifier(n_estimators=300, n_jobs=-1,
+                 RandomForestClassifier(max_depth=20, min_samples_split=5,
+                                        n_estimators=200, n_jobs=-1,
                                         random_state=42))])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" ><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>Pipeline</div></div><div><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>Pipeline(steps=[(&#x27;preproc&#x27;,
                  ColumnTransformer(transformers=[(&#x27;num&#x27;,
                                                   Pipeline(steps=[(&#x27;imputer&#x27;,
@@ -1148,14 +1150,14 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
                                                   Index([&#x27;tipo_contrato&#x27;, &#x27;genero&#x27;, &#x27;posee_auto&#x27;, &#x27;posee_vivienda&#x27;,
        &#x27;ingreso_total&#x27;, &#x27;cuota_periodica&#x27;, &#x27;poblacion_relativa_region&#x27;,
        &#x27;dias_desde_nacimiento&#x27;, &#x27;dias_desde_registro&#x27;, &#x27;dias_desde_emision_id&#x27;...
-                                                                   OneHotEncoder(handle_unknown=&#x27;ignore&#x27;))]),
                                                   Index([&#x27;numero_hijos&#x27;, &#x27;acompanantes_solicitud&#x27;, &#x27;tipo_ingreso&#x27;,
        &#x27;nivel_educativo&#x27;, &#x27;estado_civil&#x27;, &#x27;tipo_vivienda&#x27;, &#x27;ocupacion&#x27;,
        &#x27;dia_solicitud&#x27;, &#x27;hora_solicitud&#x27;, &#x27;tipo_organizacion&#x27;],
       dtype=&#x27;object&#x27;))])),
                 (&#x27;sampler&#x27;, RandomUnderSampler(random_state=42)),
                 (&#x27;clf&#x27;,
-                 RandomForestClassifier(n_estimators=300, n_jobs=-1,
+                 RandomForestClassifier(max_depth=20, min_samples_split=5,
+                                        n_estimators=200, n_jobs=-1,
                                         random_state=42))])</pre></div> </div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" ><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>preproc: ColumnTransformer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.compose.ColumnTransformer.html">?<span>Documentation for preproc: ColumnTransformer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>ColumnTransformer(transformers=[(&#x27;num&#x27;,
                                  Pipeline(steps=[(&#x27;imputer&#x27;,
                                                   SimpleImputer(strategy=&#x27;median&#x27;)),
@@ -1193,7 +1195,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
       dtype=&#x27;object&#x27;)</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" ><label for="sk-estimator-id-4" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SimpleImputer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.impute.SimpleImputer.html">?<span>Documentation for SimpleImputer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>SimpleImputer(strategy=&#x27;median&#x27;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" ><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content fitted"><pre>StandardScaler()</pre></div> </div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" ><label for="sk-estimator-id-6" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>cat</div></div></label><div class="sk-toggleable__content fitted"><pre>Index([&#x27;numero_hijos&#x27;, &#x27;acompanantes_solicitud&#x27;, &#x27;tipo_ingreso&#x27;,
        &#x27;nivel_educativo&#x27;, &#x27;estado_civil&#x27;, &#x27;tipo_vivienda&#x27;, &#x27;ocupacion&#x27;,
        &#x27;dia_solicitud&#x27;, &#x27;hora_solicitud&#x27;, &#x27;tipo_organizacion&#x27;],
-      dtype=&#x27;object&#x27;)</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox" ><label for="sk-estimator-id-7" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SimpleImputer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.impute.SimpleImputer.html">?<span>Documentation for SimpleImputer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>SimpleImputer(strategy=&#x27;most_frequent&#x27;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox" ><label for="sk-estimator-id-8" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>OneHotEncoder</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.OneHotEncoder.html">?<span>Documentation for OneHotEncoder</span></a></div></label><div class="sk-toggleable__content fitted"><pre>OneHotEncoder(handle_unknown=&#x27;ignore&#x27;)</pre></div> </div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-9" type="checkbox" ><label for="sk-estimator-id-9" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>RandomUnderSampler</div></div></label><div class="sk-toggleable__content fitted"><pre>RandomUnderSampler(random_state=42)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-10" type="checkbox" ><label for="sk-estimator-id-10" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>RandomForestClassifier</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.ensemble.RandomForestClassifier.html">?<span>Documentation for RandomForestClassifier</span></a></div></label><div class="sk-toggleable__content fitted"><pre>RandomForestClassifier(n_estimators=300, n_jobs=-1, random_state=42)</pre></div> </div></div></div></div></div></div></div></div>
+      dtype=&#x27;object&#x27;)</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox" ><label for="sk-estimator-id-7" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SimpleImputer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.impute.SimpleImputer.html">?<span>Documentation for SimpleImputer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>SimpleImputer(strategy=&#x27;most_frequent&#x27;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox" ><label for="sk-estimator-id-8" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>OneHotEncoder</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.OneHotEncoder.html">?<span>Documentation for OneHotEncoder</span></a></div></label><div class="sk-toggleable__content fitted"><pre>OneHotEncoder(handle_unknown=&#x27;ignore&#x27;)</pre></div> </div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-9" type="checkbox" ><label for="sk-estimator-id-9" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>RandomUnderSampler</div></div></label><div class="sk-toggleable__content fitted"><pre>RandomUnderSampler(random_state=42)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-10" type="checkbox" ><label for="sk-estimator-id-10" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>RandomForestClassifier</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.ensemble.RandomForestClassifier.html">?<span>Documentation for RandomForestClassifier</span></a></div></label><div class="sk-toggleable__content fitted"><pre>RandomForestClassifier(max_depth=20, min_samples_split=5, n_estimators=200,
+                       n_jobs=-1, random_state=42)</pre></div> </div></div></div></div></div></div></div></div>
 </div>
 </section>
 <section id="grid-para-xgboost">
@@ -1250,13 +1253,13 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 5 folds for each of 216 candidates, totalling 1080 fits
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:474: FutureWarning: `BaseEstimator._validate_data` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation.validate_data` instead. This function becomes public and is part of the scikit-learn developer API.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: &#39;force_all_finite&#39; was renamed to &#39;ensure_all_finite&#39; in 1.6 and will be removed in 1.8.
   warnings.warn(
-c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:474: FutureWarning: `BaseEstimator._validate_data` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation.validate_data` instead. This function becomes public and is part of the scikit-learn developer API.
+c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:484: FutureWarning: `BaseEstimator._check_n_features` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation._check_n_features` instead.
   warnings.warn(
-c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:474: FutureWarning: `BaseEstimator._validate_data` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation.validate_data` instead. This function becomes public and is part of the scikit-learn developer API.
+c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:493: FutureWarning: `BaseEstimator._check_feature_names` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation._check_feature_names` instead.
   warnings.warn(
-c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\xgboost\core.py:158: UserWarning: [22:43:46] WARNING: D:\bld\xgboost-split_1744329010901\work\src\learner.cc:740: 
+c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\xgboost\core.py:158: UserWarning: [01:49:12] WARNING: D:\bld\xgboost-split_1744329010901\work\src\learner.cc:740: 
 Parameters: { &quot;use_label_encoder&quot; } are not used.
 
   warnings.warn(smsg, UserWarning)
@@ -1750,7 +1753,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
       dtype=&#x27;object&#x27;)</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-14" type="checkbox" ><label for="sk-estimator-id-14" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SimpleImputer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.impute.SimpleImputer.html">?<span>Documentation for SimpleImputer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>SimpleImputer(strategy=&#x27;median&#x27;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-15" type="checkbox" ><label for="sk-estimator-id-15" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content fitted"><pre>StandardScaler()</pre></div> </div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-16" type="checkbox" ><label for="sk-estimator-id-16" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>cat</div></div></label><div class="sk-toggleable__content fitted"><pre>Index([&#x27;numero_hijos&#x27;, &#x27;acompanantes_solicitud&#x27;, &#x27;tipo_ingreso&#x27;,
        &#x27;nivel_educativo&#x27;, &#x27;estado_civil&#x27;, &#x27;tipo_vivienda&#x27;, &#x27;ocupacion&#x27;,
        &#x27;dia_solicitud&#x27;, &#x27;hora_solicitud&#x27;, &#x27;tipo_organizacion&#x27;],
-      dtype=&#x27;object&#x27;)</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-17" type="checkbox" ><label for="sk-estimator-id-17" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SimpleImputer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.impute.SimpleImputer.html">?<span>Documentation for SimpleImputer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>SimpleImputer(strategy=&#x27;most_frequent&#x27;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-18" type="checkbox" ><label for="sk-estimator-id-18" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>OneHotEncoder</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.OneHotEncoder.html">?<span>Documentation for OneHotEncoder</span></a></div></label><div class="sk-toggleable__content fitted"><pre>OneHotEncoder(handle_unknown=&#x27;ignore&#x27;)</pre></div> </div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-19" type="checkbox" ><label for="sk-estimator-id-19" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SMOTEENN</div></div></label><div class="sk-toggleable__content fitted"><pre>SMOTEENN(random_state=42)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-20" type="checkbox" ><label for="sk-estimator-id-20" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>XGBClassifier</div></div></label><div class="sk-toggleable__content fitted"><pre>XGBClassifier(base_score=None, booster=None, callbacks=None,
+      dtype=&#x27;object&#x27;)</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-17" type="checkbox" ><label for="sk-estimator-id-17" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SimpleImputer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.impute.SimpleImputer.html">?<span>Documentation for SimpleImputer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>SimpleImputer(strategy=&#x27;most_frequent&#x27;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-18" type="checkbox" ><label for="sk-estimator-id-18" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>OneHotEncoder</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.OneHotEncoder.html">?<span>Documentation for OneHotEncoder</span></a></div></label><div class="sk-toggleable__content fitted"><pre>OneHotEncoder(handle_unknown=&#x27;ignore&#x27;)</pre></div> </div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-19" type="checkbox" ><label for="sk-estimator-id-19" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>RandomUnderSampler</div></div></label><div class="sk-toggleable__content fitted"><pre>RandomUnderSampler(random_state=42)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-20" type="checkbox" ><label for="sk-estimator-id-20" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>XGBClassifier</div></div></label><div class="sk-toggleable__content fitted"><pre>XGBClassifier(base_score=None, booster=None, callbacks=None,
               colsample_bylevel=None, colsample_bynode=None,
               colsample_bytree=None, device=None, early_stopping_rounds=None,
               enable_categorical=False, eval_metric=&#x27;logloss&#x27;,
@@ -1811,11 +1814,11 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 5 folds for each of 30 candidates, totalling 150 fits
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: &#39;force_all_finite&#39; was renamed to &#39;ensure_all_finite&#39; in 1.6 and will be removed in 1.8.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:474: FutureWarning: `BaseEstimator._validate_data` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation.validate_data` instead. This function becomes public and is part of the scikit-learn developer API.
   warnings.warn(
-c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:484: FutureWarning: `BaseEstimator._check_n_features` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation._check_n_features` instead.
+c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:474: FutureWarning: `BaseEstimator._validate_data` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation.validate_data` instead. This function becomes public and is part of the scikit-learn developer API.
   warnings.warn(
-c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:493: FutureWarning: `BaseEstimator._check_feature_names` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation._check_feature_names` instead.
+c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:474: FutureWarning: `BaseEstimator._validate_data` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation.validate_data` instead. This function becomes public and is part of the scikit-learn developer API.
   warnings.warn(
 </pre></div>
 </div>
@@ -2248,7 +2251,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
        &#x27;nivel_educativo&#x27;, &#x27;estado_civil&#x27;, &#x27;tipo_vivienda&#x27;, &#x27;ocupacion&#x27;,
        &#x27;dia_solicitud&#x27;, &#x27;hora_solicitud&#x27;, &#x27;tipo_organizacion&#x27;],
       dtype=&#x27;object&#x27;))])),
-                (&#x27;sampler&#x27;, RandomUnderSampler(random_state=42)),
+                (&#x27;sampler&#x27;, SMOTEENN(random_state=42)),
                 (&#x27;clf&#x27;,
                  LogisticRegression(C=0.001, class_weight=&#x27;balanced&#x27;,
                                     max_iter=1000, solver=&#x27;liblinear&#x27;))])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-21" type="checkbox" ><label for="sk-estimator-id-21" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>Pipeline</div></div><div><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>Pipeline(steps=[(&#x27;preproc&#x27;,
@@ -2265,7 +2268,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
        &#x27;nivel_educativo&#x27;, &#x27;estado_civil&#x27;, &#x27;tipo_vivienda&#x27;, &#x27;ocupacion&#x27;,
        &#x27;dia_solicitud&#x27;, &#x27;hora_solicitud&#x27;, &#x27;tipo_organizacion&#x27;],
       dtype=&#x27;object&#x27;))])),
-                (&#x27;sampler&#x27;, RandomUnderSampler(random_state=42)),
+                (&#x27;sampler&#x27;, SMOTEENN(random_state=42)),
                 (&#x27;clf&#x27;,
                  LogisticRegression(C=0.001, class_weight=&#x27;balanced&#x27;,
                                     max_iter=1000, solver=&#x27;liblinear&#x27;))])</pre></div> </div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-22" type="checkbox" ><label for="sk-estimator-id-22" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>preproc: ColumnTransformer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.compose.ColumnTransformer.html">?<span>Documentation for preproc: ColumnTransformer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>ColumnTransformer(transformers=[(&#x27;num&#x27;,
@@ -2305,7 +2308,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
       dtype=&#x27;object&#x27;)</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-24" type="checkbox" ><label for="sk-estimator-id-24" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SimpleImputer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.impute.SimpleImputer.html">?<span>Documentation for SimpleImputer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>SimpleImputer(strategy=&#x27;median&#x27;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-25" type="checkbox" ><label for="sk-estimator-id-25" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content fitted"><pre>StandardScaler()</pre></div> </div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-26" type="checkbox" ><label for="sk-estimator-id-26" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>cat</div></div></label><div class="sk-toggleable__content fitted"><pre>Index([&#x27;numero_hijos&#x27;, &#x27;acompanantes_solicitud&#x27;, &#x27;tipo_ingreso&#x27;,
        &#x27;nivel_educativo&#x27;, &#x27;estado_civil&#x27;, &#x27;tipo_vivienda&#x27;, &#x27;ocupacion&#x27;,
        &#x27;dia_solicitud&#x27;, &#x27;hora_solicitud&#x27;, &#x27;tipo_organizacion&#x27;],
-      dtype=&#x27;object&#x27;)</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-27" type="checkbox" ><label for="sk-estimator-id-27" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SimpleImputer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.impute.SimpleImputer.html">?<span>Documentation for SimpleImputer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>SimpleImputer(strategy=&#x27;most_frequent&#x27;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-28" type="checkbox" ><label for="sk-estimator-id-28" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>OneHotEncoder</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.OneHotEncoder.html">?<span>Documentation for OneHotEncoder</span></a></div></label><div class="sk-toggleable__content fitted"><pre>OneHotEncoder(handle_unknown=&#x27;ignore&#x27;)</pre></div> </div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-29" type="checkbox" ><label for="sk-estimator-id-29" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>RandomUnderSampler</div></div></label><div class="sk-toggleable__content fitted"><pre>RandomUnderSampler(random_state=42)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-30" type="checkbox" ><label for="sk-estimator-id-30" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LogisticRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.LogisticRegression.html">?<span>Documentation for LogisticRegression</span></a></div></label><div class="sk-toggleable__content fitted"><pre>LogisticRegression(C=0.001, class_weight=&#x27;balanced&#x27;, max_iter=1000,
+      dtype=&#x27;object&#x27;)</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-27" type="checkbox" ><label for="sk-estimator-id-27" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SimpleImputer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.impute.SimpleImputer.html">?<span>Documentation for SimpleImputer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>SimpleImputer(strategy=&#x27;most_frequent&#x27;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-28" type="checkbox" ><label for="sk-estimator-id-28" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>OneHotEncoder</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.OneHotEncoder.html">?<span>Documentation for OneHotEncoder</span></a></div></label><div class="sk-toggleable__content fitted"><pre>OneHotEncoder(handle_unknown=&#x27;ignore&#x27;)</pre></div> </div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-29" type="checkbox" ><label for="sk-estimator-id-29" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SMOTEENN</div></div></label><div class="sk-toggleable__content fitted"><pre>SMOTEENN(random_state=42)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-30" type="checkbox" ><label for="sk-estimator-id-30" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LogisticRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.LogisticRegression.html">?<span>Documentation for LogisticRegression</span></a></div></label><div class="sk-toggleable__content fitted"><pre>LogisticRegression(C=0.001, class_weight=&#x27;balanced&#x27;, max_iter=1000,
                    solver=&#x27;liblinear&#x27;)</pre></div> </div></div></div></div></div></div></div></div>
 </div>
 </section>
@@ -2412,52 +2415,48 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
-#T_89ac7_row0_col1, #T_89ac7_row2_col3, #T_89ac7_row2_col4 {
+#T_b5ae8_row0_col1, #T_b5ae8_row0_col3, #T_b5ae8_row0_col4 {
   background-color: #f7fbff;
   color: #000000;
 }
-#T_89ac7_row0_col3 {
-  background-color: #d3e3f3;
-  color: #000000;
-}
-#T_89ac7_row0_col4 {
-  background-color: #d0e1f2;
-  color: #000000;
-}
-#T_89ac7_row1_col1, #T_89ac7_row3_col1 {
+#T_b5ae8_row1_col1 {
   background-color: #08306b;
   color: #f1f1f1;
   background-color: salmon;
 }
-#T_89ac7_row1_col3, #T_89ac7_row1_col4 {
+#T_b5ae8_row1_col3, #T_b5ae8_row2_col1 {
+  background-color: #d4e4f4;
+  color: #000000;
+}
+#T_b5ae8_row1_col4, #T_b5ae8_row3_col3, #T_b5ae8_row3_col4 {
   background-color: #08306b;
   color: #f1f1f1;
 }
-#T_89ac7_row2_col1 {
-  background-color: #6aaed6;
+#T_b5ae8_row2_col3 {
+  background-color: #63a8d3;
   color: #f1f1f1;
 }
-#T_89ac7_row3_col3 {
-  background-color: #08509b;
-  color: #f1f1f1;
+#T_b5ae8_row2_col4 {
+  background-color: #82bbdb;
+  color: #000000;
 }
-#T_89ac7_row3_col4 {
-  background-color: #084d96;
-  color: #f1f1f1;
+#T_b5ae8_row3_col1 {
+  background-color: #edf4fc;
+  color: #000000;
 }
 </style>
-<table id="T_89ac7">
+<table id="T_b5ae8">
   <caption>Comparativa de métricas y tiempos de optimización</caption>
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_89ac7_level0_col0" class="col_heading level0 col0" >Precision</th>
-      <th id="T_89ac7_level0_col1" class="col_heading level0 col1" >Recall</th>
-      <th id="T_89ac7_level0_col2" class="col_heading level0 col2" >F1-score</th>
-      <th id="T_89ac7_level0_col3" class="col_heading level0 col3" >AUC-ROC</th>
-      <th id="T_89ac7_level0_col4" class="col_heading level0 col4" >Avg Precision</th>
-      <th id="T_89ac7_level0_col5" class="col_heading level0 col5" >Tiempo Optimización (s)</th>
-      <th id="T_89ac7_level0_col6" class="col_heading level0 col6" >Rank Recall</th>
+      <th id="T_b5ae8_level0_col0" class="col_heading level0 col0" >Precision</th>
+      <th id="T_b5ae8_level0_col1" class="col_heading level0 col1" >Recall</th>
+      <th id="T_b5ae8_level0_col2" class="col_heading level0 col2" >F1-score</th>
+      <th id="T_b5ae8_level0_col3" class="col_heading level0 col3" >AUC-ROC</th>
+      <th id="T_b5ae8_level0_col4" class="col_heading level0 col4" >Avg Precision</th>
+      <th id="T_b5ae8_level0_col5" class="col_heading level0 col5" >Tiempo Optimización (s)</th>
+      <th id="T_b5ae8_level0_col6" class="col_heading level0 col6" >Rank Recall</th>
     </tr>
     <tr>
       <th class="index_name level0" >Modelo</th>
@@ -2472,44 +2471,44 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   </thead>
   <tbody>
     <tr>
-      <th id="T_89ac7_level0_row0" class="row_heading level0 row0" >RF</th>
-      <td id="T_89ac7_row0_col0" class="data row0 col0" >0.133300</td>
-      <td id="T_89ac7_row0_col1" class="data row0 col1" >0.444400</td>
-      <td id="T_89ac7_row0_col2" class="data row0 col2" >0.205100</td>
-      <td id="T_89ac7_row0_col3" class="data row0 col3" >0.608700</td>
-      <td id="T_89ac7_row0_col4" class="data row0 col4" >0.212300</td>
-      <td id="T_89ac7_row0_col5" class="data row0 col5" >15.500000</td>
-      <td id="T_89ac7_row0_col6" class="data row0 col6" >4</td>
+      <th id="T_b5ae8_level0_row0" class="row_heading level0 row0" >RF</th>
+      <td id="T_b5ae8_row0_col0" class="data row0 col0" >0.165300</td>
+      <td id="T_b5ae8_row0_col1" class="data row0 col1" >0.662200</td>
+      <td id="T_b5ae8_row0_col2" class="data row0 col2" >0.264500</td>
+      <td id="T_b5ae8_row0_col3" class="data row0 col3" >0.736600</td>
+      <td id="T_b5ae8_row0_col4" class="data row0 col4" >0.221500</td>
+      <td id="T_b5ae8_row0_col5" class="data row0 col5" >1997.700000</td>
+      <td id="T_b5ae8_row0_col6" class="data row0 col6" >4</td>
     </tr>
     <tr>
-      <th id="T_89ac7_level0_row1" class="row_heading level0 row1" >XGB</th>
-      <td id="T_89ac7_row1_col0" class="data row1 col0" >0.176500</td>
-      <td id="T_89ac7_row1_col1" class="data row1 col1" >0.666700</td>
-      <td id="T_89ac7_row1_col2" class="data row1 col2" >0.279100</td>
-      <td id="T_89ac7_row1_col3" class="data row1 col3" >0.763100</td>
-      <td id="T_89ac7_row1_col4" class="data row1 col4" >0.495400</td>
-      <td id="T_89ac7_row1_col5" class="data row1 col5" >12.100000</td>
-      <td id="T_89ac7_row1_col6" class="data row1 col6" >1</td>
+      <th id="T_b5ae8_level0_row1" class="row_heading level0 row1" >XGB</th>
+      <td id="T_b5ae8_row1_col0" class="data row1 col0" >0.085800</td>
+      <td id="T_b5ae8_row1_col1" class="data row1 col1" >1.000000</td>
+      <td id="T_b5ae8_row1_col2" class="data row1 col2" >0.158100</td>
+      <td id="T_b5ae8_row1_col3" class="data row1 col3" >0.738100</td>
+      <td id="T_b5ae8_row1_col4" class="data row1 col4" >0.227800</td>
+      <td id="T_b5ae8_row1_col5" class="data row1 col5" >1851.200000</td>
+      <td id="T_b5ae8_row1_col6" class="data row1 col6" >1</td>
     </tr>
     <tr>
-      <th id="T_89ac7_level0_row2" class="row_heading level0 row2" >LR</th>
-      <td id="T_89ac7_row2_col0" class="data row2 col0" >0.128200</td>
-      <td id="T_89ac7_row2_col1" class="data row2 col1" >0.555600</td>
-      <td id="T_89ac7_row2_col2" class="data row2 col2" >0.208300</td>
-      <td id="T_89ac7_row2_col3" class="data row2 col3" >0.573900</td>
-      <td id="T_89ac7_row2_col4" class="data row2 col4" >0.141800</td>
-      <td id="T_89ac7_row2_col5" class="data row2 col5" >0.300000</td>
-      <td id="T_89ac7_row2_col6" class="data row2 col6" >3</td>
+      <th id="T_b5ae8_level0_row2" class="row_heading level0 row2" >LR</th>
+      <td id="T_b5ae8_row2_col0" class="data row2 col0" >0.152700</td>
+      <td id="T_b5ae8_row2_col1" class="data row2 col1" >0.721800</td>
+      <td id="T_b5ae8_row2_col2" class="data row2 col2" >0.252100</td>
+      <td id="T_b5ae8_row2_col3" class="data row2 col3" >0.741000</td>
+      <td id="T_b5ae8_row2_col4" class="data row2 col4" >0.224300</td>
+      <td id="T_b5ae8_row2_col5" class="data row2 col5" >252.700000</td>
+      <td id="T_b5ae8_row2_col6" class="data row2 col6" >2</td>
     </tr>
     <tr>
-      <th id="T_89ac7_level0_row3" class="row_heading level0 row3" >STACK</th>
-      <td id="T_89ac7_row3_col0" class="data row3 col0" >0.193500</td>
-      <td id="T_89ac7_row3_col1" class="data row3 col1" >0.666700</td>
-      <td id="T_89ac7_row3_col2" class="data row3 col2" >0.300000</td>
-      <td id="T_89ac7_row3_col3" class="data row3 col3" >0.739900</td>
-      <td id="T_89ac7_row3_col4" class="data row3 col4" >0.455600</td>
-      <td id="T_89ac7_row3_col5" class="data row3 col5" >1.600000</td>
-      <td id="T_89ac7_row3_col6" class="data row3 col6" >1</td>
+      <th id="T_b5ae8_level0_row3" class="row_heading level0 row3" >STACK</th>
+      <td id="T_b5ae8_row3_col0" class="data row3 col0" >0.165100</td>
+      <td id="T_b5ae8_row3_col1" class="data row3 col1" >0.680100</td>
+      <td id="T_b5ae8_row3_col2" class="data row3 col2" >0.265700</td>
+      <td id="T_b5ae8_row3_col3" class="data row3 col3" >0.745000</td>
+      <td id="T_b5ae8_row3_col4" class="data row3 col4" >0.227800</td>
+      <td id="T_b5ae8_row3_col5" class="data row3 col5" >106.100000</td>
+      <td id="T_b5ae8_row3_col6" class="data row3 col6" >3</td>
     </tr>
   </tbody>
 </table>
@@ -2554,14 +2553,14 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/347577fdf7e60d8d85dce403d17b3c4af502cf0e761e3e48e76e1ac25798521f.png" src="_images/347577fdf7e60d8d85dce403d17b3c4af502cf0e761e3e48e76e1ac25798521f.png" />
-<img alt="_images/a51c1d2d216012824352e1dd8343408e071bcfd317f8102f2d7559b6fe031b76.png" src="_images/a51c1d2d216012824352e1dd8343408e071bcfd317f8102f2d7559b6fe031b76.png" />
-<img alt="_images/bc56dc25d9ff83b83d25f7cc9ad64c4d08fa28d0a33388d1a37cf2bbe2469961.png" src="_images/bc56dc25d9ff83b83d25f7cc9ad64c4d08fa28d0a33388d1a37cf2bbe2469961.png" />
-<img alt="_images/385cfa7576eb750bc7c124e5ee0fe0be64823c61ece44be497b932be45612e43.png" src="_images/385cfa7576eb750bc7c124e5ee0fe0be64823c61ece44be497b932be45612e43.png" />
-<img alt="_images/2e4621a70e15289c8b5fc31774279840debb44eea512adc951b6fffaf2d9ba72.png" src="_images/2e4621a70e15289c8b5fc31774279840debb44eea512adc951b6fffaf2d9ba72.png" />
-<img alt="_images/871c57a09be74a82bdb165fe3d6094809de0b4ac1bb238dbb9a28134ee71cbb2.png" src="_images/871c57a09be74a82bdb165fe3d6094809de0b4ac1bb238dbb9a28134ee71cbb2.png" />
-<img alt="_images/4a88a2ff38c89294c4253478a8976f3370d19933f18788bddacf49d332787c1c.png" src="_images/4a88a2ff38c89294c4253478a8976f3370d19933f18788bddacf49d332787c1c.png" />
-<img alt="_images/59fc9f9b0d4e4d14d43550ca52e02485fe47951ab49fbb5bbed2b025e08dfbd8.png" src="_images/59fc9f9b0d4e4d14d43550ca52e02485fe47951ab49fbb5bbed2b025e08dfbd8.png" />
-<img alt="_images/8b38dfc2c9bfcff56ab35e98859efb60a8f393d6a06b0278942c0810d9b3f43f.png" src="_images/8b38dfc2c9bfcff56ab35e98859efb60a8f393d6a06b0278942c0810d9b3f43f.png" />
+<img alt="_images/2576b6d39e0bca6476c5a49717cbdd7992b2cc69efc90f450468e5ebb7762b78.png" src="_images/2576b6d39e0bca6476c5a49717cbdd7992b2cc69efc90f450468e5ebb7762b78.png" />
+<img alt="_images/fdbdd28d51a9b8816e0122d7414839d6421c650172b9ae02a92a60878c45ef30.png" src="_images/fdbdd28d51a9b8816e0122d7414839d6421c650172b9ae02a92a60878c45ef30.png" />
+<img alt="_images/b2449f78786169cd6f244cc9c98ad8b4703c7d94dafaf7a6785962ac99c054b1.png" src="_images/b2449f78786169cd6f244cc9c98ad8b4703c7d94dafaf7a6785962ac99c054b1.png" />
+<img alt="_images/835a73ea8a0d71785ea5c294d066bf0c7226d588000494909bf065be7bf6f06c.png" src="_images/835a73ea8a0d71785ea5c294d066bf0c7226d588000494909bf065be7bf6f06c.png" />
+<img alt="_images/f209b34b2867ba3ee8782591a3bfaaad73e6d5ae5d8b6c2b840e61e73d7cc965.png" src="_images/f209b34b2867ba3ee8782591a3bfaaad73e6d5ae5d8b6c2b840e61e73d7cc965.png" />
+<img alt="_images/e8a7e860b237062c8979c4530cb8cbbd9169ff0f9253c232250860cf266bd139.png" src="_images/e8a7e860b237062c8979c4530cb8cbbd9169ff0f9253c232250860cf266bd139.png" />
+<img alt="_images/394305dea3522d3b4becf4d930083a0c1df9c280f7cfa4659e054679aa169178.png" src="_images/394305dea3522d3b4becf4d930083a0c1df9c280f7cfa4659e054679aa169178.png" />
+<img alt="_images/d7c5314a83b6a28ac058cf21211b16b210e6dd0b60b13105dbd896dbc4a90829.png" src="_images/d7c5314a83b6a28ac058cf21211b16b210e6dd0b60b13105dbd896dbc4a90829.png" />
 </div>
 </div>
 </section>
@@ -2590,8 +2589,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6db5bd614758e56bb586832f62a2a5d5050ba3e759584359b22372e17f32c109.png" src="_images/6db5bd614758e56bb586832f62a2a5d5050ba3e759584359b22372e17f32c109.png" />
-<img alt="_images/80ee32c1b74194379c8b89baaf6636ab64c89fa37bcd9502f8f27c41f56c5d4f.png" src="_images/80ee32c1b74194379c8b89baaf6636ab64c89fa37bcd9502f8f27c41f56c5d4f.png" />
+<img alt="_images/239fd8a2a52a3a4869737e9fdd2a9f3ec1ea4f2899a5d00f94a6f312ae658868.png" src="_images/239fd8a2a52a3a4869737e9fdd2a9f3ec1ea4f2899a5d00f94a6f312ae658868.png" />
+<img alt="_images/f4d749c3a616e919f6a5fc4469d64036eb3b82eddd9f2d841d8a6aec39a13de3.png" src="_images/f4d749c3a616e919f6a5fc4469d64036eb3b82eddd9f2d841d8a6aec39a13de3.png" />
 </div>
 </div>
 </section>
@@ -2610,7 +2609,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/59717ea89705ed9bdf7aa48cb0a0164084ab1936d242e6482365d0abee8f48e3.png" src="_images/59717ea89705ed9bdf7aa48cb0a0164084ab1936d242e6482365d0abee8f48e3.png" />
+<img alt="_images/4d0f606b49cafb53504312127fec8bb2be40347b2738582b3eede88e132cd5ae.png" src="_images/4d0f606b49cafb53504312127fec8bb2be40347b2738582b3eede88e132cd5ae.png" />
 </div>
 </div>
 </section>
@@ -2657,7 +2656,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/52ff05f4148f571bc104af0a94b2adec218ae3acc1a7b36b1a771d22b0c1a02c.png" src="_images/52ff05f4148f571bc104af0a94b2adec218ae3acc1a7b36b1a771d22b0c1a02c.png" />
+<img alt="_images/c9a2aac45678af86cd300a1456e4a95f4a424dda9c24bfdb11ac4114e2859f0f.png" src="_images/c9a2aac45678af86cd300a1456e4a95f4a424dda9c24bfdb11ac4114e2859f0f.png" />
 </div>
 </div>
 </section>
@@ -2674,7 +2673,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KS: 0.47985347985347987
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KS: 0.3645816247128218
 </pre></div>
 </div>
 </div>
@@ -2714,7 +2713,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0e1b2897eb2b518c8cd31205e5988d1bab436688bfec692ffb51be173cd1615d.png" src="_images/0e1b2897eb2b518c8cd31205e5988d1bab436688bfec692ffb51be173cd1615d.png" />
+<img alt="_images/556d31cbc166689665d4d148e44b823d8f87c54f2cf9514c36d1f736eceb7b00.png" src="_images/556d31cbc166689665d4d148e44b823d8f87c54f2cf9514c36d1f736eceb7b00.png" />
 </div>
 </div>
 </section>
@@ -2745,7 +2744,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   from .autonotebook import tqdm as notebook_tqdm
 </pre></div>
 </div>
-<img alt="_images/f793894bbcca9c845036f26a8e3f353141e4df79014ef626b253b8bc31adef57.png" src="_images/f793894bbcca9c845036f26a8e3f353141e4df79014ef626b253b8bc31adef57.png" />
+<img alt="_images/477d3fc40d876e96b8e644fc5b98d7b6abc40c40a7438c741abc49cfadadfe60.png" src="_images/477d3fc40d876e96b8e644fc5b98d7b6abc40c40a7438c741abc49cfadadfe60.png" />
 </div>
 </div>
 </section>
@@ -2834,7 +2833,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">📄 Informe del Proyecto</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
