@@ -1,0 +1,2936 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Sección 1: Configuración Inicial y Preparación de Datos &#8212; jbook_Proyecto_Final_Clasificacion</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modelo_propuesto';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="documento_proyecto.html" />
+    <link rel="prev" title="LSTM Autoencoder para Detección de Anomalías en Crédito" href="autoencoders.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="descripcion_del_proyecto.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo-uninorte.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo-uninorte.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="descripcion_del_proyecto.html">
+                    <no title>
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="eda.html">Análisis Exploratorio (EDA)</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="clasificacion_bayesiana.html">Clasificación Bayesiana</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="knn.html">k-Vecinos Más Cercanos</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="regresion_logistica_l1_l2.html">Regresión Logística Ridge (L2) y Lasso (L1)</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="arbol_de_decision.html">Árbol de Decisión</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="bosques_aleatorios.html">Bosques Aleatorios</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xgboost.html">XGBoost</a></li>
+<li class="toctree-l1"><a class="reference internal" href="svm.html">Máquina de Soporte Vectorial</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="mlp.html">Redes Neuronales Perceptrón Multicapa</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="rnn.html">RNN Sobre Datos Estáticos</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="lstm.html">Redes Neuronales Memoria Larga a Corto Plazo</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="cnn.html">Red Neuronal Convolucional (CNN)</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="autoencoders.html">LSTM Autoencoder para Detección de Anomalías en Crédito</a></li>
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Sección 1: Configuración Inicial y Preparación de Datos</a></li>
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fmodelo_propuesto.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/modelo_propuesto.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Sección 1: Configuración Inicial y Preparación de Datos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Sección 1: Configuración Inicial y Preparación de Datos</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-y-division-de-datos">1. Carga y división de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesamiento">2. Preprocesamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-de-tecnicas-de-balanceo">3. Definición de técnicas de balanceo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimadores-base">4. Estimadores base</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seccion-2-fase-de-modelado">Sección 2: Fase de Modelado</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-para-randomforest">1. Grid para RandomForest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-para-xgboost">2.Grid para XGBoost</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-para-logisticregression">3.Grid para LogisticRegression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recuperar-los-mejores-estimadores">4.Recuperar los mejores estimadores</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensamble-por-apilamiento-stacking">5.Ensamble por apilamiento (Stacking)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seccion-3-evaluacion-basica-del-modelo">Sección 3: Evaluación Básica del Modelo</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-de-desempeno-comparativas">1.Metricas de Desempeño Comparativas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-visual">2.Evaluación Visual</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-especificos-del-mejor-modelo-por-recall">3.Gráficos específicos del Mejor Modelo (por Recall)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seccion-4-evaluacion-avanzada-del-modelo">Sección 4: Evaluación Avanzada del Modelo</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-de-calibracion">1.Curva de calibración</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lift-chart-cumulative-gain">2.Lift Chart / Cumulative Gain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ks-statistic">3.KS Statistic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-importance-y-shap">4.Feature importance y SHAP</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seccion-5-guardar-modelo-ensamblado-final">SECCIÓN 5: Guardar modelo ensamblado final</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <p>A continuación serealizará un modelo de ensamblado especialmente diseñado para el problema de riesgo crediticio con fuerte desbalance (8 % de positivos).</p>
+<p>El flujo de trabajo paso a paso incluye:</p>
+<ol class="arabic simple">
+<li><p>Preprocesamiento (imputación, escalado, codificación).</p></li>
+<li><p>Técnicas de balanceo (SMOTE, ADASYN, BorderlineSMOTE, SMOTEENN, SMOTETomek, RandomUnderSampler, class_weight).</p></li>
+<li><p>Selección de estimadores base (RandomForest, XGBoost, LogisticRegression).</p></li>
+<li><p>GridSearchCV amplio con validación cruzada estratificada.</p></li>
+<li><p>Ensamble por apilamiento (StackingClassifier) con meta-estimador.</p></li>
+<li><p>Evaluación básica (matriz de confusión, classification report, AUC-ROC, PR curve).</p></li>
+<li><p>Evaluación avanzada (curva de calibración, lift chart, KS statistic, feature importance/SHAP).</p></li>
+</ol>
+<section class="tex2jax_ignore mathjax_ignore" id="seccion-1-configuracion-inicial-y-preparacion-de-datos">
+<h1>Sección 1: Configuración Inicial y Preparación de Datos<a class="headerlink" href="#seccion-1-configuracion-inicial-y-preparacion-de-datos" title="Permalink to this heading">#</a></h1>
+<section id="carga-y-division-de-datos">
+<h2>1. Carga y división de datos<a class="headerlink" href="#carga-y-division-de-datos" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="c1"># 1. Carga</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\Users\DELL\Desktop\Aprendizaje_de_Maquina\jbook_Proyecto_Final_Clasificacion\docs2\credit_prueba.csv&quot;</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;incumplimiento_credito&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;incumplimiento_credito&quot;</span><span class="p">]</span>
+
+<span class="c1"># 2. División</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="preprocesamiento">
+<h2>2. Preprocesamiento<a class="headerlink" href="#preprocesamiento" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">SimpleImputer</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">OneHotEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">ColumnTransformer</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+
+<span class="c1"># Detectar columnas</span>
+<span class="n">num_cols</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;int64&quot;</span><span class="p">,</span><span class="s2">&quot;float64&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">cat_cols</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;object&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+
+<span class="c1"># Pipelines</span>
+<span class="n">num_pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">&quot;imputer&quot;</span><span class="p">,</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;median&quot;</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s2">&quot;scaler&quot;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">())</span>
+<span class="p">])</span>
+<span class="n">cat_pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">&quot;imputer&quot;</span><span class="p">,</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;most_frequent&quot;</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s2">&quot;onehot&quot;</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">))</span>
+<span class="p">])</span>
+
+<span class="n">preprocessor</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">&quot;num&quot;</span><span class="p">,</span> <span class="n">num_pipeline</span><span class="p">,</span> <span class="n">num_cols</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="n">cat_pipeline</span><span class="p">,</span> <span class="n">cat_cols</span><span class="p">)</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="definicion-de-tecnicas-de-balanceo">
+<h2>3. Definición de técnicas de balanceo<a class="headerlink" href="#definicion-de-tecnicas-de-balanceo" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">imblearn.over_sampling</span> <span class="kn">import</span> <span class="n">SMOTE</span><span class="p">,</span> <span class="n">ADASYN</span><span class="p">,</span> <span class="n">BorderlineSMOTE</span>
+<span class="kn">from</span> <span class="nn">imblearn.combine</span> <span class="kn">import</span> <span class="n">SMOTEENN</span><span class="p">,</span> <span class="n">SMOTETomek</span>
+<span class="kn">from</span> <span class="nn">imblearn.under_sampling</span> <span class="kn">import</span> <span class="n">RandomUnderSampler</span>
+
+<span class="n">sampler_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;SMOTE&quot;</span><span class="p">:</span>        <span class="n">SMOTE</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+    <span class="s2">&quot;ADASYN&quot;</span><span class="p">:</span>       <span class="n">ADASYN</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+    <span class="s2">&quot;Borderline&quot;</span><span class="p">:</span>   <span class="n">BorderlineSMOTE</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+    <span class="s2">&quot;SMOTEENN&quot;</span><span class="p">:</span>     <span class="n">SMOTEENN</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+    <span class="s2">&quot;SMOTETomek&quot;</span><span class="p">:</span>   <span class="n">SMOTETomek</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+    <span class="s2">&quot;UnderSampler&quot;</span><span class="p">:</span> <span class="n">RandomUnderSampler</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="n">samplers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">sampler_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="estimadores-base">
+<h2>4. Estimadores base<a class="headerlink" href="#estimadores-base" title="Permalink to this heading">#</a></h2>
+<p>Se probarán tres familias de modelos:</p>
+<ul class="simple">
+<li><p>RandomForestClassifier (con class_weight=’balanced’).</p></li>
+<li><p>XGBClassifier (con scale_pos_weight ajustado).</p></li>
+<li><p>LogisticRegression (con class_weight=’balanced’).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+
+<span class="n">estimators</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;RF&quot;</span><span class="p">:</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">class_weight</span><span class="o">=</span><span class="s2">&quot;balanced&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;XGB&quot;</span><span class="p">:</span> <span class="n">XGBClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">use_label_encoder</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">eval_metric</span><span class="o">=</span><span class="s2">&quot;logloss&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;LR&quot;</span><span class="p">:</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">class_weight</span><span class="o">=</span><span class="s2">&quot;balanced&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="seccion-2-fase-de-modelado">
+<h1>Sección 2: Fase de Modelado<a class="headerlink" href="#seccion-2-fase-de-modelado" title="Permalink to this heading">#</a></h1>
+<section id="grid-para-randomforest">
+<h2>1. Grid para RandomForest<a class="headerlink" href="#grid-para-randomforest" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">imblearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span> <span class="k">as</span> <span class="n">ImbPipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span><span class="p">,</span> <span class="n">StratifiedKFold</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">pipeline_rf</span> <span class="o">=</span> <span class="n">ImbPipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">&quot;preproc&quot;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;sampler&quot;</span><span class="p">,</span> <span class="n">samplers</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>  <span class="c1"># placeholder, se selecciona en la grilla</span>
+    <span class="p">(</span><span class="s2">&quot;clf&quot;</span><span class="p">,</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
+<span class="p">])</span>
+
+<span class="n">param_grid_rf</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;sampler&quot;</span><span class="p">:</span> <span class="n">samplers</span><span class="p">,</span>
+    <span class="s2">&quot;clf__n_estimators&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">],</span>
+    <span class="s2">&quot;clf__max_depth&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span>
+    <span class="s2">&quot;clf__min_samples_split&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1"># Definir el esquema de validación cruzada</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">grid_rf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span>
+    <span class="n">pipeline_rf</span><span class="p">,</span>
+    <span class="n">param_grid_rf</span><span class="p">,</span>
+    <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;recall&quot;</span><span class="p">,</span>
+    <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span>
+    <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">return_train_score</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="c1"># Medir tiempo de entrenamiento después de definir grid_rf</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">grid_rf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">t_rf</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="c1"># Mostrar visualmente el mejor estimador</span>
+<span class="n">grid_rf</span><span class="o">.</span><span class="n">best_estimator_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 5 folds for each of 108 candidates, totalling 540 fits
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: &#39;force_all_finite&#39; was renamed to &#39;ensure_all_finite&#39; in 1.6 and will be removed in 1.8.
+  warnings.warn(
+c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:484: FutureWarning: `BaseEstimator._check_n_features` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation._check_n_features` instead.
+  warnings.warn(
+c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:493: FutureWarning: `BaseEstimator._check_feature_names` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation._check_feature_names` instead.
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output text_html"><style>#sk-container-id-1 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: #000;
+  --sklearn-color-text-muted: #666;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
+  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-icon: #696969;
+
+  @media (prefers-color-scheme: dark) {
+    /* Redefinition of color scheme for dark theme */
+    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
+    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-icon: #878787;
+  }
+}
+
+#sk-container-id-1 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-1 pre {
+  padding: 0;
+}
+
+#sk-container-id-1 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-1 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-1 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-1 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-1 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-1 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-1 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-1 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-1 label.sk-toggleable__label {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.5em;
+}
+
+#sk-container-id-1 label.sk-toggleable__label .caption {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  color: var(--sklearn-color-text-muted);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-1 div.sk-toggleable__content {
+  max-height: 0;
+  max-width: 0;
+  overflow: hidden;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  max-height: 200px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label label.sk-toggleable__label,
+#sk-container-id-1 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-1 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+}
+
+#sk-container-id-1 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-1 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-1 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 0.5em;
+  text-align: center;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-1);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-1 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-1 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;preproc&#x27;,
+                 ColumnTransformer(transformers=[(&#x27;num&#x27;,
+                                                  Pipeline(steps=[(&#x27;imputer&#x27;,
+                                                                   SimpleImputer(strategy=&#x27;median&#x27;)),
+                                                                  (&#x27;scaler&#x27;,
+                                                                   StandardScaler())]),
+                                                  Index([&#x27;tipo_contrato&#x27;, &#x27;genero&#x27;, &#x27;posee_auto&#x27;, &#x27;posee_vivienda&#x27;,
+       &#x27;ingreso_total&#x27;, &#x27;cuota_periodica&#x27;, &#x27;poblacion_relativa_region&#x27;,
+       &#x27;dias_desde_nacimiento&#x27;, &#x27;dias_desde_registro&#x27;, &#x27;dias_desde_emision_id&#x27;...
+                                                                   OneHotEncoder(handle_unknown=&#x27;ignore&#x27;))]),
+                                                  Index([&#x27;numero_hijos&#x27;, &#x27;acompanantes_solicitud&#x27;, &#x27;tipo_ingreso&#x27;,
+       &#x27;nivel_educativo&#x27;, &#x27;estado_civil&#x27;, &#x27;tipo_vivienda&#x27;, &#x27;ocupacion&#x27;,
+       &#x27;dia_solicitud&#x27;, &#x27;hora_solicitud&#x27;, &#x27;tipo_organizacion&#x27;],
+      dtype=&#x27;object&#x27;))])),
+                (&#x27;sampler&#x27;, RandomUnderSampler(random_state=42)),
+                (&#x27;clf&#x27;,
+                 RandomForestClassifier(n_estimators=300, n_jobs=-1,
+                                        random_state=42))])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" ><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>Pipeline</div></div><div><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>Pipeline(steps=[(&#x27;preproc&#x27;,
+                 ColumnTransformer(transformers=[(&#x27;num&#x27;,
+                                                  Pipeline(steps=[(&#x27;imputer&#x27;,
+                                                                   SimpleImputer(strategy=&#x27;median&#x27;)),
+                                                                  (&#x27;scaler&#x27;,
+                                                                   StandardScaler())]),
+                                                  Index([&#x27;tipo_contrato&#x27;, &#x27;genero&#x27;, &#x27;posee_auto&#x27;, &#x27;posee_vivienda&#x27;,
+       &#x27;ingreso_total&#x27;, &#x27;cuota_periodica&#x27;, &#x27;poblacion_relativa_region&#x27;,
+       &#x27;dias_desde_nacimiento&#x27;, &#x27;dias_desde_registro&#x27;, &#x27;dias_desde_emision_id&#x27;...
+                                                                   OneHotEncoder(handle_unknown=&#x27;ignore&#x27;))]),
+                                                  Index([&#x27;numero_hijos&#x27;, &#x27;acompanantes_solicitud&#x27;, &#x27;tipo_ingreso&#x27;,
+       &#x27;nivel_educativo&#x27;, &#x27;estado_civil&#x27;, &#x27;tipo_vivienda&#x27;, &#x27;ocupacion&#x27;,
+       &#x27;dia_solicitud&#x27;, &#x27;hora_solicitud&#x27;, &#x27;tipo_organizacion&#x27;],
+      dtype=&#x27;object&#x27;))])),
+                (&#x27;sampler&#x27;, RandomUnderSampler(random_state=42)),
+                (&#x27;clf&#x27;,
+                 RandomForestClassifier(n_estimators=300, n_jobs=-1,
+                                        random_state=42))])</pre></div> </div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" ><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>preproc: ColumnTransformer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.compose.ColumnTransformer.html">?<span>Documentation for preproc: ColumnTransformer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>ColumnTransformer(transformers=[(&#x27;num&#x27;,
+                                 Pipeline(steps=[(&#x27;imputer&#x27;,
+                                                  SimpleImputer(strategy=&#x27;median&#x27;)),
+                                                 (&#x27;scaler&#x27;, StandardScaler())]),
+                                 Index([&#x27;tipo_contrato&#x27;, &#x27;genero&#x27;, &#x27;posee_auto&#x27;, &#x27;posee_vivienda&#x27;,
+       &#x27;ingreso_total&#x27;, &#x27;cuota_periodica&#x27;, &#x27;poblacion_relativa_region&#x27;,
+       &#x27;dias_desde_nacimiento&#x27;, &#x27;dias_desde_registro&#x27;, &#x27;dias_desde_emision_id&#x27;,
+       &#x27;telefono_trabajo&#x27;, &#x27;telefo...
+       &#x27;total_cuotas&#x27;, &#x27;total_pagado&#x27;, &#x27;promedio_dias_entre_registro_y_pago&#x27;],
+      dtype=&#x27;object&#x27;)),
+                                (&#x27;cat&#x27;,
+                                 Pipeline(steps=[(&#x27;imputer&#x27;,
+                                                  SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
+                                                 (&#x27;onehot&#x27;,
+                                                  OneHotEncoder(handle_unknown=&#x27;ignore&#x27;))]),
+                                 Index([&#x27;numero_hijos&#x27;, &#x27;acompanantes_solicitud&#x27;, &#x27;tipo_ingreso&#x27;,
+       &#x27;nivel_educativo&#x27;, &#x27;estado_civil&#x27;, &#x27;tipo_vivienda&#x27;, &#x27;ocupacion&#x27;,
+       &#x27;dia_solicitud&#x27;, &#x27;hora_solicitud&#x27;, &#x27;tipo_organizacion&#x27;],
+      dtype=&#x27;object&#x27;))])</pre></div> </div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" ><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>num</div></div></label><div class="sk-toggleable__content fitted"><pre>Index([&#x27;tipo_contrato&#x27;, &#x27;genero&#x27;, &#x27;posee_auto&#x27;, &#x27;posee_vivienda&#x27;,
+       &#x27;ingreso_total&#x27;, &#x27;cuota_periodica&#x27;, &#x27;poblacion_relativa_region&#x27;,
+       &#x27;dias_desde_nacimiento&#x27;, &#x27;dias_desde_registro&#x27;, &#x27;dias_desde_emision_id&#x27;,
+       &#x27;telefono_trabajo&#x27;, &#x27;telefono_personal&#x27;, &#x27;tiene_email&#x27;,
+       &#x27;numero_miembros_familia&#x27;, &#x27;trabaja_fuera_region_registrada&#x27;,
+       &#x27;vive_fuera_ciudad_registrada&#x27;, &#x27;trabaja_fuera_ciudad_registrada&#x27;,
+       &#x27;ciudad_residencia_distinta_trabajo&#x27;, &#x27;fuente_externa_2&#x27;,
+       &#x27;fuente_externa_3&#x27;, &#x27;incumplimientos_30_dias&#x27;,
+       &#x27;default_60_dias_circulo_social&#x27;, &#x27;dias_ultimo_cambio_telefono&#x27;,
+       &#x27;documento_3&#x27;, &#x27;documento_6&#x27;, &#x27;documento_8&#x27;, &#x27;consultas_buro_hora&#x27;,
+       &#x27;consultas_buro_dia&#x27;, &#x27;consultas_buro_semana&#x27;, &#x27;consultas_buro_mes&#x27;,
+       &#x27;consultas_buro_trimestre&#x27;, &#x27;consultas_buro_anio&#x27;, &#x27;entradas_buro&#x27;,
+       &#x27;tipos_credito_activo&#x27;, &#x27;suma_total_credito&#x27;,
+       &#x27;cantidad_solicitudes_previas&#x27;, &#x27;monto_promedio_solicitudes&#x27;,
+       &#x27;monto_total_credito&#x27;, &#x27;cuentas_pos_cash&#x27;, &#x27;promedio_meses_saldo&#x27;,
+       &#x27;total_cuotas&#x27;, &#x27;total_pagado&#x27;, &#x27;promedio_dias_entre_registro_y_pago&#x27;],
+      dtype=&#x27;object&#x27;)</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox" ><label for="sk-estimator-id-4" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SimpleImputer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.impute.SimpleImputer.html">?<span>Documentation for SimpleImputer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>SimpleImputer(strategy=&#x27;median&#x27;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox" ><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content fitted"><pre>StandardScaler()</pre></div> </div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox" ><label for="sk-estimator-id-6" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>cat</div></div></label><div class="sk-toggleable__content fitted"><pre>Index([&#x27;numero_hijos&#x27;, &#x27;acompanantes_solicitud&#x27;, &#x27;tipo_ingreso&#x27;,
+       &#x27;nivel_educativo&#x27;, &#x27;estado_civil&#x27;, &#x27;tipo_vivienda&#x27;, &#x27;ocupacion&#x27;,
+       &#x27;dia_solicitud&#x27;, &#x27;hora_solicitud&#x27;, &#x27;tipo_organizacion&#x27;],
+      dtype=&#x27;object&#x27;)</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox" ><label for="sk-estimator-id-7" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SimpleImputer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.impute.SimpleImputer.html">?<span>Documentation for SimpleImputer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>SimpleImputer(strategy=&#x27;most_frequent&#x27;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox" ><label for="sk-estimator-id-8" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>OneHotEncoder</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.OneHotEncoder.html">?<span>Documentation for OneHotEncoder</span></a></div></label><div class="sk-toggleable__content fitted"><pre>OneHotEncoder(handle_unknown=&#x27;ignore&#x27;)</pre></div> </div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-9" type="checkbox" ><label for="sk-estimator-id-9" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>RandomUnderSampler</div></div></label><div class="sk-toggleable__content fitted"><pre>RandomUnderSampler(random_state=42)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-10" type="checkbox" ><label for="sk-estimator-id-10" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>RandomForestClassifier</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.ensemble.RandomForestClassifier.html">?<span>Documentation for RandomForestClassifier</span></a></div></label><div class="sk-toggleable__content fitted"><pre>RandomForestClassifier(n_estimators=300, n_jobs=-1, random_state=42)</pre></div> </div></div></div></div></div></div></div></div>
+</div>
+</section>
+<section id="grid-para-xgboost">
+<h2>2.Grid para XGBoost<a class="headerlink" href="#grid-para-xgboost" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">xgboost</span>                   <span class="kn">import</span> <span class="n">XGBClassifier</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">pipeline_xgb</span> <span class="o">=</span> <span class="n">ImbPipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">&quot;preproc&quot;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;sampler&quot;</span><span class="p">,</span> <span class="n">samplers</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s2">&quot;clf&quot;</span><span class="p">,</span> <span class="n">XGBClassifier</span><span class="p">(</span>
+        <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+        <span class="n">use_label_encoder</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">eval_metric</span><span class="o">=</span><span class="s2">&quot;logloss&quot;</span>
+    <span class="p">))</span>
+<span class="p">])</span>
+
+<span class="n">param_grid_xgb</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;sampler&quot;</span><span class="p">:</span> <span class="n">samplers</span><span class="p">,</span>
+    <span class="s2">&quot;clf__n_estimators&quot;</span><span class="p">:</span>     <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span>
+    <span class="s2">&quot;clf__max_depth&quot;</span><span class="p">:</span>        <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+    <span class="s2">&quot;clf__learning_rate&quot;</span><span class="p">:</span>    <span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span>
+    <span class="s2">&quot;clf__scale_pos_weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1"># Definir el esquema de validación cruzada</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">grid_xgb</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span>
+    <span class="n">pipeline_xgb</span><span class="p">,</span>
+    <span class="n">param_grid_xgb</span><span class="p">,</span>
+    <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;recall&quot;</span><span class="p">,</span>
+    <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span>
+    <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="c1"># Medir tiempo de entrenamiento después de definir grid_rf</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">grid_xgb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">t_xgb</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">set_config</span>
+<span class="n">set_config</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="s1">&#39;diagram&#39;</span><span class="p">)</span>  <span class="c1"># Activa el modo de diagrama</span>
+
+<span class="c1"># Mostrar visualmente el mejor estimador</span>
+<span class="n">grid_xgb</span><span class="o">.</span><span class="n">best_estimator_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 5 folds for each of 216 candidates, totalling 1080 fits
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:474: FutureWarning: `BaseEstimator._validate_data` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation.validate_data` instead. This function becomes public and is part of the scikit-learn developer API.
+  warnings.warn(
+c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:474: FutureWarning: `BaseEstimator._validate_data` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation.validate_data` instead. This function becomes public and is part of the scikit-learn developer API.
+  warnings.warn(
+c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:474: FutureWarning: `BaseEstimator._validate_data` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation.validate_data` instead. This function becomes public and is part of the scikit-learn developer API.
+  warnings.warn(
+c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\xgboost\core.py:158: UserWarning: [22:43:46] WARNING: D:\bld\xgboost-split_1744329010901\work\src\learner.cc:740: 
+Parameters: { &quot;use_label_encoder&quot; } are not used.
+
+  warnings.warn(smsg, UserWarning)
+</pre></div>
+</div>
+<div class="output text_html"><style>#sk-container-id-2 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: #000;
+  --sklearn-color-text-muted: #666;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
+  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-icon: #696969;
+
+  @media (prefers-color-scheme: dark) {
+    /* Redefinition of color scheme for dark theme */
+    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
+    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-icon: #878787;
+  }
+}
+
+#sk-container-id-2 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-2 pre {
+  padding: 0;
+}
+
+#sk-container-id-2 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-2 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-2 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-2 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-2 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-2 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-2 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-2 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-2 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-2 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-2 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-2 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-2 label.sk-toggleable__label {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.5em;
+}
+
+#sk-container-id-2 label.sk-toggleable__label .caption {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  color: var(--sklearn-color-text-muted);
+}
+
+#sk-container-id-2 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-2 div.sk-toggleable__content {
+  max-height: 0;
+  max-width: 0;
+  overflow: hidden;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-2 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-2 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-2 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  max-height: 200px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-2 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-2 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-2 div.sk-label label.sk-toggleable__label,
+#sk-container-id-2 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-2 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-2 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+}
+
+#sk-container-id-2 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-2 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-2 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-2 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-2 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 0.5em;
+  text-align: center;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-1);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-2 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-2 a.estimator_doc_link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-2 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-2 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;preproc&#x27;,
+                 ColumnTransformer(transformers=[(&#x27;num&#x27;,
+                                                  Pipeline(steps=[(&#x27;imputer&#x27;,
+                                                                   SimpleImputer(strategy=&#x27;median&#x27;)),
+                                                                  (&#x27;scaler&#x27;,
+                                                                   StandardScaler())]),
+                                                  Index([&#x27;tipo_contrato&#x27;, &#x27;genero&#x27;, &#x27;posee_auto&#x27;, &#x27;posee_vivienda&#x27;,
+       &#x27;ingreso_total&#x27;, &#x27;cuota_periodica&#x27;, &#x27;poblacion_relativa_region&#x27;,
+       &#x27;dias_desde_nacimiento&#x27;, &#x27;dias_desde_registro&#x27;, &#x27;dias_desde_emision_id&#x27;...
+                               feature_types=None, gamma=None, grow_policy=None,
+                               importance_type=None,
+                               interaction_constraints=None, learning_rate=0.05,
+                               max_bin=None, max_cat_threshold=None,
+                               max_cat_to_onehot=None, max_delta_step=None,
+                               max_depth=3, max_leaves=None,
+                               min_child_weight=None, missing=nan,
+                               monotone_constraints=None, multi_strategy=None,
+                               n_estimators=100, n_jobs=None,
+                               num_parallel_tree=None, random_state=42, ...))])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-11" type="checkbox" ><label for="sk-estimator-id-11" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>Pipeline</div></div><div><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>Pipeline(steps=[(&#x27;preproc&#x27;,
+                 ColumnTransformer(transformers=[(&#x27;num&#x27;,
+                                                  Pipeline(steps=[(&#x27;imputer&#x27;,
+                                                                   SimpleImputer(strategy=&#x27;median&#x27;)),
+                                                                  (&#x27;scaler&#x27;,
+                                                                   StandardScaler())]),
+                                                  Index([&#x27;tipo_contrato&#x27;, &#x27;genero&#x27;, &#x27;posee_auto&#x27;, &#x27;posee_vivienda&#x27;,
+       &#x27;ingreso_total&#x27;, &#x27;cuota_periodica&#x27;, &#x27;poblacion_relativa_region&#x27;,
+       &#x27;dias_desde_nacimiento&#x27;, &#x27;dias_desde_registro&#x27;, &#x27;dias_desde_emision_id&#x27;...
+                               feature_types=None, gamma=None, grow_policy=None,
+                               importance_type=None,
+                               interaction_constraints=None, learning_rate=0.05,
+                               max_bin=None, max_cat_threshold=None,
+                               max_cat_to_onehot=None, max_delta_step=None,
+                               max_depth=3, max_leaves=None,
+                               min_child_weight=None, missing=nan,
+                               monotone_constraints=None, multi_strategy=None,
+                               n_estimators=100, n_jobs=None,
+                               num_parallel_tree=None, random_state=42, ...))])</pre></div> </div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-12" type="checkbox" ><label for="sk-estimator-id-12" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>preproc: ColumnTransformer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.compose.ColumnTransformer.html">?<span>Documentation for preproc: ColumnTransformer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>ColumnTransformer(transformers=[(&#x27;num&#x27;,
+                                 Pipeline(steps=[(&#x27;imputer&#x27;,
+                                                  SimpleImputer(strategy=&#x27;median&#x27;)),
+                                                 (&#x27;scaler&#x27;, StandardScaler())]),
+                                 Index([&#x27;tipo_contrato&#x27;, &#x27;genero&#x27;, &#x27;posee_auto&#x27;, &#x27;posee_vivienda&#x27;,
+       &#x27;ingreso_total&#x27;, &#x27;cuota_periodica&#x27;, &#x27;poblacion_relativa_region&#x27;,
+       &#x27;dias_desde_nacimiento&#x27;, &#x27;dias_desde_registro&#x27;, &#x27;dias_desde_emision_id&#x27;,
+       &#x27;telefono_trabajo&#x27;, &#x27;telefo...
+       &#x27;total_cuotas&#x27;, &#x27;total_pagado&#x27;, &#x27;promedio_dias_entre_registro_y_pago&#x27;],
+      dtype=&#x27;object&#x27;)),
+                                (&#x27;cat&#x27;,
+                                 Pipeline(steps=[(&#x27;imputer&#x27;,
+                                                  SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
+                                                 (&#x27;onehot&#x27;,
+                                                  OneHotEncoder(handle_unknown=&#x27;ignore&#x27;))]),
+                                 Index([&#x27;numero_hijos&#x27;, &#x27;acompanantes_solicitud&#x27;, &#x27;tipo_ingreso&#x27;,
+       &#x27;nivel_educativo&#x27;, &#x27;estado_civil&#x27;, &#x27;tipo_vivienda&#x27;, &#x27;ocupacion&#x27;,
+       &#x27;dia_solicitud&#x27;, &#x27;hora_solicitud&#x27;, &#x27;tipo_organizacion&#x27;],
+      dtype=&#x27;object&#x27;))])</pre></div> </div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-13" type="checkbox" ><label for="sk-estimator-id-13" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>num</div></div></label><div class="sk-toggleable__content fitted"><pre>Index([&#x27;tipo_contrato&#x27;, &#x27;genero&#x27;, &#x27;posee_auto&#x27;, &#x27;posee_vivienda&#x27;,
+       &#x27;ingreso_total&#x27;, &#x27;cuota_periodica&#x27;, &#x27;poblacion_relativa_region&#x27;,
+       &#x27;dias_desde_nacimiento&#x27;, &#x27;dias_desde_registro&#x27;, &#x27;dias_desde_emision_id&#x27;,
+       &#x27;telefono_trabajo&#x27;, &#x27;telefono_personal&#x27;, &#x27;tiene_email&#x27;,
+       &#x27;numero_miembros_familia&#x27;, &#x27;trabaja_fuera_region_registrada&#x27;,
+       &#x27;vive_fuera_ciudad_registrada&#x27;, &#x27;trabaja_fuera_ciudad_registrada&#x27;,
+       &#x27;ciudad_residencia_distinta_trabajo&#x27;, &#x27;fuente_externa_2&#x27;,
+       &#x27;fuente_externa_3&#x27;, &#x27;incumplimientos_30_dias&#x27;,
+       &#x27;default_60_dias_circulo_social&#x27;, &#x27;dias_ultimo_cambio_telefono&#x27;,
+       &#x27;documento_3&#x27;, &#x27;documento_6&#x27;, &#x27;documento_8&#x27;, &#x27;consultas_buro_hora&#x27;,
+       &#x27;consultas_buro_dia&#x27;, &#x27;consultas_buro_semana&#x27;, &#x27;consultas_buro_mes&#x27;,
+       &#x27;consultas_buro_trimestre&#x27;, &#x27;consultas_buro_anio&#x27;, &#x27;entradas_buro&#x27;,
+       &#x27;tipos_credito_activo&#x27;, &#x27;suma_total_credito&#x27;,
+       &#x27;cantidad_solicitudes_previas&#x27;, &#x27;monto_promedio_solicitudes&#x27;,
+       &#x27;monto_total_credito&#x27;, &#x27;cuentas_pos_cash&#x27;, &#x27;promedio_meses_saldo&#x27;,
+       &#x27;total_cuotas&#x27;, &#x27;total_pagado&#x27;, &#x27;promedio_dias_entre_registro_y_pago&#x27;],
+      dtype=&#x27;object&#x27;)</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-14" type="checkbox" ><label for="sk-estimator-id-14" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SimpleImputer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.impute.SimpleImputer.html">?<span>Documentation for SimpleImputer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>SimpleImputer(strategy=&#x27;median&#x27;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-15" type="checkbox" ><label for="sk-estimator-id-15" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content fitted"><pre>StandardScaler()</pre></div> </div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-16" type="checkbox" ><label for="sk-estimator-id-16" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>cat</div></div></label><div class="sk-toggleable__content fitted"><pre>Index([&#x27;numero_hijos&#x27;, &#x27;acompanantes_solicitud&#x27;, &#x27;tipo_ingreso&#x27;,
+       &#x27;nivel_educativo&#x27;, &#x27;estado_civil&#x27;, &#x27;tipo_vivienda&#x27;, &#x27;ocupacion&#x27;,
+       &#x27;dia_solicitud&#x27;, &#x27;hora_solicitud&#x27;, &#x27;tipo_organizacion&#x27;],
+      dtype=&#x27;object&#x27;)</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-17" type="checkbox" ><label for="sk-estimator-id-17" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SimpleImputer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.impute.SimpleImputer.html">?<span>Documentation for SimpleImputer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>SimpleImputer(strategy=&#x27;most_frequent&#x27;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-18" type="checkbox" ><label for="sk-estimator-id-18" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>OneHotEncoder</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.OneHotEncoder.html">?<span>Documentation for OneHotEncoder</span></a></div></label><div class="sk-toggleable__content fitted"><pre>OneHotEncoder(handle_unknown=&#x27;ignore&#x27;)</pre></div> </div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-19" type="checkbox" ><label for="sk-estimator-id-19" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SMOTEENN</div></div></label><div class="sk-toggleable__content fitted"><pre>SMOTEENN(random_state=42)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-20" type="checkbox" ><label for="sk-estimator-id-20" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>XGBClassifier</div></div></label><div class="sk-toggleable__content fitted"><pre>XGBClassifier(base_score=None, booster=None, callbacks=None,
+              colsample_bylevel=None, colsample_bynode=None,
+              colsample_bytree=None, device=None, early_stopping_rounds=None,
+              enable_categorical=False, eval_metric=&#x27;logloss&#x27;,
+              feature_types=None, gamma=None, grow_policy=None,
+              importance_type=None, interaction_constraints=None,
+              learning_rate=0.05, max_bin=None, max_cat_threshold=None,
+              max_cat_to_onehot=None, max_delta_step=None, max_depth=3,
+              max_leaves=None, min_child_weight=None, missing=nan,
+              monotone_constraints=None, multi_strategy=None, n_estimators=100,
+              n_jobs=None, num_parallel_tree=None, random_state=42, ...)</pre></div> </div></div></div></div></div></div></div></div>
+</div>
+</section>
+<section id="grid-para-logisticregression">
+<h2>3.Grid para LogisticRegression<a class="headerlink" href="#grid-para-logisticregression" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span>     <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">pipeline_lr</span> <span class="o">=</span> <span class="n">ImbPipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s2">&quot;preproc&quot;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;sampler&quot;</span><span class="p">,</span> <span class="n">samplers</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s2">&quot;clf&quot;</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">(</span>
+        <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+        <span class="n">class_weight</span><span class="o">=</span><span class="s2">&quot;balanced&quot;</span><span class="p">,</span>
+        <span class="n">solver</span><span class="o">=</span><span class="s2">&quot;liblinear&quot;</span>
+    <span class="p">))</span>
+<span class="p">])</span>
+
+<span class="n">param_grid_lr</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;sampler&quot;</span><span class="p">:</span> <span class="n">samplers</span><span class="p">,</span>
+    <span class="s2">&quot;clf__C&quot;</span><span class="p">:</span>       <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+    <span class="s2">&quot;clf__penalty&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;l2&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1"># Definir el esquema de validación cruzada</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">grid_lr</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span>
+    <span class="n">pipeline_lr</span><span class="p">,</span>
+    <span class="n">param_grid_lr</span><span class="p">,</span>
+    <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;recall&quot;</span><span class="p">,</span>
+    <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span>
+    <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span>
+<span class="p">)</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">grid_lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">t_lr</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="c1"># Mostrar visualmente el mejor estimador</span>
+<span class="n">grid_lr</span><span class="o">.</span><span class="n">best_estimator_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 5 folds for each of 30 candidates, totalling 150 fits
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: &#39;force_all_finite&#39; was renamed to &#39;ensure_all_finite&#39; in 1.6 and will be removed in 1.8.
+  warnings.warn(
+c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:484: FutureWarning: `BaseEstimator._check_n_features` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation._check_n_features` instead.
+  warnings.warn(
+c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:493: FutureWarning: `BaseEstimator._check_feature_names` is deprecated in 1.6 and will be removed in 1.7. Use `sklearn.utils.validation._check_feature_names` instead.
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output text_html"><style>#sk-container-id-3 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: #000;
+  --sklearn-color-text-muted: #666;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
+  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-icon: #696969;
+
+  @media (prefers-color-scheme: dark) {
+    /* Redefinition of color scheme for dark theme */
+    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
+    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-icon: #878787;
+  }
+}
+
+#sk-container-id-3 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-3 pre {
+  padding: 0;
+}
+
+#sk-container-id-3 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-3 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-3 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-3 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-3 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-3 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-3 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-3 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-3 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-3 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-3 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-3 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-3 label.sk-toggleable__label {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.5em;
+}
+
+#sk-container-id-3 label.sk-toggleable__label .caption {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  color: var(--sklearn-color-text-muted);
+}
+
+#sk-container-id-3 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-3 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-3 div.sk-toggleable__content {
+  max-height: 0;
+  max-width: 0;
+  overflow: hidden;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-3 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-3 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-3 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-3 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  max-height: 200px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+#sk-container-id-3 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-3 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-3 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-3 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-3 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-3 div.sk-label label.sk-toggleable__label,
+#sk-container-id-3 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-3 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-3 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-3 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+}
+
+#sk-container-id-3 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-3 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-3 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-3 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-3 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 0.5em;
+  text-align: center;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-1);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-3 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-3 a.estimator_doc_link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-3 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-3 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+</style><div id="sk-container-id-3" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Pipeline(steps=[(&#x27;preproc&#x27;,
+                 ColumnTransformer(transformers=[(&#x27;num&#x27;,
+                                                  Pipeline(steps=[(&#x27;imputer&#x27;,
+                                                                   SimpleImputer(strategy=&#x27;median&#x27;)),
+                                                                  (&#x27;scaler&#x27;,
+                                                                   StandardScaler())]),
+                                                  Index([&#x27;tipo_contrato&#x27;, &#x27;genero&#x27;, &#x27;posee_auto&#x27;, &#x27;posee_vivienda&#x27;,
+       &#x27;ingreso_total&#x27;, &#x27;cuota_periodica&#x27;, &#x27;poblacion_relativa_region&#x27;,
+       &#x27;dias_desde_nacimiento&#x27;, &#x27;dias_desde_registro&#x27;, &#x27;dias_desde_emision_id&#x27;...
+                                                                   OneHotEncoder(handle_unknown=&#x27;ignore&#x27;))]),
+                                                  Index([&#x27;numero_hijos&#x27;, &#x27;acompanantes_solicitud&#x27;, &#x27;tipo_ingreso&#x27;,
+       &#x27;nivel_educativo&#x27;, &#x27;estado_civil&#x27;, &#x27;tipo_vivienda&#x27;, &#x27;ocupacion&#x27;,
+       &#x27;dia_solicitud&#x27;, &#x27;hora_solicitud&#x27;, &#x27;tipo_organizacion&#x27;],
+      dtype=&#x27;object&#x27;))])),
+                (&#x27;sampler&#x27;, RandomUnderSampler(random_state=42)),
+                (&#x27;clf&#x27;,
+                 LogisticRegression(C=0.001, class_weight=&#x27;balanced&#x27;,
+                                    max_iter=1000, solver=&#x27;liblinear&#x27;))])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-21" type="checkbox" ><label for="sk-estimator-id-21" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>Pipeline</div></div><div><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>Pipeline(steps=[(&#x27;preproc&#x27;,
+                 ColumnTransformer(transformers=[(&#x27;num&#x27;,
+                                                  Pipeline(steps=[(&#x27;imputer&#x27;,
+                                                                   SimpleImputer(strategy=&#x27;median&#x27;)),
+                                                                  (&#x27;scaler&#x27;,
+                                                                   StandardScaler())]),
+                                                  Index([&#x27;tipo_contrato&#x27;, &#x27;genero&#x27;, &#x27;posee_auto&#x27;, &#x27;posee_vivienda&#x27;,
+       &#x27;ingreso_total&#x27;, &#x27;cuota_periodica&#x27;, &#x27;poblacion_relativa_region&#x27;,
+       &#x27;dias_desde_nacimiento&#x27;, &#x27;dias_desde_registro&#x27;, &#x27;dias_desde_emision_id&#x27;...
+                                                                   OneHotEncoder(handle_unknown=&#x27;ignore&#x27;))]),
+                                                  Index([&#x27;numero_hijos&#x27;, &#x27;acompanantes_solicitud&#x27;, &#x27;tipo_ingreso&#x27;,
+       &#x27;nivel_educativo&#x27;, &#x27;estado_civil&#x27;, &#x27;tipo_vivienda&#x27;, &#x27;ocupacion&#x27;,
+       &#x27;dia_solicitud&#x27;, &#x27;hora_solicitud&#x27;, &#x27;tipo_organizacion&#x27;],
+      dtype=&#x27;object&#x27;))])),
+                (&#x27;sampler&#x27;, RandomUnderSampler(random_state=42)),
+                (&#x27;clf&#x27;,
+                 LogisticRegression(C=0.001, class_weight=&#x27;balanced&#x27;,
+                                    max_iter=1000, solver=&#x27;liblinear&#x27;))])</pre></div> </div></div><div class="sk-serial"><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-22" type="checkbox" ><label for="sk-estimator-id-22" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>preproc: ColumnTransformer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.compose.ColumnTransformer.html">?<span>Documentation for preproc: ColumnTransformer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>ColumnTransformer(transformers=[(&#x27;num&#x27;,
+                                 Pipeline(steps=[(&#x27;imputer&#x27;,
+                                                  SimpleImputer(strategy=&#x27;median&#x27;)),
+                                                 (&#x27;scaler&#x27;, StandardScaler())]),
+                                 Index([&#x27;tipo_contrato&#x27;, &#x27;genero&#x27;, &#x27;posee_auto&#x27;, &#x27;posee_vivienda&#x27;,
+       &#x27;ingreso_total&#x27;, &#x27;cuota_periodica&#x27;, &#x27;poblacion_relativa_region&#x27;,
+       &#x27;dias_desde_nacimiento&#x27;, &#x27;dias_desde_registro&#x27;, &#x27;dias_desde_emision_id&#x27;,
+       &#x27;telefono_trabajo&#x27;, &#x27;telefo...
+       &#x27;total_cuotas&#x27;, &#x27;total_pagado&#x27;, &#x27;promedio_dias_entre_registro_y_pago&#x27;],
+      dtype=&#x27;object&#x27;)),
+                                (&#x27;cat&#x27;,
+                                 Pipeline(steps=[(&#x27;imputer&#x27;,
+                                                  SimpleImputer(strategy=&#x27;most_frequent&#x27;)),
+                                                 (&#x27;onehot&#x27;,
+                                                  OneHotEncoder(handle_unknown=&#x27;ignore&#x27;))]),
+                                 Index([&#x27;numero_hijos&#x27;, &#x27;acompanantes_solicitud&#x27;, &#x27;tipo_ingreso&#x27;,
+       &#x27;nivel_educativo&#x27;, &#x27;estado_civil&#x27;, &#x27;tipo_vivienda&#x27;, &#x27;ocupacion&#x27;,
+       &#x27;dia_solicitud&#x27;, &#x27;hora_solicitud&#x27;, &#x27;tipo_organizacion&#x27;],
+      dtype=&#x27;object&#x27;))])</pre></div> </div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-23" type="checkbox" ><label for="sk-estimator-id-23" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>num</div></div></label><div class="sk-toggleable__content fitted"><pre>Index([&#x27;tipo_contrato&#x27;, &#x27;genero&#x27;, &#x27;posee_auto&#x27;, &#x27;posee_vivienda&#x27;,
+       &#x27;ingreso_total&#x27;, &#x27;cuota_periodica&#x27;, &#x27;poblacion_relativa_region&#x27;,
+       &#x27;dias_desde_nacimiento&#x27;, &#x27;dias_desde_registro&#x27;, &#x27;dias_desde_emision_id&#x27;,
+       &#x27;telefono_trabajo&#x27;, &#x27;telefono_personal&#x27;, &#x27;tiene_email&#x27;,
+       &#x27;numero_miembros_familia&#x27;, &#x27;trabaja_fuera_region_registrada&#x27;,
+       &#x27;vive_fuera_ciudad_registrada&#x27;, &#x27;trabaja_fuera_ciudad_registrada&#x27;,
+       &#x27;ciudad_residencia_distinta_trabajo&#x27;, &#x27;fuente_externa_2&#x27;,
+       &#x27;fuente_externa_3&#x27;, &#x27;incumplimientos_30_dias&#x27;,
+       &#x27;default_60_dias_circulo_social&#x27;, &#x27;dias_ultimo_cambio_telefono&#x27;,
+       &#x27;documento_3&#x27;, &#x27;documento_6&#x27;, &#x27;documento_8&#x27;, &#x27;consultas_buro_hora&#x27;,
+       &#x27;consultas_buro_dia&#x27;, &#x27;consultas_buro_semana&#x27;, &#x27;consultas_buro_mes&#x27;,
+       &#x27;consultas_buro_trimestre&#x27;, &#x27;consultas_buro_anio&#x27;, &#x27;entradas_buro&#x27;,
+       &#x27;tipos_credito_activo&#x27;, &#x27;suma_total_credito&#x27;,
+       &#x27;cantidad_solicitudes_previas&#x27;, &#x27;monto_promedio_solicitudes&#x27;,
+       &#x27;monto_total_credito&#x27;, &#x27;cuentas_pos_cash&#x27;, &#x27;promedio_meses_saldo&#x27;,
+       &#x27;total_cuotas&#x27;, &#x27;total_pagado&#x27;, &#x27;promedio_dias_entre_registro_y_pago&#x27;],
+      dtype=&#x27;object&#x27;)</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-24" type="checkbox" ><label for="sk-estimator-id-24" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SimpleImputer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.impute.SimpleImputer.html">?<span>Documentation for SimpleImputer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>SimpleImputer(strategy=&#x27;median&#x27;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-25" type="checkbox" ><label for="sk-estimator-id-25" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content fitted"><pre>StandardScaler()</pre></div> </div></div></div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-26" type="checkbox" ><label for="sk-estimator-id-26" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>cat</div></div></label><div class="sk-toggleable__content fitted"><pre>Index([&#x27;numero_hijos&#x27;, &#x27;acompanantes_solicitud&#x27;, &#x27;tipo_ingreso&#x27;,
+       &#x27;nivel_educativo&#x27;, &#x27;estado_civil&#x27;, &#x27;tipo_vivienda&#x27;, &#x27;ocupacion&#x27;,
+       &#x27;dia_solicitud&#x27;, &#x27;hora_solicitud&#x27;, &#x27;tipo_organizacion&#x27;],
+      dtype=&#x27;object&#x27;)</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-27" type="checkbox" ><label for="sk-estimator-id-27" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>SimpleImputer</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.impute.SimpleImputer.html">?<span>Documentation for SimpleImputer</span></a></div></label><div class="sk-toggleable__content fitted"><pre>SimpleImputer(strategy=&#x27;most_frequent&#x27;)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-28" type="checkbox" ><label for="sk-estimator-id-28" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>OneHotEncoder</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.OneHotEncoder.html">?<span>Documentation for OneHotEncoder</span></a></div></label><div class="sk-toggleable__content fitted"><pre>OneHotEncoder(handle_unknown=&#x27;ignore&#x27;)</pre></div> </div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-29" type="checkbox" ><label for="sk-estimator-id-29" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>RandomUnderSampler</div></div></label><div class="sk-toggleable__content fitted"><pre>RandomUnderSampler(random_state=42)</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-30" type="checkbox" ><label for="sk-estimator-id-30" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LogisticRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.LogisticRegression.html">?<span>Documentation for LogisticRegression</span></a></div></label><div class="sk-toggleable__content fitted"><pre>LogisticRegression(C=0.001, class_weight=&#x27;balanced&#x27;, max_iter=1000,
+                   solver=&#x27;liblinear&#x27;)</pre></div> </div></div></div></div></div></div></div></div>
+</div>
+</section>
+<section id="recuperar-los-mejores-estimadores">
+<h2>4.Recuperar los mejores estimadores<a class="headerlink" href="#recuperar-los-mejores-estimadores" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_rf</span> <span class="o">=</span> <span class="n">grid_rf</span><span class="o">.</span><span class="n">best_estimator_</span>
+<span class="n">best_xgb</span> <span class="o">=</span> <span class="n">grid_xgb</span><span class="o">.</span><span class="n">best_estimator_</span>
+<span class="n">best_lr</span> <span class="o">=</span> <span class="n">grid_lr</span><span class="o">.</span><span class="n">best_estimator_</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ensamble-por-apilamiento-stacking">
+<h2>5.Ensamble por apilamiento (Stacking)<a class="headerlink" href="#ensamble-por-apilamiento-stacking" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">StackingClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+
+<span class="c1"># Definir el modelo de stacking</span>
+<span class="n">stack</span> <span class="o">=</span> <span class="n">StackingClassifier</span><span class="p">(</span>
+    <span class="n">estimators</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;RF&quot;</span><span class="p">,</span> <span class="n">best_rf</span><span class="p">),</span>   <span class="c1"># ya incluye preproc + sampler</span>
+        <span class="p">(</span><span class="s2">&quot;XGB&quot;</span><span class="p">,</span> <span class="n">best_xgb</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;LR&quot;</span><span class="p">,</span> <span class="n">best_lr</span><span class="p">),</span>
+    <span class="p">],</span>
+    <span class="n">final_estimator</span><span class="o">=</span><span class="n">LogisticRegression</span><span class="p">(</span><span class="n">class_weight</span><span class="o">=</span><span class="s2">&quot;balanced&quot;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+    <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span>
+    <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">passthrough</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+<span class="c1"># Medir tiempo de entrenamiento (después de definir `stack`)</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">stack</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">t_stack</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="seccion-3-evaluacion-basica-del-modelo">
+<h1>Sección 3: Evaluación Básica del Modelo<a class="headerlink" href="#seccion-3-evaluacion-basica-del-modelo" title="Permalink to this heading">#</a></h1>
+<section id="metricas-de-desempeno-comparativas">
+<h2>1.Metricas de Desempeño Comparativas<a class="headerlink" href="#metricas-de-desempeno-comparativas" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">,</span>
+    <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">average_precision_score</span>
+<span class="p">)</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Modelos + tiempos</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;RF&quot;</span><span class="p">:</span>    <span class="n">best_rf</span><span class="p">,</span>
+    <span class="s2">&quot;XGB&quot;</span><span class="p">:</span>   <span class="n">best_xgb</span><span class="p">,</span>
+    <span class="s2">&quot;LR&quot;</span><span class="p">:</span>    <span class="n">best_lr</span><span class="p">,</span>
+    <span class="s2">&quot;STACK&quot;</span><span class="p">:</span> <span class="n">stack</span> <span class="k">if</span> <span class="s2">&quot;stack&quot;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()</span> <span class="k">else</span> <span class="n">stack_pipeline</span>
+<span class="p">}</span>
+
+<span class="n">opt_times</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;RF&quot;</span><span class="p">:</span>    <span class="n">t_rf</span><span class="p">,</span>
+    <span class="s2">&quot;XGB&quot;</span><span class="p">:</span>   <span class="n">t_xgb</span><span class="p">,</span>
+    <span class="s2">&quot;LR&quot;</span><span class="p">:</span>    <span class="n">t_lr</span><span class="p">,</span>
+    <span class="s2">&quot;STACK&quot;</span><span class="p">:</span> <span class="n">t_stack</span>
+<span class="p">}</span>
+
+<span class="n">records</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">mdl</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">y_pred</span>  <span class="o">=</span> <span class="n">mdl</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    <span class="n">y_proba</span> <span class="o">=</span> <span class="n">mdl</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">records</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+        <span class="s2">&quot;Modelo&quot;</span><span class="p">:</span>             <span class="n">name</span><span class="p">,</span>
+        <span class="s2">&quot;Precision&quot;</span><span class="p">:</span>          <span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+        <span class="s2">&quot;Recall&quot;</span><span class="p">:</span>             <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+        <span class="s2">&quot;F1-score&quot;</span><span class="p">:</span>           <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+        <span class="s2">&quot;AUC-ROC&quot;</span><span class="p">:</span>            <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_proba</span><span class="p">),</span>
+        <span class="s2">&quot;Avg Precision&quot;</span><span class="p">:</span>      <span class="n">average_precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_proba</span><span class="p">),</span>
+        <span class="s2">&quot;Tiempo Optimización (s)&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">opt_times</span><span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">})</span>
+
+<span class="n">df_metrics</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">records</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Modelo&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">df_metrics</span><span class="p">[</span><span class="s2">&quot;Rank Recall&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_metrics</span><span class="p">[</span><span class="s2">&quot;Recall&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="n">best_model</span> <span class="o">=</span> <span class="n">df_metrics</span><span class="p">[</span><span class="s2">&quot;Recall&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
+
+<span class="c1"># Mostrar con estilo</span>
+<span class="n">display</span><span class="p">(</span>
+    <span class="n">df_metrics</span><span class="o">.</span><span class="n">style</span>
+      <span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Recall&quot;</span><span class="p">,</span><span class="s2">&quot;AUC-ROC&quot;</span><span class="p">,</span><span class="s2">&quot;Avg Precision&quot;</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
+      <span class="o">.</span><span class="n">highlight_max</span><span class="p">(</span><span class="s2">&quot;Recall&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;salmon&quot;</span><span class="p">)</span>
+      <span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s2">&quot;Comparativa de métricas y tiempos de optimización&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;➡️ Mejor modelo por Recall: </span><span class="si">{</span><span class="n">best_model</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_89ac7_row0_col1, #T_89ac7_row2_col3, #T_89ac7_row2_col4 {
+  background-color: #f7fbff;
+  color: #000000;
+}
+#T_89ac7_row0_col3 {
+  background-color: #d3e3f3;
+  color: #000000;
+}
+#T_89ac7_row0_col4 {
+  background-color: #d0e1f2;
+  color: #000000;
+}
+#T_89ac7_row1_col1, #T_89ac7_row3_col1 {
+  background-color: #08306b;
+  color: #f1f1f1;
+  background-color: salmon;
+}
+#T_89ac7_row1_col3, #T_89ac7_row1_col4 {
+  background-color: #08306b;
+  color: #f1f1f1;
+}
+#T_89ac7_row2_col1 {
+  background-color: #6aaed6;
+  color: #f1f1f1;
+}
+#T_89ac7_row3_col3 {
+  background-color: #08509b;
+  color: #f1f1f1;
+}
+#T_89ac7_row3_col4 {
+  background-color: #084d96;
+  color: #f1f1f1;
+}
+</style>
+<table id="T_89ac7">
+  <caption>Comparativa de métricas y tiempos de optimización</caption>
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_89ac7_level0_col0" class="col_heading level0 col0" >Precision</th>
+      <th id="T_89ac7_level0_col1" class="col_heading level0 col1" >Recall</th>
+      <th id="T_89ac7_level0_col2" class="col_heading level0 col2" >F1-score</th>
+      <th id="T_89ac7_level0_col3" class="col_heading level0 col3" >AUC-ROC</th>
+      <th id="T_89ac7_level0_col4" class="col_heading level0 col4" >Avg Precision</th>
+      <th id="T_89ac7_level0_col5" class="col_heading level0 col5" >Tiempo Optimización (s)</th>
+      <th id="T_89ac7_level0_col6" class="col_heading level0 col6" >Rank Recall</th>
+    </tr>
+    <tr>
+      <th class="index_name level0" >Modelo</th>
+      <th class="blank col0" >&nbsp;</th>
+      <th class="blank col1" >&nbsp;</th>
+      <th class="blank col2" >&nbsp;</th>
+      <th class="blank col3" >&nbsp;</th>
+      <th class="blank col4" >&nbsp;</th>
+      <th class="blank col5" >&nbsp;</th>
+      <th class="blank col6" >&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_89ac7_level0_row0" class="row_heading level0 row0" >RF</th>
+      <td id="T_89ac7_row0_col0" class="data row0 col0" >0.133300</td>
+      <td id="T_89ac7_row0_col1" class="data row0 col1" >0.444400</td>
+      <td id="T_89ac7_row0_col2" class="data row0 col2" >0.205100</td>
+      <td id="T_89ac7_row0_col3" class="data row0 col3" >0.608700</td>
+      <td id="T_89ac7_row0_col4" class="data row0 col4" >0.212300</td>
+      <td id="T_89ac7_row0_col5" class="data row0 col5" >15.500000</td>
+      <td id="T_89ac7_row0_col6" class="data row0 col6" >4</td>
+    </tr>
+    <tr>
+      <th id="T_89ac7_level0_row1" class="row_heading level0 row1" >XGB</th>
+      <td id="T_89ac7_row1_col0" class="data row1 col0" >0.176500</td>
+      <td id="T_89ac7_row1_col1" class="data row1 col1" >0.666700</td>
+      <td id="T_89ac7_row1_col2" class="data row1 col2" >0.279100</td>
+      <td id="T_89ac7_row1_col3" class="data row1 col3" >0.763100</td>
+      <td id="T_89ac7_row1_col4" class="data row1 col4" >0.495400</td>
+      <td id="T_89ac7_row1_col5" class="data row1 col5" >12.100000</td>
+      <td id="T_89ac7_row1_col6" class="data row1 col6" >1</td>
+    </tr>
+    <tr>
+      <th id="T_89ac7_level0_row2" class="row_heading level0 row2" >LR</th>
+      <td id="T_89ac7_row2_col0" class="data row2 col0" >0.128200</td>
+      <td id="T_89ac7_row2_col1" class="data row2 col1" >0.555600</td>
+      <td id="T_89ac7_row2_col2" class="data row2 col2" >0.208300</td>
+      <td id="T_89ac7_row2_col3" class="data row2 col3" >0.573900</td>
+      <td id="T_89ac7_row2_col4" class="data row2 col4" >0.141800</td>
+      <td id="T_89ac7_row2_col5" class="data row2 col5" >0.300000</td>
+      <td id="T_89ac7_row2_col6" class="data row2 col6" >3</td>
+    </tr>
+    <tr>
+      <th id="T_89ac7_level0_row3" class="row_heading level0 row3" >STACK</th>
+      <td id="T_89ac7_row3_col0" class="data row3 col0" >0.193500</td>
+      <td id="T_89ac7_row3_col1" class="data row3 col1" >0.666700</td>
+      <td id="T_89ac7_row3_col2" class="data row3 col2" >0.300000</td>
+      <td id="T_89ac7_row3_col3" class="data row3 col3" >0.739900</td>
+      <td id="T_89ac7_row3_col4" class="data row3 col4" >0.455600</td>
+      <td id="T_89ac7_row3_col5" class="data row3 col5" >1.600000</td>
+      <td id="T_89ac7_row3_col6" class="data row3 col6" >1</td>
+    </tr>
+  </tbody>
+</table>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>➡️ Mejor modelo por Recall: XGB
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="evaluacion-visual">
+<h2>2.Evaluación Visual<a class="headerlink" href="#evaluacion-visual" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">RocCurveDisplay</span><span class="p">,</span> <span class="n">PrecisionRecallDisplay</span>
+<span class="p">)</span>
+
+<span class="c1"># 9.1 Curvas ROC y PR de todos</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># ROC</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">mdl</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">y_proba</span> <span class="o">=</span> <span class="n">mdl</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">disp</span> <span class="o">=</span> <span class="n">RocCurveDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_proba</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Curvas ROC&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Precision–Recall</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">mdl</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">y_proba</span> <span class="o">=</span> <span class="n">mdl</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">disp</span> <span class="o">=</span> <span class="n">PrecisionRecallDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_proba</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Curvas Precision–Recall&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/347577fdf7e60d8d85dce403d17b3c4af502cf0e761e3e48e76e1ac25798521f.png" src="_images/347577fdf7e60d8d85dce403d17b3c4af502cf0e761e3e48e76e1ac25798521f.png" />
+<img alt="_images/a51c1d2d216012824352e1dd8343408e071bcfd317f8102f2d7559b6fe031b76.png" src="_images/a51c1d2d216012824352e1dd8343408e071bcfd317f8102f2d7559b6fe031b76.png" />
+<img alt="_images/bc56dc25d9ff83b83d25f7cc9ad64c4d08fa28d0a33388d1a37cf2bbe2469961.png" src="_images/bc56dc25d9ff83b83d25f7cc9ad64c4d08fa28d0a33388d1a37cf2bbe2469961.png" />
+<img alt="_images/385cfa7576eb750bc7c124e5ee0fe0be64823c61ece44be497b932be45612e43.png" src="_images/385cfa7576eb750bc7c124e5ee0fe0be64823c61ece44be497b932be45612e43.png" />
+<img alt="_images/2e4621a70e15289c8b5fc31774279840debb44eea512adc951b6fffaf2d9ba72.png" src="_images/2e4621a70e15289c8b5fc31774279840debb44eea512adc951b6fffaf2d9ba72.png" />
+<img alt="_images/871c57a09be74a82bdb165fe3d6094809de0b4ac1bb238dbb9a28134ee71cbb2.png" src="_images/871c57a09be74a82bdb165fe3d6094809de0b4ac1bb238dbb9a28134ee71cbb2.png" />
+<img alt="_images/4a88a2ff38c89294c4253478a8976f3370d19933f18788bddacf49d332787c1c.png" src="_images/4a88a2ff38c89294c4253478a8976f3370d19933f18788bddacf49d332787c1c.png" />
+<img alt="_images/59fc9f9b0d4e4d14d43550ca52e02485fe47951ab49fbb5bbed2b025e08dfbd8.png" src="_images/59fc9f9b0d4e4d14d43550ca52e02485fe47951ab49fbb5bbed2b025e08dfbd8.png" />
+<img alt="_images/8b38dfc2c9bfcff56ab35e98859efb60a8f393d6a06b0278942c0810d9b3f43f.png" src="_images/8b38dfc2c9bfcff56ab35e98859efb60a8f393d6a06b0278942c0810d9b3f43f.png" />
+</div>
+</div>
+</section>
+<section id="graficos-especificos-del-mejor-modelo-por-recall">
+<h2>3.Gráficos específicos del Mejor Modelo (por Recall)<a class="headerlink" href="#graficos-especificos-del-mejor-modelo-por-recall" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Usamos best_model para extraer sus predicciones</span>
+<span class="n">mdl_best</span> <span class="o">=</span> <span class="n">models</span><span class="p">[</span><span class="n">best_model</span><span class="p">]</span>
+<span class="n">y_pred_b</span> <span class="o">=</span> <span class="n">mdl_best</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">y_proba_b</span> <span class="o">=</span> <span class="n">mdl_best</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># 10.1 Matriz de confusión</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">ConfusionMatrixDisplay</span>
+
+<span class="n">cm</span> <span class="o">=</span> <span class="n">ConfusionMatrixDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_b</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Pastel1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Matriz de Confusión — </span><span class="si">{</span><span class="n">best_model</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 10.2 Curva de calibración</span>
+<span class="kn">from</span> <span class="nn">sklearn.calibration</span> <span class="kn">import</span> <span class="n">CalibrationDisplay</span>
+<span class="n">CalibrationDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_proba_b</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Curva de Calibración — </span><span class="si">{</span><span class="n">best_model</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6db5bd614758e56bb586832f62a2a5d5050ba3e759584359b22372e17f32c109.png" src="_images/6db5bd614758e56bb586832f62a2a5d5050ba3e759584359b22372e17f32c109.png" />
+<img alt="_images/80ee32c1b74194379c8b89baaf6636ab64c89fa37bcd9502f8f27c41f56c5d4f.png" src="_images/80ee32c1b74194379c8b89baaf6636ab64c89fa37bcd9502f8f27c41f56c5d4f.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="seccion-4-evaluacion-avanzada-del-modelo">
+<h1>Sección 4: Evaluación Avanzada del Modelo<a class="headerlink" href="#seccion-4-evaluacion-avanzada-del-modelo" title="Permalink to this heading">#</a></h1>
+<section id="curva-de-calibracion">
+<h2>1.Curva de calibración<a class="headerlink" href="#curva-de-calibracion" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.calibration</span> <span class="kn">import</span> <span class="n">calibration_curve</span><span class="p">,</span> <span class="n">CalibrationDisplay</span>
+<span class="n">CalibrationDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span><span class="n">stack</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Curva de calibración — STACK&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/59717ea89705ed9bdf7aa48cb0a0164084ab1936d242e6482365d0abee8f48e3.png" src="_images/59717ea89705ed9bdf7aa48cb0a0164084ab1936d242e6482365d0abee8f48e3.png" />
+</div>
+</div>
+</section>
+<section id="lift-chart-cumulative-gain">
+<h2>2.Lift Chart / Cumulative Gain<a class="headerlink" href="#lift-chart-cumulative-gain" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Crear dataframe ordenado por score descendente</span>
+<span class="n">proba_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">y_test</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="n">y_proba</span><span class="p">})</span>
+<span class="n">proba_df</span> <span class="o">=</span> <span class="n">proba_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;score&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Calcular columnas auxiliares</span>
+<span class="n">proba_df</span><span class="p">[</span><span class="s2">&quot;positivos_acumulados&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">proba_df</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+<span class="n">total_positivos</span> <span class="o">=</span> <span class="n">proba_df</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">proba_df</span><span class="p">[</span><span class="s2">&quot;porcentaje_positivos_acumulados&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">proba_df</span><span class="p">[</span><span class="s2">&quot;positivos_acumulados&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">total_positivos</span>
+<span class="n">proba_df</span><span class="p">[</span><span class="s2">&quot;porcentaje_datos&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">proba_df</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">proba_df</span><span class="p">)</span>
+<span class="n">proba_df</span><span class="p">[</span><span class="s2">&quot;lift&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">proba_df</span><span class="p">[</span><span class="s2">&quot;porcentaje_positivos_acumulados&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">proba_df</span><span class="p">[</span><span class="s2">&quot;porcentaje_datos&quot;</span><span class="p">]</span>
+
+<span class="c1"># Gráfico: Cumulative Gain</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">proba_df</span><span class="p">[</span><span class="s2">&quot;porcentaje_datos&quot;</span><span class="p">],</span> <span class="n">proba_df</span><span class="p">[</span><span class="s2">&quot;porcentaje_positivos_acumulados&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Modelo&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Aleatorio&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Porcentaje de datos (ordenados por score)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Porcentaje de positivos acumulados&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Gráfico de Ganancia Acumulada&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Gráfico: Lift</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">proba_df</span><span class="p">[</span><span class="s2">&quot;porcentaje_datos&quot;</span><span class="p">],</span> <span class="n">proba_df</span><span class="p">[</span><span class="s2">&quot;lift&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Lift&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;darkgreen&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Porcentaje de datos (ordenados por score)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Lift&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Lift Chart&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/52ff05f4148f571bc104af0a94b2adec218ae3acc1a7b36b1a771d22b0c1a02c.png" src="_images/52ff05f4148f571bc104af0a94b2adec218ae3acc1a7b36b1a771d22b0c1a02c.png" />
+</div>
+</div>
+</section>
+<section id="ks-statistic">
+<h2>3.KS Statistic<a class="headerlink" href="#ks-statistic" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">ks_2samp</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">y_proba</span><span class="p">[</span><span class="n">y_test</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">neg</span> <span class="o">=</span> <span class="n">y_proba</span><span class="p">[</span><span class="n">y_test</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ks_stat</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">ks_2samp</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">neg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;KS:&quot;</span><span class="p">,</span> <span class="n">ks_stat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KS: 0.47985347985347987
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">ks_2samp</span>
+
+<span class="c1"># Scores</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">y_proba</span><span class="p">[</span><span class="n">y_test</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">neg</span> <span class="o">=</span> <span class="n">y_proba</span><span class="p">[</span><span class="n">y_test</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># CDFs</span>
+<span class="n">pos_sorted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+<span class="n">neg_sorted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">neg</span><span class="p">)</span>
+<span class="n">cdf_pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos_sorted</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos_sorted</span><span class="p">)</span>
+<span class="n">cdf_neg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">neg_sorted</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">neg_sorted</span><span class="p">)</span>
+
+<span class="c1"># Calcular KS statistic</span>
+<span class="n">ks_stat</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">ks_2samp</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">neg</span><span class="p">)</span>
+<span class="n">ks_position</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">pos_sorted</span><span class="p">,</span> <span class="n">neg_sorted</span><span class="p">,</span> <span class="n">cdf_neg</span><span class="p">)</span> <span class="o">-</span> <span class="n">cdf_pos</span><span class="p">))</span>
+
+<span class="c1"># Plot KS</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pos_sorted</span><span class="p">,</span> <span class="n">cdf_pos</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;CDF Positivos&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">neg_sorted</span><span class="p">,</span> <span class="n">cdf_neg</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;CDF Negativos&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">pos_sorted</span><span class="p">[</span><span class="n">ks_position</span><span class="p">],</span> <span class="n">cdf_neg</span><span class="p">[</span><span class="n">ks_position</span><span class="p">],</span> <span class="n">cdf_pos</span><span class="p">[</span><span class="n">ks_position</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;KS = </span><span class="si">{</span><span class="n">ks_stat</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Score&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Distribución Acumulada&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Gráfico KS Statistic&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0e1b2897eb2b518c8cd31205e5988d1bab436688bfec692ffb51be173cd1615d.png" src="_images/0e1b2897eb2b518c8cd31205e5988d1bab436688bfec692ffb51be173cd1615d.png" />
+</div>
+</div>
+</section>
+<section id="feature-importance-y-shap">
+<h2>4.Feature importance y SHAP<a class="headerlink" href="#feature-importance-y-shap" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">shap</span>
+
+<span class="c1"># Obtener el preprocesamiento y modelo desde el pipeline</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">best_xgb</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s2">&quot;clf&quot;</span><span class="p">]</span>
+<span class="n">X_test_proc</span> <span class="o">=</span> <span class="n">best_xgb</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s2">&quot;preproc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Obtener nombres de variables transformadas</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="n">best_xgb</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s2">&quot;preproc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+
+<span class="c1"># Aplicar SHAP</span>
+<span class="n">explainer</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">Explainer</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">shap_vals</span> <span class="o">=</span> <span class="n">explainer</span><span class="p">(</span><span class="n">X_test_proc</span><span class="p">)</span>
+
+<span class="c1"># Mostrar gráfico con nombres reales</span>
+<span class="n">shap</span><span class="o">.</span><span class="n">summary_plot</span><span class="p">(</span><span class="n">shap_vals</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="n">X_test_proc</span><span class="p">,</span> <span class="n">feature_names</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\tqdm\auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+</pre></div>
+</div>
+<img alt="_images/f793894bbcca9c845036f26a8e3f353141e4df79014ef626b253b8bc31adef57.png" src="_images/f793894bbcca9c845036f26a8e3f353141e4df79014ef626b253b8bc31adef57.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="seccion-5-guardar-modelo-ensamblado-final">
+<h1>SECCIÓN 5: Guardar modelo ensamblado final<a class="headerlink" href="#seccion-5-guardar-modelo-ensamblado-final" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">joblib</span>
+
+<span class="c1"># Crear carpeta</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;modelos&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Guardar el modelo ensamblado</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">stack</span><span class="p">,</span> <span class="s2">&quot;modelos/ensemble_final.joblib&quot;</span><span class="p">)</span>
+
+<span class="c1"># (Opcional) Para cargar más adelante:</span>
+<span class="c1"># loaded_model = joblib.load(&quot;modelos/ensemble_final.joblib&quot;)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;modelos/ensemble_final.joblib&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;📌 Directorio actual:&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>📌 Directorio actual: c:\Users\DELL\Desktop\Aprendizaje_de_Maquina\jbook_Proyecto_Final_Clasificacion\docs2
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="autoencoders.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">LSTM Autoencoder para Detección de Anomalías en Crédito</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="documento_proyecto.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Sección 1: Configuración Inicial y Preparación de Datos</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-y-division-de-datos">1. Carga y división de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocesamiento">2. Preprocesamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-de-tecnicas-de-balanceo">3. Definición de técnicas de balanceo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimadores-base">4. Estimadores base</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seccion-2-fase-de-modelado">Sección 2: Fase de Modelado</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-para-randomforest">1. Grid para RandomForest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-para-xgboost">2.Grid para XGBoost</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-para-logisticregression">3.Grid para LogisticRegression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recuperar-los-mejores-estimadores">4.Recuperar los mejores estimadores</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensamble-por-apilamiento-stacking">5.Ensamble por apilamiento (Stacking)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seccion-3-evaluacion-basica-del-modelo">Sección 3: Evaluación Básica del Modelo</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metricas-de-desempeno-comparativas">1.Metricas de Desempeño Comparativas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-visual">2.Evaluación Visual</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-especificos-del-mejor-modelo-por-recall">3.Gráficos específicos del Mejor Modelo (por Recall)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seccion-4-evaluacion-avanzada-del-modelo">Sección 4: Evaluación Avanzada del Modelo</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-de-calibracion">1.Curva de calibración</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lift-chart-cumulative-gain">2.Lift Chart / Cumulative Gain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ks-statistic">3.KS Statistic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-importance-y-shap">4.Feature importance y SHAP</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seccion-5-guardar-modelo-ensamblado-final">SECCIÓN 5: Guardar modelo ensamblado final</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Angélica Sepúlveda, Andrés Pedraza y Jefry Llerena
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
