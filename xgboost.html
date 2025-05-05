@@ -210,21 +210,11 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="bosques_aleatorios.html">Bosques Aleatorios</a></li>
+
+
+
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">XGBoost</a></li>
 
 
@@ -511,10 +501,9 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-de-aprendizaje-y-perdida">6.Curvas de Aprendizaje y Pérdida</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-precision-recall-comparativa">7.Curva Precision-Recall comparativa</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-de-recall">8.Heatmap de Recall</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#radar-plot-de-metricas">9.Radar plot de métricas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-de-validacion-max-depth">10.Curvas de Validación (max_depth)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-gain-lift">11.Cumulative Gain &amp; Lift</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-ks">12.Curva KS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-de-validacion-max-depth">9.Curvas de Validación (max_depth)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-gain-lift">10.Cumulative Gain &amp; Lift</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-ks">11.Curva KS</a></li>
 </ul>
 </li>
 </ul>
@@ -712,7 +701,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 5 folds for each of 144 candidates, totalling 720 fits
-✅ GridSearch terminado en 530.6s  –  Mejor recall CV: 0.6687
+✅ GridSearch terminado en 880.6s  –  Mejor recall CV: 0.6687
 🔑 Parámetros óptimos: {&#39;clf__colsample_bytree&#39;: 0.8, &#39;clf__learning_rate&#39;: 0.01, &#39;clf__max_depth&#39;: 3, &#39;clf__n_estimators&#39;: 200, &#39;clf__scale_pos_weight&#39;: 10.699978691668443, &#39;clf__subsample&#39;: 0.8, &#39;sample&#39;: &#39;passthrough&#39;}
 </pre></div>
 </div>
@@ -858,43 +847,43 @@ c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:474: F
 </pre></div>
 </div>
 <div class="output text_html"><style type="text/css">
-#T_f1970_row0_col0 {
+#T_db9e6_row0_col0 {
   background-color: #08306b;
   color: #f1f1f1;
   background-color: salmon;
 }
-#T_f1970_row0_col3, #T_f1970_row0_col4 {
+#T_db9e6_row0_col3, #T_db9e6_row0_col4 {
   background-color: #08306b;
   color: #f1f1f1;
 }
-#T_f1970_row1_col0 {
+#T_db9e6_row1_col0 {
   background-color: #e7f0fa;
   color: #000000;
 }
-#T_f1970_row1_col3 {
+#T_db9e6_row1_col3 {
   background-color: #e3eef9;
   color: #000000;
 }
-#T_f1970_row1_col4 {
+#T_db9e6_row1_col4 {
   background-color: #e2edf8;
   color: #000000;
 }
-#T_f1970_row2_col0, #T_f1970_row2_col3, #T_f1970_row2_col4 {
+#T_db9e6_row2_col0, #T_db9e6_row2_col3, #T_db9e6_row2_col4 {
   background-color: #f7fbff;
   color: #000000;
 }
 </style>
-<table id="T_f1970">
+<table id="T_db9e6">
   <caption>XGBoost – Métricas por técnica de balanceo</caption>
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_f1970_level0_col0" class="col_heading level0 col0" >Recall</th>
-      <th id="T_f1970_level0_col1" class="col_heading level0 col1" >Precision</th>
-      <th id="T_f1970_level0_col2" class="col_heading level0 col2" >F1-score</th>
-      <th id="T_f1970_level0_col3" class="col_heading level0 col3" >AUC</th>
-      <th id="T_f1970_level0_col4" class="col_heading level0 col4" >AvgPrec</th>
-      <th id="T_f1970_level0_col5" class="col_heading level0 col5" >Tiempo (s)</th>
+      <th id="T_db9e6_level0_col0" class="col_heading level0 col0" >Recall</th>
+      <th id="T_db9e6_level0_col1" class="col_heading level0 col1" >Precision</th>
+      <th id="T_db9e6_level0_col2" class="col_heading level0 col2" >F1-score</th>
+      <th id="T_db9e6_level0_col3" class="col_heading level0 col3" >AUC</th>
+      <th id="T_db9e6_level0_col4" class="col_heading level0 col4" >AvgPrec</th>
+      <th id="T_db9e6_level0_col5" class="col_heading level0 col5" >Tiempo (s)</th>
     </tr>
     <tr>
       <th class="index_name level0" >Técnica</th>
@@ -908,38 +897,38 @@ c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:474: F
   </thead>
   <tbody>
     <tr>
-      <th id="T_f1970_level0_row0" class="row_heading level0 row0" >passthrough</th>
-      <td id="T_f1970_row0_col0" class="data row0 col0" >0.655100</td>
-      <td id="T_f1970_row0_col1" class="data row0 col1" >0.158900</td>
-      <td id="T_f1970_row0_col2" class="data row0 col2" >0.255800</td>
-      <td id="T_f1970_row0_col3" class="data row0 col3" >0.727300</td>
-      <td id="T_f1970_row0_col4" class="data row0 col4" >0.219200</td>
-      <td id="T_f1970_row0_col5" class="data row0 col5" >0.600000</td>
+      <th id="T_db9e6_level0_row0" class="row_heading level0 row0" >passthrough</th>
+      <td id="T_db9e6_row0_col0" class="data row0 col0" >0.655100</td>
+      <td id="T_db9e6_row0_col1" class="data row0 col1" >0.158900</td>
+      <td id="T_db9e6_row0_col2" class="data row0 col2" >0.255800</td>
+      <td id="T_db9e6_row0_col3" class="data row0 col3" >0.727300</td>
+      <td id="T_db9e6_row0_col4" class="data row0 col4" >0.219200</td>
+      <td id="T_db9e6_row0_col5" class="data row0 col5" >0.500000</td>
     </tr>
     <tr>
-      <th id="T_f1970_level0_row1" class="row_heading level0 row1" >SMOTE</th>
-      <td id="T_f1970_row1_col0" class="data row1 col0" >0.244500</td>
-      <td id="T_f1970_row1_col1" class="data row1 col1" >0.218300</td>
-      <td id="T_f1970_row1_col2" class="data row1 col2" >0.230700</td>
-      <td id="T_f1970_row1_col3" class="data row1 col3" >0.697100</td>
-      <td id="T_f1970_row1_col4" class="data row1 col4" >0.174100</td>
-      <td id="T_f1970_row1_col5" class="data row1 col5" >1.600000</td>
+      <th id="T_db9e6_level0_row1" class="row_heading level0 row1" >SMOTE</th>
+      <td id="T_db9e6_row1_col0" class="data row1 col0" >0.244500</td>
+      <td id="T_db9e6_row1_col1" class="data row1 col1" >0.218300</td>
+      <td id="T_db9e6_row1_col2" class="data row1 col2" >0.230700</td>
+      <td id="T_db9e6_row1_col3" class="data row1 col3" >0.697100</td>
+      <td id="T_db9e6_row1_col4" class="data row1 col4" >0.174100</td>
+      <td id="T_db9e6_row1_col5" class="data row1 col5" >1.400000</td>
     </tr>
     <tr>
-      <th id="T_f1970_level0_row2" class="row_heading level0 row2" >ADASYN</th>
-      <td id="T_f1970_row2_col0" class="data row2 col0" >0.206800</td>
-      <td id="T_f1970_row2_col1" class="data row2 col1" >0.208000</td>
-      <td id="T_f1970_row2_col2" class="data row2 col2" >0.207400</td>
-      <td id="T_f1970_row2_col3" class="data row2 col3" >0.693700</td>
-      <td id="T_f1970_row2_col4" class="data row2 col4" >0.168700</td>
-      <td id="T_f1970_row2_col5" class="data row2 col5" >1.500000</td>
+      <th id="T_db9e6_level0_row2" class="row_heading level0 row2" >ADASYN</th>
+      <td id="T_db9e6_row2_col0" class="data row2 col0" >0.206800</td>
+      <td id="T_db9e6_row2_col1" class="data row2 col1" >0.208000</td>
+      <td id="T_db9e6_row2_col2" class="data row2 col2" >0.207400</td>
+      <td id="T_db9e6_row2_col3" class="data row2 col3" >0.693700</td>
+      <td id="T_db9e6_row2_col4" class="data row2 col4" >0.168700</td>
+      <td id="T_db9e6_row2_col5" class="data row2 col5" >1.300000</td>
     </tr>
   </tbody>
 </table>
 </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>🔝 Mejor modelo por Recall: **passthrough**
 </pre></div>
 </div>
-<img alt="_images/1e1ca41768a1f1597ac820b44d3b052e14e002240b550ea7a513ddb1abb939bc.png" src="_images/1e1ca41768a1f1597ac820b44d3b052e14e002240b550ea7a513ddb1abb939bc.png" />
+<img alt="_images/57082d0cb1e686c38c641d114381f442212015f6237b72412ad41dc68d120771.png" src="_images/57082d0cb1e686c38c641d114381f442212015f6237b72412ad41dc68d120771.png" />
 </div>
 </div>
 </section>
@@ -1072,13 +1061,13 @@ c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:474: F
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\DELL\AppData\Local\Temp\ipykernel_43732\2211252754.py:4: UserWarning: Glyph 9201 (\N{STOPWATCH}) missing from font(s) DejaVu Sans.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\DELL\AppData\Local\Temp\ipykernel_3952\2211252754.py:4: UserWarning: Glyph 9201 (\N{STOPWATCH}) missing from font(s) DejaVu Sans.
   plt.tight_layout(); plt.show()
 c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 9201 (\N{STOPWATCH}) missing from font(s) DejaVu Sans.
   fig.canvas.print_figure(bytes_io, **kw)
 </pre></div>
 </div>
-<img alt="_images/f67d0be6e1ce8b374e5cef0938fa0e33dcadf5ad8350ee8032b354ab33e1bedf.png" src="_images/f67d0be6e1ce8b374e5cef0938fa0e33dcadf5ad8350ee8032b354ab33e1bedf.png" />
+<img alt="_images/5ea31bcd5fbdd3cab5c37952f78fc6a962bcfcc5995463b458da4cef6e6d3289.png" src="_images/5ea31bcd5fbdd3cab5c37952f78fc6a962bcfcc5995463b458da4cef6e6d3289.png" />
 </div>
 </div>
 </section>
@@ -1234,44 +1223,8 @@ c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\IPython\core\pylabtool
 </div>
 </div>
 </section>
-<section id="radar-plot-de-metricas">
-<h2>9.Radar plot de métricas<a class="headerlink" href="#radar-plot-de-metricas" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span>
-<span class="n">radar_metrics</span> <span class="o">=</span> <span class="n">df_metricas</span><span class="p">[</span><span class="n">metric_names</span><span class="p">]</span>
-<span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">metric_names</span><span class="p">),</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">angles</span><span class="p">,[</span><span class="n">angles</span><span class="p">[</span><span class="mi">0</span><span class="p">]]))</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">polar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">tech</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">radar_metrics</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">values</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-    <span class="n">values</span> <span class="o">+=</span> <span class="n">values</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">angles</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">tech</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">angles</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">metric_names</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">radar_metrics</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">*</span><span class="mf">1.1</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Radar plot métricas&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span><span class="mi">1</span><span class="p">));</span> <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">radar_metrics</span> <span class="o">=</span> <span class="n">df_metricas</span><span class="p">[</span><span class="n">metric_names</span><span class="p">]</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">metric_names</span><span class="p">),</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">angles</span><span class="p">,[</span><span class="n">angles</span><span class="p">[</span><span class="mi">0</span><span class="p">]]))</span>
-
-<span class="ne">NameError</span>: name &#39;metric_names&#39; is not defined
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 <section id="curvas-de-validacion-max-depth">
-<h2>10.Curvas de Validación (max_depth)<a class="headerlink" href="#curvas-de-validacion-max-depth" title="Permalink to this heading">#</a></h2>
+<h2>9.Curvas de Validación (max_depth)<a class="headerlink" href="#curvas-de-validacion-max-depth" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---------------------------------------------------------------</span>
@@ -1326,7 +1279,7 @@ c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\IPython\core\pylabtool
 </div>
 </section>
 <section id="cumulative-gain-lift">
-<h2>11.Cumulative Gain &amp; Lift<a class="headerlink" href="#cumulative-gain-lift" title="Permalink to this heading">#</a></h2>
+<h2>10.Cumulative Gain &amp; Lift<a class="headerlink" href="#cumulative-gain-lift" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
@@ -1352,7 +1305,7 @@ c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\IPython\core\pylabtool
 </div>
 </section>
 <section id="curva-ks">
-<h2>12.Curva KS<a class="headerlink" href="#curva-ks" title="Permalink to this heading">#</a></h2>
+<h2>11.Curva KS<a class="headerlink" href="#curva-ks" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
@@ -1465,10 +1418,9 @@ c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\IPython\core\pylabtool
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-de-aprendizaje-y-perdida">6.Curvas de Aprendizaje y Pérdida</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-precision-recall-comparativa">7.Curva Precision-Recall comparativa</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-de-recall">8.Heatmap de Recall</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#radar-plot-de-metricas">9.Radar plot de métricas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-de-validacion-max-depth">10.Curvas de Validación (max_depth)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-gain-lift">11.Cumulative Gain &amp; Lift</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-ks">12.Curva KS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-de-validacion-max-depth">9.Curvas de Validación (max_depth)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cumulative-gain-lift">10.Cumulative Gain &amp; Lift</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curva-ks">11.Curva KS</a></li>
 </ul>
 </li>
 </ul>
