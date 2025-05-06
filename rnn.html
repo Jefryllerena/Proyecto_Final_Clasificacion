@@ -540,7 +540,7 @@ document.write(`
 <h2>1.Importación de Librerías<a class="headerlink" href="#importacion-de-librerias" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
@@ -570,9 +570,26 @@ document.write(`
 <h2>2.Carga y División de Datos<a class="headerlink" href="#carga-y-division-de-datos" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;/content/drive/MyDrive/credit_risk_cleanv6.csv&#39;</span><span class="p">)</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;TARGET&quot;</span><span class="p">])</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;TARGET&quot;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Cargar el archivo CSV</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\Users\DELL\Desktop\Aprendizaje_de_Maquina\credit_risk_the_end.csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># Separar las características (X) y la variable objetivo (y)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;incumplimiento_credito&quot;</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;incumplimiento_credito&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;incumplimiento_credito&#39;, &#39;tipo_contrato&#39;, &#39;genero&#39;, &#39;posee_auto&#39;, &#39;posee_vivienda&#39;, &#39;numero_hijos&#39;, &#39;ingreso_total&#39;, &#39;cuota_periodica&#39;, &#39;acompanantes_solicitud&#39;, &#39;tipo_ingreso&#39;, &#39;nivel_educativo&#39;, &#39;estado_civil&#39;, &#39;tipo_vivienda&#39;, &#39;poblacion_relativa_region&#39;, &#39;dias_desde_nacimiento&#39;, &#39;dias_desde_registro&#39;, &#39;dias_desde_emision_id&#39;, &#39;telefono_trabajo&#39;, &#39;telefono_personal&#39;, &#39;tiene_email&#39;, &#39;ocupacion&#39;, &#39;numero_miembros_familia&#39;, &#39;dia_solicitud&#39;, &#39;hora_solicitud&#39;, &#39;trabaja_fuera_region_registrada&#39;, &#39;vive_fuera_ciudad_registrada&#39;, &#39;trabaja_fuera_ciudad_registrada&#39;, &#39;ciudad_residencia_distinta_trabajo&#39;, &#39;tipo_organizacion&#39;, &#39;fuente_externa_2&#39;, &#39;fuente_externa_3&#39;, &#39;incumplimientos_30_dias&#39;, &#39;default_60_dias_circulo_social&#39;, &#39;dias_ultimo_cambio_telefono&#39;, &#39;documento_3&#39;, &#39;documento_6&#39;, &#39;documento_8&#39;, &#39;consultas_buro_hora&#39;, &#39;consultas_buro_dia&#39;, &#39;consultas_buro_semana&#39;, &#39;consultas_buro_mes&#39;, &#39;consultas_buro_trimestre&#39;, &#39;consultas_buro_anio&#39;, &#39;entradas_buro&#39;, &#39;tipos_credito_activo&#39;, &#39;suma_total_credito&#39;, &#39;cantidad_solicitudes_previas&#39;, &#39;monto_promedio_solicitudes&#39;, &#39;monto_total_credito&#39;, &#39;cuentas_pos_cash&#39;, &#39;promedio_meses_saldo&#39;, &#39;total_cuotas&#39;, &#39;total_pagado&#39;, &#39;promedio_dias_entre_registro_y_pago&#39;]
 </pre></div>
 </div>
 </div>
@@ -582,8 +599,7 @@ document.write(`
 <h2>3.Preprocesamiento de Datos<a class="headerlink" href="#preprocesamiento-de-datos" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="c1"># Separar por tipo de dato</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Separar por tipo de dato</span>
 <span class="n">num_cols</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;int64&quot;</span><span class="p">,</span> <span class="s2">&quot;float64&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
 <span class="n">cat_cols</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;object&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
 
@@ -621,7 +637,7 @@ document.write(`
 <h2>1.GridSearch de Hiperparámetros<a class="headerlink" href="#gridsearch-de-hiperparametros" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">StratifiedKFold</span><span class="p">,</span> <span class="n">GridSearchCV</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">StratifiedKFold</span><span class="p">,</span> <span class="n">GridSearchCV</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">recall_score</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">SimpleRNN</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">BatchNormalization</span>
@@ -788,8 +804,233 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Técnica de balanceo: SMOTE
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.11/dist-packages/joblib/externals/loky/process_executor.py:752: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
-  warnings.warn(
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exception in thread ExecutorManagerThread:
+Traceback (most recent call last):
+  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\psutil\_pswindows.py&quot;, line 694, in wrapper
+    return fun(self, *args, **kwargs)
+  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\psutil\_pswindows.py&quot;, line 878, in kill
+    return cext.proc_kill(self.pid)
+PermissionError: [WinError 5] Acceso denegado: &#39;(originated from OpenProcess)&#39;
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\threading.py&quot;, line 980, in _bootstrap_inner
+    self.run()
+  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\joblib\externals\loky\process_executor.py&quot;, line 599, in run
+    self.terminate_broken(bpe)
+  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\joblib\externals\loky\process_executor.py&quot;, line 803, in terminate_broken
+    self.kill_workers(reason=&quot;broken executor&quot;)
+  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\joblib\externals\loky\process_executor.py&quot;, line 836, in kill_workers
+    kill_process_tree(p)
+  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\joblib\externals\loky\backend\utils.py&quot;, line 19, in kill_process_tree
+    _kill_process_tree_with_psutil(process)
+  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\joblib\externals\loky\backend\utils.py&quot;, line 43, in _kill_process_tree_with_psutil
+    descendant.kill()
+  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\psutil\__init__.py&quot;, line 278, in wrapper
+    return fun(self, *args, **kwargs)
+  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\psutil\__init__.py&quot;, line 1250, in kill
+    self._proc.kill()
+  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\psutil\_pswindows.py&quot;, line 696, in wrapper
+    raise convert_oserror(err, pid=self.pid, name=self._name)
+psutil.AccessDenied: (pid=7532)
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">_RemoteTraceback</span><span class="g g-Whitespace">                          </span>Traceback (most recent call last)
+<span class="ne">_Remote</span>Traceback: 
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Traceback (most recent call last):</span>
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\tensorflow\python\pywrap_tensorflow.py&quot;, line 73, in &lt;module&gt;</span>
+<span class="sd">    from tensorflow.python._pywrap_tensorflow_internal import *</span>
+<span class="ne">ImportError</span>: DLL load failed while importing _pywrap_tensorflow_internal: Error en una rutina de inicialización de biblioteca de vínculos dinámicos (DLL).
+
+<span class="sd">During handling of the above exception, another exception occurred:</span>
+
+<span class="sd">Traceback (most recent call last):</span>
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\joblib\externals\loky\process_executor.py&quot;, line 426, in _process_worker</span>
+<span class="sd">    call_item = call_queue.get(block=True, timeout=timeout)</span>
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\multiprocessing\queues.py&quot;, line 122, in get</span>
+<span class="sd">    return _ForkingPickler.loads(res)</span>
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\scikeras\__init__.py&quot;, line 9, in &lt;module&gt;</span>
+<span class="sd">    import keras as _keras</span>
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\keras\__init__.py&quot;, line 2, in &lt;module&gt;</span>
+<span class="sd">    from keras.api import DTypePolicy</span>
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\keras\api\__init__.py&quot;, line 8, in &lt;module&gt;</span>
+<span class="sd">    from keras.api import activations</span>
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\keras\api\activations\__init__.py&quot;, line 7, in &lt;module&gt;</span>
+<span class="sd">    from keras.src.activations import deserialize</span>
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\keras\src\__init__.py&quot;, line 1, in &lt;module&gt;</span>
+<span class="sd">    from keras.src import activations</span>
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\keras\src\activations\__init__.py&quot;, line 3, in &lt;module&gt;</span>
+<span class="sd">    from keras.src.activations.activations import celu</span>
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\keras\src\activations\activations.py&quot;, line 1, in &lt;module&gt;</span>
+<span class="sd">    from keras.src import backend</span>
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\keras\src\backend\__init__.py&quot;, line 10, in &lt;module&gt;</span>
+<span class="sd">    from keras.src.backend.common.dtypes import result_type</span>
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\keras\src\backend\common\__init__.py&quot;, line 2, in &lt;module&gt;</span>
+<span class="sd">    from keras.src.backend.common.dtypes import result_type</span>
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\keras\src\backend\common\dtypes.py&quot;, line 5, in &lt;module&gt;</span>
+<span class="sd">    from keras.src.backend.common.variables import standardize_dtype</span>
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\keras\src\backend\common\variables.py&quot;, line 11, in &lt;module&gt;</span>
+<span class="sd">    from keras.src.utils.module_utils import tensorflow as tf</span>
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\keras\src\utils\__init__.py&quot;, line 1, in &lt;module&gt;</span>
+<span class="sd">    from keras.src.utils.audio_dataset_utils import audio_dataset_from_directory</span>
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\keras\src\utils\audio_dataset_utils.py&quot;, line 4, in &lt;module&gt;</span>
+<span class="sd">    from keras.src.utils import dataset_utils</span>
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\keras\src\utils\dataset_utils.py&quot;, line 9, in &lt;module&gt;</span>
+<span class="sd">    from keras.src import tree</span>
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\keras\src\tree\__init__.py&quot;, line 1, in &lt;module&gt;</span>
+<span class="sd">    from keras.src.tree.tree_api import assert_same_paths</span>
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\keras\src\tree\tree_api.py&quot;, line 8, in &lt;module&gt;</span>
+<span class="sd">    from keras.src.tree import optree_impl as tree_impl</span>
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\keras\src\tree\optree_impl.py&quot;, line 13, in &lt;module&gt;</span>
+<span class="sd">    from tensorflow.python.trackable.data_structures import ListWrapper</span>
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\tensorflow\__init__.py&quot;, line 40, in &lt;module&gt;</span>
+<span class="sd">    from tensorflow.python import pywrap_tensorflow as _pywrap_tensorflow  # pylint: disable=unused-import</span>
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\tensorflow\python\pywrap_tensorflow.py&quot;, line 88, in &lt;module&gt;</span>
+<span class="sd">    raise ImportError(</span>
+<span class="ne">ImportError</span>: Traceback (most recent call last):
+<span class="sd">  File &quot;c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\tensorflow\python\pywrap_tensorflow.py&quot;, line 73, in &lt;module&gt;</span>
+<span class="sd">    from tensorflow.python._pywrap_tensorflow_internal import *</span>
+<span class="ne">ImportError</span>: DLL load failed while importing _pywrap_tensorflow_internal: Error en una rutina de inicialización de biblioteca de vínculos dinámicos (DLL).
+
+
+<span class="sd">Failed to load the native TensorFlow runtime.</span>
+<span class="sd">See https://www.tensorflow.org/install/errors for some common causes and solutions.</span>
+<span class="sd">If you need help, create an issue at https://github.com/tensorflow/tensorflow/issues and include the entire stack trace above this error message.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">BrokenProcessPool</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span> <span class="n">line</span> <span class="mi">113</span>
+<span class="g g-Whitespace">    </span><span class="mi">111</span> <span class="c1"># 2.4 Ejecuta GridSearch y mide tiempo</span>
+<span class="g g-Whitespace">    </span><span class="mi">112</span> <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">113</span> <span class="n">grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_res</span><span class="p">,</span> <span class="n">y_res</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">114</span> <span class="n">fit_minutes</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span> <span class="o">/</span> <span class="mi">60</span>
+<span class="g g-Whitespace">    </span><span class="mi">116</span> <span class="c1"># 3. Extrae los mejores hiperparámetros</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\base.py:1474,</span> in <span class="ni">_fit_context.&lt;locals&gt;.decorator.&lt;locals&gt;.wrapper</span><span class="nt">(estimator, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1467</span>     <span class="n">estimator</span><span class="o">.</span><span class="n">_validate_params</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1469</span> <span class="k">with</span> <span class="n">config_context</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1470</span>     <span class="n">skip_parameter_validation</span><span class="o">=</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1471</span>         <span class="n">prefer_skip_nested_validation</span> <span class="ow">or</span> <span class="n">global_skip_validation</span>
+<span class="g g-Whitespace">   </span><span class="mi">1472</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1473</span> <span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1474</span>     <span class="k">return</span> <span class="n">fit_method</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\model_selection\_search.py:970,</span> in <span class="ni">BaseSearchCV.fit</span><span class="nt">(self, X, y, **params)</span>
+<span class="g g-Whitespace">    </span><span class="mi">964</span>     <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_results</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">965</span>         <span class="n">all_candidate_params</span><span class="p">,</span> <span class="n">n_splits</span><span class="p">,</span> <span class="n">all_out</span><span class="p">,</span> <span class="n">all_more_results</span>
+<span class="g g-Whitespace">    </span><span class="mi">966</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">968</span>     <span class="k">return</span> <span class="n">results</span>
+<span class="ne">--&gt; </span><span class="mi">970</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_search</span><span class="p">(</span><span class="n">evaluate_candidates</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">972</span> <span class="c1"># multimetric is determined here because in the case of a callable</span>
+<span class="g g-Whitespace">    </span><span class="mi">973</span> <span class="c1"># self.scoring the return type is only known after calling</span>
+<span class="g g-Whitespace">    </span><span class="mi">974</span> <span class="n">first_test_score</span> <span class="o">=</span> <span class="n">all_out</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;test_scores&quot;</span><span class="p">]</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\model_selection\_search.py:1527,</span> in <span class="ni">GridSearchCV._run_search</span><span class="nt">(self, evaluate_candidates)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1525</span> <span class="k">def</span> <span class="nf">_run_search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evaluate_candidates</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1526</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Search all candidates in param_grid&quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1527</span>     <span class="n">evaluate_candidates</span><span class="p">(</span><span class="n">ParameterGrid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">param_grid</span><span class="p">))</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\model_selection\_search.py:916,</span> in <span class="ni">BaseSearchCV.fit.&lt;locals&gt;.evaluate_candidates</span><span class="nt">(candidate_params, cv, more_results)</span>
+<span class="g g-Whitespace">    </span><span class="mi">908</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">909</span>     <span class="nb">print</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">910</span>         <span class="s2">&quot;Fitting </span><span class="si">{0}</span><span class="s2"> folds for each of </span><span class="si">{1}</span><span class="s2"> candidates,&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">911</span>         <span class="s2">&quot; totalling </span><span class="si">{2}</span><span class="s2"> fits&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">912</span>             <span class="n">n_splits</span><span class="p">,</span> <span class="n">n_candidates</span><span class="p">,</span> <span class="n">n_candidates</span> <span class="o">*</span> <span class="n">n_splits</span>
+<span class="g g-Whitespace">    </span><span class="mi">913</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">914</span>     <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">916</span> <span class="n">out</span> <span class="o">=</span> <span class="n">parallel</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">917</span>     <span class="n">delayed</span><span class="p">(</span><span class="n">_fit_and_score</span><span class="p">)(</span>
+<span class="g g-Whitespace">    </span><span class="mi">918</span>         <span class="n">clone</span><span class="p">(</span><span class="n">base_estimator</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">919</span>         <span class="n">X</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">920</span>         <span class="n">y</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">921</span>         <span class="n">train</span><span class="o">=</span><span class="n">train</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">922</span>         <span class="n">test</span><span class="o">=</span><span class="n">test</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">923</span>         <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">924</span>         <span class="n">split_progress</span><span class="o">=</span><span class="p">(</span><span class="n">split_idx</span><span class="p">,</span> <span class="n">n_splits</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">925</span>         <span class="n">candidate_progress</span><span class="o">=</span><span class="p">(</span><span class="n">cand_idx</span><span class="p">,</span> <span class="n">n_candidates</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">926</span>         <span class="o">**</span><span class="n">fit_and_score_kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">927</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">928</span>     <span class="k">for</span> <span class="p">(</span><span class="n">cand_idx</span><span class="p">,</span> <span class="n">parameters</span><span class="p">),</span> <span class="p">(</span><span class="n">split_idx</span><span class="p">,</span> <span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">))</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">929</span>         <span class="nb">enumerate</span><span class="p">(</span><span class="n">candidate_params</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">930</span>         <span class="nb">enumerate</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">routed_params</span><span class="o">.</span><span class="n">splitter</span><span class="o">.</span><span class="n">split</span><span class="p">)),</span>
+<span class="g g-Whitespace">    </span><span class="mi">931</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">932</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">934</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">935</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">936</span>         <span class="s2">&quot;No fits were performed. &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">937</span>         <span class="s2">&quot;Was the CV iterator empty? &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">938</span>         <span class="s2">&quot;Were there no candidates?&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">939</span>     <span class="p">)</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\sklearn\utils\parallel.py:67,</span> in <span class="ni">Parallel.__call__</span><span class="nt">(self, iterable)</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span> <span class="n">config</span> <span class="o">=</span> <span class="n">get_config</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">63</span> <span class="n">iterable_with_config</span> <span class="o">=</span> <span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">64</span>     <span class="p">(</span><span class="n">_with_config</span><span class="p">(</span><span class="n">delayed_func</span><span class="p">,</span> <span class="n">config</span><span class="p">),</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span>     <span class="k">for</span> <span class="n">delayed_func</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">iterable</span>
+<span class="g g-Whitespace">     </span><span class="mi">66</span> <span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">67</span> <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">iterable_with_config</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\joblib\parallel.py:2007,</span> in <span class="ni">Parallel.__call__</span><span class="nt">(self, iterable)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2001</span> <span class="c1"># The first item from the output is blank, but it makes the interpreter</span>
+<span class="g g-Whitespace">   </span><span class="mi">2002</span> <span class="c1"># progress until it enters the Try/Except block of the generator and</span>
+<span class="g g-Whitespace">   </span><span class="mi">2003</span> <span class="c1"># reaches the first `yield` statement. This starts the asynchronous</span>
+<span class="g g-Whitespace">   </span><span class="mi">2004</span> <span class="c1"># dispatch of the tasks to the workers.</span>
+<span class="g g-Whitespace">   </span><span class="mi">2005</span> <span class="nb">next</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">2007</span> <span class="k">return</span> <span class="n">output</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_generator</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\joblib\parallel.py:1650,</span> in <span class="ni">Parallel._get_outputs</span><span class="nt">(self, iterator, pre_dispatch)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1647</span>     <span class="k">yield</span>
+<span class="g g-Whitespace">   </span><span class="mi">1649</span>     <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">retrieval_context</span><span class="p">():</span>
+<span class="ne">-&gt; </span><span class="mi">1650</span>         <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">_retrieve</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1652</span> <span class="k">except</span> <span class="ne">GeneratorExit</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1653</span>     <span class="c1"># The generator has been garbage collected before being fully</span>
+<span class="g g-Whitespace">   </span><span class="mi">1654</span>     <span class="c1"># consumed. This aborts the remaining tasks if possible and warn</span>
+<span class="g g-Whitespace">   </span><span class="mi">1655</span>     <span class="c1"># the user if necessary.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1656</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_exception</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\joblib\parallel.py:1754,</span> in <span class="ni">Parallel._retrieve</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1747</span> <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wait_retrieval</span><span class="p">():</span>
+<span class="g g-Whitespace">   </span><span class="mi">1748</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1749</span>     <span class="c1"># If the callback thread of a worker has signaled that its task</span>
+<span class="g g-Whitespace">   </span><span class="mi">1750</span>     <span class="c1"># triggered an exception, or if the retrieval loop has raised an</span>
+<span class="g g-Whitespace">   </span><span class="mi">1751</span>     <span class="c1"># exception (e.g. `GeneratorExit`), exit the loop and surface the</span>
+<span class="g g-Whitespace">   </span><span class="mi">1752</span>     <span class="c1"># worker traceback.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1753</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aborting</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1754</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_raise_error_fast</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1755</span>         <span class="k">break</span>
+<span class="g g-Whitespace">   </span><span class="mi">1757</span>     <span class="c1"># If the next job is not ready for retrieval yet, we just wait for</span>
+<span class="g g-Whitespace">   </span><span class="mi">1758</span>     <span class="c1"># async callbacks to progress.</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\joblib\parallel.py:1789,</span> in <span class="ni">Parallel._raise_error_fast</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1785</span> <span class="c1"># If this error job exists, immediately raise the error by</span>
+<span class="g g-Whitespace">   </span><span class="mi">1786</span> <span class="c1"># calling get_result. This job might not exists if abort has been</span>
+<span class="g g-Whitespace">   </span><span class="mi">1787</span> <span class="c1"># called directly or if the generator is gc&#39;ed.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1788</span> <span class="k">if</span> <span class="n">error_job</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1789</span>     <span class="n">error_job</span><span class="o">.</span><span class="n">get_result</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\joblib\parallel.py:745,</span> in <span class="ni">BatchCompletionCallBack.get_result</span><span class="nt">(self, timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">739</span> <span class="n">backend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parallel</span><span class="o">.</span><span class="n">_backend</span>
+<span class="g g-Whitespace">    </span><span class="mi">741</span> <span class="k">if</span> <span class="n">backend</span><span class="o">.</span><span class="n">supports_retrieve_callback</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">742</span>     <span class="c1"># We assume that the result has already been retrieved by the</span>
+<span class="g g-Whitespace">    </span><span class="mi">743</span>     <span class="c1"># callback thread, and is stored internally. It&#39;s just waiting to</span>
+<span class="g g-Whitespace">    </span><span class="mi">744</span>     <span class="c1"># be returned.</span>
+<span class="ne">--&gt; </span><span class="mi">745</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_return_or_raise</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">747</span> <span class="c1"># For other backends, the main thread needs to run the retrieval step.</span>
+<span class="g g-Whitespace">    </span><span class="mi">748</span> <span class="k">try</span><span class="p">:</span>
+
+<span class="nn">File c:\Users\DELL\anaconda3\envs\KrakenData\lib\site-packages\joblib\parallel.py:763,</span> in <span class="ni">BatchCompletionCallBack._return_or_raise</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">761</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">762</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">TASK_ERROR</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">763</span>         <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result</span>
+<span class="g g-Whitespace">    </span><span class="mi">764</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result</span>
+<span class="g g-Whitespace">    </span><span class="mi">765</span> <span class="k">finally</span><span class="p">:</span>
+
+<span class="ne">BrokenProcessPool</span>: A task has failed to un-serialize. Please ensure that the arguments of the function are all picklable.
 </pre></div>
 </div>
 </div>
@@ -802,7 +1043,7 @@ document.write(`
 <h2>1.Curvas de Aprendizaje Comparativas<a class="headerlink" href="#curvas-de-aprendizaje-comparativas" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1"># Extraer el mayor número de épocas registrado</span>
 <span class="n">max_epochs</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;loss&quot;</span><span class="p">,</span> <span class="p">[]))</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span>
@@ -854,7 +1095,7 @@ document.write(`
 <h2>2.Tabla de Hiperparámetros Óptimos por Técnica de Balanceo<a class="headerlink" href="#tabla-de-hiperparametros-optimos-por-tecnica-de-balanceo" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1) Construir lista de filas con hiperparámetros por técnica</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1) Construir lista de filas con hiperparámetros por técnica</span>
 <span class="n">hiperparametros_optimos</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
     <span class="n">params</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Mejores parámetros&quot;</span><span class="p">,</span> <span class="p">{})</span>
@@ -942,7 +1183,7 @@ document.write(`
 <h3>3.1. Evaluación del desempeño sin Técnicas de Balanceo.<a class="headerlink" href="#evaluacion-del-desempeno-sin-tecnicas-de-balanceo" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="c1"># Suprimir TODOS los warnings (matplotlib, seaborn, keras, etc.)</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
@@ -956,6 +1197,7 @@ document.write(`
 
     <span class="n">metricas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
         <span class="s2">&quot;Técnica&quot;</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;Técnica&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;Accuracy&quot;</span><span class="p">:</span>  <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_ae</span><span class="p">),</span>
         <span class="s2">&quot;Recall&quot;</span><span class="p">:</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span>
         <span class="s2">&quot;Precision&quot;</span><span class="p">:</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
         <span class="s2">&quot;F1-score&quot;</span><span class="p">:</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
@@ -1316,7 +1558,7 @@ document.write(`
 <h3>3.2. Evaluación Visual del desempeño sin Técnicas de Balanceo.<a class="headerlink" href="#evaluacion-visual-del-desempeno-sin-tecnicas-de-balanceo" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="c1"># Suprimir TODOS los warnings (matplotlib, seaborn, keras, etc.)</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
@@ -1330,6 +1572,7 @@ document.write(`
 
     <span class="n">metricas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
         <span class="s2">&quot;Técnica&quot;</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;Técnica&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;Accuracy&quot;</span><span class="p">:</span>  <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_ae</span><span class="p">),</span>
         <span class="s2">&quot;Recall&quot;</span><span class="p">:</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
         <span class="s2">&quot;Precision&quot;</span><span class="p">:</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
         <span class="s2">&quot;F1-score&quot;</span><span class="p">:</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
@@ -1361,7 +1604,7 @@ document.write(`
 <h2>4.Matrices de Confusión por Técnica de Balanceo<a class="headerlink" href="#matrices-de-confusion-por-tecnica-de-balanceo" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filtrar modelos válidos</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filtrar modelos válidos</span>
 <span class="n">modelos_validos</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span> <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Modelo&quot;</span><span class="p">)]</span>
 
 <span class="c1"># Crear figura con subplots: 1 fila, 3 columnas</span>
@@ -1401,7 +1644,7 @@ document.write(`
 <h2>5.Curva ROC por Técnica de Balanceo<a class="headerlink" href="#curva-roc-por-tecnica-de-balanceo" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_curve</span><span class="p">,</span> <span class="n">auc</span>
@@ -1435,7 +1678,7 @@ document.write(`
 <h2>6.Curva Precision vs Recall comparativa<a class="headerlink" href="#curva-precision-vs-recall-comparativa" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">precision_recall_curve</span><span class="p">,</span> <span class="n">average_precision_score</span>
@@ -1468,7 +1711,7 @@ document.write(`
 <h2>7.Curva KS (Kolmogorov–Smirnov)<a class="headerlink" href="#curva-ks-kolmogorovsmirnov" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">ks_2samp</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
@@ -1516,7 +1759,7 @@ document.write(`
 <h2>1.Curva de Ganancias Acumuladas / Lift Chart<a class="headerlink" href="#curva-de-ganancias-acumuladas-lift-chart" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1"># concatenar clases y probabilidades</span>
@@ -1563,7 +1806,7 @@ document.write(`
 <h2>2.Radar Plot de métricas por Técnica de Balanceo<a class="headerlink" href="#radar-plot-de-metricas-por-tecnica-de-balanceo" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Preparar datos para radar plot</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Preparar datos para radar plot</span>
 <span class="n">labels</span> <span class="o">=</span> <span class="n">df_metricas</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 <span class="n">num_vars</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
 
@@ -1604,7 +1847,7 @@ document.write(`
 <h2>3.Heatmap de Recall por Units y Dropout<a class="headerlink" href="#heatmap-de-recall-por-units-y-dropout" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extraer en un DataFrame</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extraer en un DataFrame</span>
 <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
     <span class="n">bp</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;Mejores parámetros&quot;</span><span class="p">]</span>
@@ -1644,7 +1887,7 @@ document.write(`
 <h2>4.Gráfico de Barras del Tiempo de Entrenamiento<a class="headerlink" href="#grafico-de-barras-del-tiempo-de-entrenamiento" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1"># Asegurarse de tener df_resultados</span>
 <span class="n">df_resultados</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
@@ -1690,7 +1933,7 @@ document.write(`
 <h2>5.Curva de Calibración (Reliability Diagram)<a class="headerlink" href="#curva-de-calibracion-reliability-diagram" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.calibration</span> <span class="kn">import</span> <span class="n">calibration_curve</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.calibration</span> <span class="kn">import</span> <span class="n">calibration_curve</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -1727,7 +1970,7 @@ document.write(`
 <h2>6.Curvas de Validación (Validation Curves)<a class="headerlink" href="#curvas-de-validacion-validation-curves" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">validation_curve</span><span class="p">,</span> <span class="n">StratifiedKFold</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">validation_curve</span><span class="p">,</span> <span class="n">StratifiedKFold</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">recall_score</span>
 <span class="kn">from</span> <span class="nn">sklearn.utils.class_weight</span> <span class="kn">import</span> <span class="n">compute_class_weight</span>
 <span class="kn">from</span> <span class="nn">imblearn.over_sampling</span> <span class="kn">import</span> <span class="n">SMOTE</span><span class="p">,</span> <span class="n">ADASYN</span>
@@ -1817,7 +2060,7 @@ document.write(`
 <h2>7.Curva de Aprendizaje vs Tamaño de Muestra<a class="headerlink" href="#curva-de-aprendizaje-vs-tamano-de-muestra" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">learning_curve</span><span class="p">,</span> <span class="n">StratifiedKFold</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">learning_curve</span><span class="p">,</span> <span class="n">StratifiedKFold</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">recall_score</span>
 <span class="kn">from</span> <span class="nn">imblearn.over_sampling</span> <span class="kn">import</span> <span class="n">SMOTE</span><span class="p">,</span> <span class="n">ADASYN</span>
 <span class="kn">from</span> <span class="nn">sklearn.utils.class_weight</span> <span class="kn">import</span> <span class="n">compute_class_weight</span>
@@ -1899,7 +2142,7 @@ document.write(`
 <h2>8.Tabla de “Threshold Analysis”<a class="headerlink" href="#tabla-de-threshold-analysis" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1) Seleccionar el mejor modelo según Recall test</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1) Seleccionar el mejor modelo según Recall test</span>
 <span class="n">best_entry</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;Recall test clase 1&quot;</span><span class="p">])</span>
 <span class="n">prob</span>       <span class="o">=</span> <span class="n">best_entry</span><span class="p">[</span><span class="s2">&quot;Probabilidades&quot;</span><span class="p">]</span>
 
@@ -2297,7 +2540,7 @@ document.write(`
 <h2>9.Distribución de Predicciones<a class="headerlink" href="#distribucion-de-predicciones" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;Pastel1&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribución de Probabilidades Predichas&quot;</span><span class="p">)</span>
@@ -2318,7 +2561,7 @@ document.write(`
 <h1>Sección 5: Guardar Resultados<a class="headerlink" href="#seccion-5-guardar-resultados" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">pickle</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
